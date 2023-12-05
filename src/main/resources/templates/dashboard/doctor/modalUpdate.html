@@ -1,0 +1,99 @@
+<th:block th:fragment="modalUpdate">
+    <!-- Modal Update-->
+    <div class="modal fade" id="modalUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Doctor Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="error-area hide"></div>
+                    <form method="post" id="frmUpdate">
+                        <div class="row mb-3">
+                            <div class="col-lg-4">
+                                <label class="fw-bold" for="fullNameUp">Full name</label>
+                                <input type="text" class="form-control" id="fullNameUp" name="fullNameUp">
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="fw-bold" for="emailUp">Email</label>
+                                <input type="email" class="form-control" id="emailUp" name="emailUp">
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="fw-bold" for="phoneUp">Phone</label>
+                                <input type="tel" class="form-control" id="phoneUp" name="phoneUp">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3">
+                                <label class="fw-bold" for="identityUp">Số CMND/Passport</label>
+                                <input type="text" class="form-control" id="identityUp" name="identityUp">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold" for="dobUp">Ngày tháng năm sinh</label>
+                                <input type="text" class="form-control" id="dobUp" name="dobUp">
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Giới tính</label>
+                                <select class="form-select" id="genderUp">
+                                    <option value="">Chọn giới tính</option>
+                                    <option value="MALE">Nam</option>
+                                    <option value="FEMALE">Nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Dân tộc</label>
+                                <select class="form-select" id="ethnicUp"></select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Province</label>
+                                <select class="form-select" id="provinceUp"></select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">District</label>
+                                <select class="form-select" id="districtUp"></select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Ward</label>
+                                <select class="form-select" id="wardUp"></select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="fw-bold">Address</label>
+                                <input type="text" class="form-control" id="addressUp">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-4">
+                                <label class="fw-bold">Khoa/Phòng</label>
+                                <select class="form-select" id="specialityUp"></select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="fw-bold">Trình độ chuyên môn</label>
+                                <select class="form-select" id="levelUp">
+                                    <option value="BS">Bác sĩ</option>
+                                    <option value="BSCKI">Bác sĩ chuyên khoa I</option>
+                                    <option value="BSCKII">Bác sĩ chuyên khoa II</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="fw-bold">Nghề nghiệp</label>
+                                <select class="form-select" id="jobUp" disabled>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate">
+                        <i class="fas fa-plus"></i>
+                        Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

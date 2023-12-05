@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css" />
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header" />
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC" style="min-height: 0">
+            <div class="style_bg_breakcum__2BT1J bg-info">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Chọn hồ sơ bệnh nhân
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div data-test="container" class="container">
+                <div data-test="row" class="row">
+                    <div data-test="col" class="col-md-12">
+                        <div>
+                            <div class="style_wapper_page_item__3Y0Lc">
+                                <div data-test="animation" class="animated fadeIn"
+                                     style="animation-iteration-count: 1; visibility: visible; animation-name: fadeIn; min-height: 425px;">
+                                    <div class="style_images_chooseprofile__2JKui">
+                                        <div class="lazyload-wrapper "><img src="/homepage/assets/img/164.59265719.png"
+                                                                            alt="">
+                                        </div>
+                                        <span>Bạn chưa có hồ sơ bệnh nhân, vui lòng tạo hồ sơ để được đặt
+                                                khám.</span>
+                                    </div>
+                                    <a class="style_button__2kGy2 style_create__h2h44 style_center__2Z10s style_bold__3SW5C"
+                                       href="/profile-create">
+                                        <i class="fas fa-user-plus"></i>Tạo hồ sơ
+                                    </a>
+                                </div>
+                                <div data-test="animation" class="animated fadeIn"
+                                     style="animation-iteration-count: 1; visibility: visible; animation-name: fadeIn;">
+                                </div>
+                                <div class="style_next_prev__2NLc5">
+                                    <button data-test="button" type="button"
+                                            class="btn-flat btn Ripple-parent style_button__bKNrt">
+                                        <div>Quay lại</div>
+                                        <div data-test="waves" class="Ripple Ripple-outline "
+                                             style="top: 0px; left: 0px; width: 0px; height: 0px;">
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer" />
+</div>
+
+
+
+<th:block th:replace="/homepage/fragment/footer_js" />
+</body>
+
+</html>

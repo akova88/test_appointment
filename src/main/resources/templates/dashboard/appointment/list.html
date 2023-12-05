@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Med Pro Admin Dashboard</title>
+
+    <th:block th:replace="/dashboard/fragment/head-css" />
+</head>
+
+<body>
+<div id="app">
+    <!--    sidebar -->
+    <th:block th:replace="/dashboard/fragment/sidebar" />
+    <div id="main">
+        <!--    heading-->
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+        <div class="page-heading">
+            <h3>Appointment Management</h3>
+        </div>
+
+        <!--    content-->
+        <div class="page-content">
+            <div class="page-heading">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>DataTable</h3>
+                            <p class="text-subtitle text-muted">For user to check they list</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Appointment DataTable</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="row" id="table-striped">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Appointments</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <button class="btn btn-primary" id="btnCreateShowModal">
+                                            <i class="fas fa-user-plus"></i> Add new appointment
+                                        </button>
+                                    </div>
+                                    <!-- table striped -->
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0" id="tbAppointment">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>#</th>
+                                                <th>Doctor Name</th>
+                                                <th>Speciality Name</th>
+                                                <th>Room</th>
+                                                <th>Day</th>
+                                                <th>Time</th>
+                                                <th>Price</th>
+                                                <th>Available</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!--        footer-->
+        <footer class="container-fluid" id="footer-control">
+
+        </footer>
+        <th:block th:replace="/dashboard/fragment/footer" />
+    </div>
+</div>
+<!--footer JS-->
+<th:block th:replace="/dashboard/appointment/modalCreate" />
+<th:block th:replace="/dashboard/appointment/modalUpdate" />
+<th:block th:replace="/dashboard/fragment/footer-js" />
+
+<script th:inline="javascript">
+    const page = {
+        url: {
+            getAllDoctorsBySpec: App.API_DOCTOR+"/speciality/",
+            getAllRoomsBySpec: App.API_ROOM+"/speciality/",
+            getAllAppointment: App.API_APPOINTMENT,
+            getAllSpeciality: App.API_SPECIALITY,
+            createAppointment: App.API_APPOINTMENT,
+            getAppointment: App.API_APPOINTMENT+"/",
+            updateAppointment: App.API_APPOINTMENT+"/",
+            removeAppointment: App.API_APPOINTMENT+"/",
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            command: {}
+        },
+        initializeControlEvent: {}
+    };
+
+    page.elements.btnShowCreateModal = $('#btnCreateShowModal');
+    page.elements.tbAppointmentBody = $('#tbAppointment tbody');
+
+    page.dialogs.elements.modalCreate = $('#modalCreate');
+    page.dialogs.elements.errorAreaCreate = $('#modalCreate .error-area')
+    page.dialogs.elements.frmCreate = $('#frmCreate');
+    page.dialogs.elements.doctorCre = $('#doctorCre');
+    page.dialogs.elements.roomCre = $('#roomCre');
+    page.dialogs.elements.specialityCre = $('#specialityCre');
+    page.dialogs.elements.dayCre = $('#dayCre');
+    page.dialogs.elements.timeCre = $('#timeCre');
+    page.dialogs.elements.btnCreate = $('#btnCreate');
+
+    page.dialogs.elements.modalUpdate = $('#modalUpdate');
+    page.dialogs.elements.errorAreaUpdate = $('#modalUpdate .error-area')
+    page.dialogs.elements.frmUpdate = $('#frmUpdate');
+    page.dialogs.elements.doctorUp = $('#doctorUp');
+    page.dialogs.elements.roomUp = $('#roomUp');
+    page.dialogs.elements.dayUp = $('#dayUp');
+    page.dialogs.elements.timeUp = $('#timeUp');
+    page.dialogs.elements.availableUp = $('#availableUp');
+    page.dialogs.elements.btnUpdate = $('#btnUpdate');
+
+    page.elements.footer = $('#footer-control');
+
+    const eTimes = [[${times}]];
+    console.log(eTimes);
+    let appointmentId = 0;
+
+    page.commands.renderAppointment = (appointment) => {
+        let doctor = appointment.doctor;
+        let room = appointment.room;
+        let timePeriod = page.commands.findTimePeriod(appointment.timeName);
+        let isAvailable = appointment.available;
+
+        let available;
+        if (isAvailable){
+            available = `<p class="badge bg-success">Available</p>`
+        }else {
+            available = `<p class="badge bg-danger">Not Available</p>`
+        }
+
+        return `
+                    <tr id="tr_${appointment.id}">
+                        <td><span class="select-tab unselected"></span></td>
+                        <td >${appointment.id}</td>
+                        <td>${doctor.fullName}</td>
+                        <td>${appointment.specialityName}</td>
+                        <td>${room.name}</td>
+                        <td>${App.formatDate(appointment.day)}</td>
+                        <td>${timePeriod}</td>
+                        <td>${App.formatCurrency(appointment.price)}</td>
+                        <td th:case="${appointment.available}">
+                            ${available}
+                        </td>
+                    </tr>
+            `
+    }
+
+    page.commands.findTimePeriod = (timeCode) =>{
+        switch (timeCode){
+            case 'C1':
+                return eTimes.C1;
+            case 'C2':
+                return eTimes.C2;
+            case 'C3':
+                return eTimes.C3;
+            case 'S1':
+                return eTimes.S1;
+            case 'S2':
+                return eTimes.S2;
+            case 'S3':
+                return eTimes.S3;
+        }
+    }
+
+    page.commands.renderFooter = (appointmentId) => {
+        return `
+                <div class="container">
+                    <button class="btn btn-secondary edit" data-id="${appointmentId}">
+                        <i class="fas fa-pencil-alt"></i> Update
+                    </button>
+                    <button class="btn btn-danger delete" data-id="${appointmentId}">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            `;
+    }
+
+    page.commands.getAllAppointments = () =>{
+        page.elements.tbAppointmentBody.empty();
+
+        $.ajax({
+            url: page.url.getAllAppointment,
+            type: "GET",
+        })
+            .done((appointments) =>{
+                appointments.forEach(appointment => {
+                    let str = page.commands.renderAppointment(appointment);
+                    page.elements.tbAppointmentBody.prepend(str);
+                })
+            })
+            .fail((errors) =>{
+                console.log(errors)
+            })
+
+    }
+
+    page.commands.getAllSpeciality = () =>{
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getAllSpeciality
+        })
+            .done((specialities) => {
+                page.dialogs.elements.specialityCre.empty();
+                $.each(specialities, (index, item) => {
+                    const str = `<option value="${item.id}">${item.name}</option>`;
+                    page.dialogs.elements.specialityCre.append(str);
+                });
+            })
+            .fail((errors) =>{
+                console.log(errors);
+            })
+    }
+
+    page.commands.renderDoctorsOpt = (doctor) =>{
+        return `
+            <option value="${doctor.id}">(${doctor.id}) ${doctor.fullName}</option>
+        `
+    }
+
+    page.commands.getAllDoctorsBySpec = (specialityId) =>{
+        page.dialogs.elements.doctorCre.empty();
+        page.dialogs.elements.doctorUp.empty();
+
+        $.ajax({
+            type: 'GET',
+            url: page.url.getAllDoctorsBySpec+specialityId,
+        })
+            .done((data) => {
+                data.forEach(doctor => {
+                    const str = page.commands.renderDoctorsOpt(doctor);
+                    page.dialogs.elements.doctorCre.append(str);
+                    page.dialogs.elements.doctorUp.append(str);
+                });
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+
+    page.commands.getAllRoomsBySpec = (specialityId) =>{
+        page.dialogs.elements.roomCre.empty();
+        page.dialogs.elements.roomUp.empty();
+
+        $.ajax({
+            type: 'GET',
+            url: page.url.getAllRoomsBySpec+specialityId,
+        })
+            .done((rooms) =>{
+                rooms.forEach(room =>{
+                    const str = `<option value="${room.id}">${room.name}</option>`;
+                    page.dialogs.elements.roomCre.append(str);
+                    page.dialogs.elements.roomUp.append(str);
+                })
+            })
+            .fail((errors) =>{
+                console.log(errors);
+            })
+    }
+
+    page.commands.renderTimes = () =>{
+        page.dialogs.elements.timeCre.empty();
+        page.dialogs.elements.timeUp.empty();
+
+        $.each(eTimes, (index,item) =>{
+            const str = `<option value="${index}">${item}</option>`;
+            page.dialogs.elements.timeCre.append(str);
+            page.dialogs.elements.timeUp.append(str);
+        })
+    }
+
+    page.commands.createAppointment = () =>{
+        let doctorId = page.dialogs.elements.doctorCre.val();
+        let roomId = page.dialogs.elements.roomCre.val();
+        let day = page.dialogs.elements.dayCre.val();
+        let timeName = page.dialogs.elements.timeCre.val();
+        let specialityId = page.dialogs.elements.specialityCre.val();
+
+        const appointment = {
+            doctorId,
+            roomId,
+            day,
+            timeName,
+            specialityId
+        }
+
+        $.ajax({
+            headers:{
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            type: 'POST',
+            url: page.url.createAppointment,
+            data: JSON.stringify(appointment)
+        })
+            .done((appointment) =>{
+                const str = page.commands.renderAppointment(appointment);
+                page.elements.tbAppointmentBody.prepend(str);
+
+                page.dialogs.elements.modalCreate.modal('hide');
+                App.showSuccessAlert("Tạo appointment thành công");
+            })
+            .fail((error) =>{
+                const responseJSON = error.responseJSON;
+
+                page.dialogs.elements.errorAreaCreate.empty();
+                let str = '';
+
+                $.each(responseJSON, (k, v) => {
+                    str += `<label for="${k}Cre">${v}</label>`
+                })
+
+                page.dialogs.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+            })
+
+    }
+
+    page.commands.handleAddEventShowModalUpdate = (appointmentId) =>{
+        $.ajax({
+            url: page.url.getAppointment+appointmentId,
+            type:"GET",
+        })
+            .done((appointment) =>{
+                let specName = appointment.specialityName;
+                let doctor = appointment.doctor;
+                let room = appointment.room;
+                let timeName = appointment.timeName;
+                let availableCode = appointment.available ? 1 : 0;
+                page.commands.getAllSpeciality().then((specialities) => {
+                    let specialityId;
+                    specialities.forEach(item => {
+                        if (item.name === specName) {
+                            specialityId = item.id;
+                            return;
+                        }
+                    })
+                    page.commands.getAllDoctorsBySpec(specialityId);
+                    page.dialogs.elements.doctorUp.val(doctor.id);
+                    page.commands.getAllRoomsBySpec(specialityId);
+                    page.dialogs.elements.roomUp.val(room.id);
+                    page.commands.renderTimes();
+                    page.dialogs.elements.timeUp.val(timeName);
+                    page.dialogs.elements.availableUp.val(availableCode);
+                    page.dialogs.elements.dayUp.val(App.formatDate(appointment.day));
+                    page.dialogs.elements.modalUpdate.modal("show");
+                })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            })
+    }
+
+    page.commands.editAppointment = ()=>{
+        const doctorId = page.dialogs.elements.doctorUp.val();
+        const roomId = page.dialogs.elements.roomUp.val();
+        const day = page.dialogs.elements.dayUp.val();
+        const timeName = page.dialogs.elements.timeUp.val();
+        const isAvailable = page.dialogs.elements.availableUp.val();
+
+        let appointment = {
+            doctorId,
+            roomId,
+            day,
+            timeName,
+            isAvailable
+        }
+
+        $.ajax({
+            headers:{
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            type: 'PATCH',
+            url: page.url.updateAppointment+appointmentId,
+            data: JSON.stringify(appointment)
+        })
+            .done((appointment) =>{
+                const currentRow = $("#tr_"+appointmentId);
+                const str = page.commands.renderAppointment(appointment);
+                currentRow.replaceWith(str);
+                page.dialogs.elements.modalUpdate.modal("hide");
+                App.showSuccessNotification("Chỉnh sửa lịch khám thành công");
+            })
+            .fail((errors)=>{
+                const responseJSON = errors.responseJSON;
+
+                page.dialogs.elements.errorAreaUpdate.empty();
+                let str = '';
+
+                $.each(responseJSON, (k, v) => {
+                    str += `<label>${v}</label>`
+                })
+
+                page.dialogs.elements.errorAreaUpdate.append(str).removeClass('hide').addClass('show');
+
+                console.log(errors);
+            })
+    }
+
+    page.commands.removeAppointment = (appointmentId)=>{
+        $.ajax({
+            type: 'DELETE',
+            url: page.url.removeAppointment+appointmentId,
+        })
+            .done((appointment) =>{
+                const currentRow = $("#tr_"+appointmentId);
+                currentRow.remove();
+                App.showSuccessNotification("Xóa lịch khám thành công");
+            })
+            .fail((errors) =>{
+                console.log(errors);
+            })
+    }
+
+    page.initializeControlEvent = () => {
+        page.elements.tbAppointmentBody.on('click', 'tr', function () {
+            page.elements.tbAppointmentBody.find('span').removeClass('selected').addClass('unselected');
+            $(this).find('span').removeClass('unselected').addClass('selected');
+
+            appointmentId = $(this).attr('id').replace('tr_', '');
+
+            const str = page.commands.renderFooter(appointmentId);
+            page.elements.footer.empty().append(str);
+        })
+
+        page.elements.btnShowCreateModal.on('click', () => {
+            page.dialogs.elements.frmCreate[0].reset();
+            page.dialogs.elements.frmCreate.validate().resetForm();
+            page.dialogs.elements.frmCreate.find("input.error").removeClass("error");
+            page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
+            page.dialogs.elements.modalCreate.modal('show');
+        })
+
+        page.dialogs.elements.specialityCre.on('change', function (){
+            let specialityId = $(this).val();
+            page.commands.getAllDoctorsBySpec(specialityId);
+            page.commands.getAllRoomsBySpec(specialityId);
+        })
+
+        page.elements.footer.on('click','.edit', function() {
+            appointmentId = $(this).data('id');
+            page.dialogs.elements.frmUpdate.validate().resetForm();
+            page.dialogs.elements.frmUpdate.find("input.error").removeClass("error");
+            page.dialogs.elements.errorAreaUpdate.removeClass("show").addClass("hide").empty();
+            page.commands.handleAddEventShowModalUpdate(appointmentId);
+        })
+
+        page.elements.footer.on('click','.delete', function() {
+            appointmentId = $(this).data('id');
+            App.showDeleteConfirmDialog().then((result) =>{
+                if (result.isConfirmed){
+                    page.commands.removeAppointment(appointmentId);
+                }
+            })
+        })
+    }
+
+    page.loadData = () =>{
+        page.commands.getAllAppointments();
+        page.commands.renderTimes();
+        page.commands.getAllSpeciality().then(() =>{
+            let specialityId = page.dialogs.elements.specialityCre.val();
+            page.commands.getAllDoctorsBySpec(specialityId);
+            page.commands.getAllRoomsBySpec(specialityId);
+        })
+    }
+
+    $(() =>{
+        page.loadData();
+        page.initializeControlEvent();
+    })
+</script>
+
+<script src="/dashboard/assets/js/appointment-validation.js"></script>
+</body>
+
+</html>

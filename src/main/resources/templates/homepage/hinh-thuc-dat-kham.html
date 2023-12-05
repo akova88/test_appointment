@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css"/>
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC" style="min-height: 0">
+            <div class="style_bg_breakcum__2BT1J bg-info">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Hình thức đặt khám
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="styles_chooseFeature__sBvc9">
+            <div id="styles_contentBannerHome__1G7jj styles_chooseFeatureContainer__nGIOJ"
+                 class="styles_container__pVb9x styles_contentBannerHome__1G7jj styles_chooseFeatureContainer__nGIOJ">
+                <div class="ant-row styles_rowboxService__OrDbs styles_chooseFeature__utkk1">
+                    <div class="ant-col ant-col-24 styles_colTitle___giBI"><h1 class="styles_title__u_sMk">Các hình thức
+                        đặt khám</h1>
+                        <div class="styles_desc__hbahd">Đặt khám nhanh chóng, không phải chờ đợi
+                        </div>
+                    </div>
+                    <div class="ant-col ant-col-24 styles_colBoxService__HAjlP">
+                        <ul class="styles_listBoxService__gEkVw styles_chooseFeatureList__dEtay"
+                            style="grid-template-columns: repeat(2, 1fr);">
+                            <li class="styles_chooseFeatureItem__MQsB3">
+                                <a href="/dat-lich-lay-mau">
+                                    <div class="styles_card__XD17W">
+                                        <figure><img
+                                                src="https://bo-api.medpro.com.vn:5000/feature/image-source/0638aaee034047dba13be8bc872fab5f_djang_ky_xet_nghiem_tai_nha.png"
+                                                width="35" height="35" alt=""></figure>
+                                        <div class="styles_name__pt_wb">Đăng ký xét nghiệm tại nhà</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="styles_chooseFeatureItem__MQsB3">
+                                <div class="styles_card__XD17W">
+                                    <figure><img
+                                            src="https://prod-partner.s3-hcm-r1.longvan.net/842f1eb1-7e73-4bfc-bdd5-6c4963572f2b-xet_nghiem_tai_co_so.png"
+                                            width="35" height="35" alt=""></figure>
+                                    <div class="styles_name__pt_wb">Đăng ký xét nghiệm tại cơ sở</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="/">
+                    <button type="button" class="btn styles_btnBack__IzOr4" style="font-weight: 500;">
+                        <span>Quay lại</span>
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" color="#003553"
+                             height="16" width="16" xmlns="http://www.w3.org/2000/svg" style="color: rgb(0, 53, 83);">
+                            <g>
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path d="M8 7v4L2 6l6-5v4h5a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H8z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+
+
+<th:block th:replace="/homepage/fragment/footer_js"/>
+</body>
+
+</html>

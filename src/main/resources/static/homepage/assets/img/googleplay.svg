@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 504 152" style="enable-background:new 0 0 504 152;" xml:space="preserve">
+<style type="text/css">
+	.st0{stroke:#A6A6A6;stroke-width:3;}
+	.st1{fill:#FFFFFF;}
+	.st2{font-family:'GoogleSans-Regular';}
+	.st3{font-size:20px;}
+	.st4{font-family:'LucidaGrande';}
+	.st5{display:none;fill:#FFFFFF;enable-background:new    ;}
+	.st6{font-family:'GoogleSans-Bold';}
+	.st7{font-size:55px;}
+	.st8{letter-spacing:1;}
+	.st9{fill:#2196F3;}
+	.st10{fill:#FFC107;}
+	.st11{fill:#4CAF50;}
+	.st12{fill:#F44336;}
+</style>
+<title>stork-google-btn</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1">
+	<g id="Artboard" transform="translate(-55.000000, -248.000000)">
+		<g id="stork-google-btn" transform="translate(55.000000, 248.000000)">
+			<path id="Rectangle-Copy" class="st0" d="M16.5,1.5h471c8.3,0,15,6.7,15,15v119c0,8.3-6.7,15-15,15h-471c-8.3,0-15-6.7-15-15
+				v-119C1.5,8.2,8.2,1.5,16.5,1.5z"/>
+			<g id="Group" transform="translate(144.000000, 28.000000)">
+				<text transform="matrix(1 0 0 1 0.4285 19)" class="st1 st2 st3">T</text>
+				<text transform="matrix(1 0 0 1 11.2081 19)" class="st1 st2 st3"> </text>
+				<text transform="matrix(1 0 0 1 11.2084 19)" class="st1 st4 st3">Ả</text>
+				<text transform="matrix(1 0 0 1 25.0072 19)" class="st1 st2 st3"> </text>
+				<text transform="matrix(1 0 0 1 25.0072 19)" class="st1 st2 st3">I </text>
+				<text transform="matrix(1 0 0 1 34.5272 19)" class="st1 st4 st3">Ứ</text>
+				<text transform="matrix(1 0 0 1 49.6542 19)" class="st1 st2 st3"> </text>
+				<text transform="matrix(1 0 0 1 49.6542 19)" class="st1 st2 st3">NG D</text>
+				<text transform="matrix(1 0 0 1 98.5735 19)" class="st1 st2 st3"> </text>
+				<text transform="matrix(1 0 0 1 98.7742 19)" class="st1 st4 st3">Ụ</text>
+				<text transform="matrix(1 0 0 1 112.6316 19)" class="st1 st2 st3"> </text>
+				<text transform="matrix(1 0 0 1 112.6316 19)" class="st1 st2 st3">NG </text>
+				<text transform="matrix(1 0 0 1 147.6917 19)" class="st5 st6 st3">UMC</text>
+				<text transform="matrix(1 0 0 1 9.289551e-02 80)" class="st1 st2 st7 st8">Google Play</text>
+			</g>
+			<g id="google-play" transform="translate(47.000000, 37.000000)">
+				<path id="Shape" class="st9" d="M41.5,38.3L2.9,77C1,75.2,0,72.8,0,70.2V9.6c0-2.6,1-5,2.9-6.8L41.5,38.3z"/>
+				<path class="st10" d="M74.9,39.9c0,3.5-1.9,6.6-5,8.3l-11,6.1L45.2,41.8l-3.7-3.4l14.4-14.4l13.9,7.7
+					C73,33.3,74.9,36.4,74.9,39.9z"/>
+				<path class="st11" d="M41.5,38.3L3,2.8c0.5-0.5,1.1-0.9,1.8-1.3c3.1-1.9,6.9-1.9,10.2-0.1l41,22.6L41.5,38.3z"/>
+				<path class="st12" d="M58.8,54.4L14.9,78.6c-1.5,0.9-3.3,1.3-5,1.3c-1.8,0-3.6-0.4-5.2-1.4C4,78,3.4,77.5,2.9,77l38.6-38.6
+					l3.7,3.4L58.8,54.4z"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

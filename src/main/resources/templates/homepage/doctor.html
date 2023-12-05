@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css"/>
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC">
+            <div class="style_bg_breakcum__2BT1J">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Thông tin tài khoản
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="">
+                    <div data-test="container" class="container">
+                        <div data-test="row" class="row">
+                            <div data-test="col" class="col-md-5 col-lg-4">
+                                <h1>Lịch khám</h1>
+
+                            </div>
+                            <div data-test="col" class="col-md-7 col-lg-8">
+                                <section class="section">
+                                    <div class="row" id="table-striped">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Striped rows</h4>
+                                                </div>
+                                                <div class="card-content">
+
+                                                    <!-- table striped -->
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped mb-0" id="tbAppointment">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Phòng khám</th>
+                                                                <th>Chuyên khoa</th>
+                                                                <th>Ngày khám</th>
+                                                                <th>Giờ khám</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+
+
+<th:block th:replace="/homepage/fragment/footer_js"/>
+</body>
+<script th:inline="javascript">
+    const page = {
+        url: {
+            getAllAppointment:App.API_APPOINTMENT
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            command: {}
+        },
+        initializeControlEvent: {}
+    }
+
+
+    page.elements.tbAppointmentBody = $('#tbAppointment tbody');
+
+    const eTimes = [[${times}]];
+    console.log(eTimes)
+
+    page.commands.renderAppointment = (appointment) => {
+        let room = appointment.room;
+        let timePeriod = page.commands.findTimePeriod(appointment.timeName);
+        return `<tr id="tr_${appointment.id}">
+                        <td>${room.name}</td>
+                        <td>${appointment.specialityName}</td>
+                        <td>${App.formatDate(appointment.day)}</td>
+                        <td>${timePeriod}</td>
+
+
+                </tr>`;
+    }
+
+    page.commands.findTimePeriod = (timeCode) =>{
+        switch (timeCode){
+            case 'C1':
+                return eTimes.C1;
+            case 'C2':
+                return eTimes.C2;
+            case 'C3':
+                return eTimes.C3;
+            case 'S1':
+                return eTimes.S1;
+            case 'S2':
+                return eTimes.S2;
+            case 'S3':
+                return eTimes.S3;
+        }
+    }
+
+    page.commands.getAllAppointments = () =>{
+
+        $.ajax({
+            url:page.url.getAllAppointment,
+            type: "GET",
+        })
+            .done((data) =>{
+                console.log(data)
+                data.forEach((item) => {
+                    let str = page.commands.renderAppointment(item);
+                    page.elements.tbAppointmentBody.prepend(str);
+                })
+            })
+            .fail((errors) =>{
+                console.log(errors)
+            })
+
+    }
+
+    page.loadData = () => {
+       page.commands.getAllAppointments();
+    }
+
+    $(() => {
+        page.loadData();
+
+
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Med Pro Admin Dashboard</title>
+
+  <th:block th:replace="/dashboard/fragment/head-css" />
+</head>
+
+<body>
+<div id="app">
+  <!--    sidebar -->
+  <th:block th:replace="/dashboard/fragment/sidebar" />
+  <div id="main">
+    <!--    heading-->
+    <header class="mb-3">
+      <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+      </a>
+    </header>
+
+    <div class="page-heading">
+      <h3>Profile Statistics</h3>
+    </div>
+
+    <!--    content-->
+    <div class="page-content">
+
+    </div>
+
+    <!--        footer-->
+    <th:block th:replace="/dashboard/fragment/footer" />
+  </div>
+</div>
+<!--footer JS-->
+<th:block th:replace="/dashboard/fragment/footer-js" />
+</body>
+
+</html>

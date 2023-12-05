@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Med Pro Admin Dashboard</title>
+
+    <th:block th:replace="/dashboard/fragment/head-css"/>
+</head>
+
+<body>
+<div id="app">
+    <!--    sidebar -->
+    <th:block th:replace="/dashboard/fragment/sidebar"/>
+    <div id="main">
+        <!--    heading-->
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+        <div class="page-heading">
+            <h3>Room</h3>
+        </div>
+
+        <!--    content-->
+        <div class="page-content">
+            <section class="section">
+                <div class="row" id="table-striped">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Striped rows</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <button class="btn btn-primary" id="btnShowCreateModal">
+                                        <i class="fas fa-user-plus"></i>
+                                        Add new room
+                                    </button>
+                                </div>
+                                <!-- table striped -->
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0" id="tbRoom">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Speciality</th>
+                                            <th>Name</th>
+                                            <th>Available</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!--        footer-->
+        <th:block th:replace="/dashboard/fragment/footer"/>
+    </div>
+</div>
+<!--footer JS-->
+<th:block th:replace="/dashboard/fragment/footer-js"/>
+<th:block th:replace="/dashboard/room/modalCreate"/>
+
+<script>
+    const page = {
+        url: {
+            getAllRooms: App.API_ROOM,
+            getRoomById: App.API_ROOM,
+            createRoom: App.API_ROOM,
+            getAllSpeciality: App.API_SPECIALITY
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            commands: {}
+        },
+        initializeControlEvent: {}
+    }
+
+    page.elements.tbRoomBody = $('#tbRoom tbody');
+    page.elements.btnShowCreateModal = $('#btnShowCreateModal');
+
+    page.dialogs.elements.modalCreate = $('#modalCreate');
+    page.dialogs.elements.formCreate = $('#formCreate');
+    page.dialogs.elements.errorAreaCreate = $('#modalCreate .error-area')
+    page.dialogs.elements.specialityCre = $('#specialityCre');
+    page.dialogs.elements.nameCre = $('#nameCre');
+    page.dialogs.elements.btnCreate = $('#btnCreate');
+
+    let room = new Room();
+    let speciality = new Speciality();
+
+
+    page.commands.renderRoom = (room) => {
+        return `
+    <tr id="tr_${room.id}">
+        <td>${room.id}</td>
+        <td>${room.specialityName}</td>
+        <td>${room.name}</td>
+        <td>
+            <span class="badge bg-success">${room.isAvailable}</span>
+        </td>
+    </tr>
+    `;
+    }
+    page.commands.getAllRooms = () => {
+        page.elements.tbRoomBody.empty();
+
+        $.ajax({
+            type: 'GET',
+            url: page.url.getAllRooms
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    room = item;
+
+                    const str = page.commands.renderRoom(room);
+                    page.elements.tbRoomBody.prepend(str);
+                });
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+
+    page.commands.getAllSpeciality = () => {
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getAllSpeciality
+        })
+            .done((data) => {
+                const specialities = data;
+                page.dialogs.elements.specialityCre.empty();
+                $.each(specialities, (index, item) => {
+                    const str = `<option value="${item.id}">${item.name}</option>`;
+                    page.dialogs.elements.specialityCre.append(str);
+                });
+            })
+    }
+
+    page.commands.getSpecialityById = (id) => {
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getSpecialityById + '/' + id,
+        });
+    }
+
+    page.dialogs.commands.create = () => {
+        const specialityId = page.dialogs.elements.specialityCre.val();
+        const name = page.dialogs.elements.nameCre.val();
+
+        let room = {
+            specialityId,
+            name
+        }
+        $.ajax({
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            type: "POST",
+            url: page.url.createRoom,
+            data: JSON.stringify(room)
+        })
+            .done((data) => {
+                const str = page.commands.renderRoom(data);
+                page.elements.tbRoomBody.prepend(str);
+
+                page.dialogs.elements.modalCreate.modal('hide');
+
+                App.showSuccessNotification('Tạo phòng thành công');
+
+            })
+            .fail((jqXHR) => {
+                const responseJSON = jqXHR.responseJSON;
+
+                page.dialogs.elements.errorAreaCreate.empty();
+                let str = '';
+
+                $.each(responseJSON, (k, v) => {
+                    str += `<label for="${k}Create">${v}</label>`
+                })
+                page.dialogs.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+                console.log(jqXHR);
+            });
+    }
+    page.initializeControlEvent = () => {
+        page.elements.btnShowCreateModal.on('click', () => {
+            page.dialogs.elements.modalCreate.modal('show');
+        })
+        page.dialogs.elements.btnCreate.on('click', () => {
+            page.dialogs.elements.formCreate.trigger("submit");
+        })
+        page.dialogs.commands.closeModalCreate = () => {
+            page.dialogs.elements.formCreate[0].reset();
+            page.dialogs.elements.formCreate.validate().resetForm();
+            page.dialogs.elements.formCreate.find("input.error").removeClass("error");
+            page.dialogs.elements.errorAreaCreate.empty().removeClass("show").addClass("hide");
+        }
+        page.dialogs.elements.modalCreate.on("hidden.bs.modal", function () {
+            page.dialogs.commands.closeModalCreate();
+        });
+
+    }
+    page.loadData = () => {
+        page.commands.getAllRooms();
+        page.commands.getAllSpeciality();
+    }
+    $(() => {
+        page.loadData();
+        page.initializeControlEvent();
+    })
+
+</script>
+<script src="/dashboard/assets/js/room-validation.js"></script>
+</body>
+
+</html>

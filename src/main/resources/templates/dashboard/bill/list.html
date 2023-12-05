@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Med Pro Admin Dashboard</title>
+
+  <th:block th:replace="/dashboard/fragment/head-css"/>
+</head>
+
+<body>
+<div id="app">
+  <!--    sidebar -->
+  <th:block th:replace="/dashboard/fragment/sidebar"/>
+  <div id="main">
+    <!--    heading-->
+    <header class="mb-3">
+      <a href="#" class="burger-btn d-block d-xl-none">
+        <i class="bi bi-justify fs-3"></i>
+      </a>
+    </header>
+
+    <div class="page-heading">
+      <h3>Medical-Bills Management</h3>
+    </div>
+
+    <!--    content-->
+    <div class="page-content">
+      <div class="page-heading">
+        <div class="page-title">
+          <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+              <h3>DataTable</h3>
+              <p class="text-subtitle text-muted">For user to check they list</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+              <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Bills DataTable</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <section class="section">
+          <div class="row" id="table-striped">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Striped rows</h4>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                  </div>
+                  <!-- table striped -->
+                  <div class="table-responsive">
+                    <table class="table table-striped mb-0" id="tableBill">
+                      <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Mã phiếu</th>
+                        <th>Tên bệnh nhân</th>
+                        <th>Tên bác sĩ</th>
+                        <th>Chuyên khoa</th>
+                        <th>Phòng khám</th>
+                        <th>Phí khám</th>
+                        <th>Ngày khám</th>
+                        <th>Thanh toán</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!--        footer-->
+    <footer class="container-fluid" id="footer-control">
+
+    </footer>
+
+
+    <th:block th:replace="/dashboard/fragment/footer"/>
+  </div>
+</div>
+<!--footer JS-->
+<th:block th:replace="/dashboard/fragment/footer-js"/>
+
+<script>
+
+  const page = {
+    url: {
+      getAllMedicalBills: App.API_MEDICAL_BILL,
+
+    },
+    elements: {},
+    loadData: {},
+    commands: {},
+    dialogs: {
+      elements: {},
+      command: {}
+    },
+    initializeControlEvent: {}
+  }
+
+  page.elements.tbMedicalBill = $('#tableBill tbody');
+
+  page.commands.renderMedicalBills = (bill) => {
+    return `
+            <tr id="tr_${bill.id}">
+                        <td >${bill.id}</td>
+                        <td>${bill.code}</td>
+                        <td>${bill.customer.fullName}</td>
+                        <td>${bill.appointment.doctor.fullName}</td>
+                        <td>${bill.appointment.specialityName}</td>
+                        <td>${bill.appointment.room.name}</td>
+                        <td>${App.formatCurrency(bill.appointment.price)}</td>
+                        <td>${App.formatDate(bill.appointment.day)}</td>
+                        <td class="text-center">
+                            <span class="badge bg-success">${bill.paid}</span>
+                        </td>
+                    </tr>
+    `;
+  }
+
+  page.commands.getAllMedicalBills = () => {
+    page.elements.tbMedicalBill.empty();
+
+    $.ajax({
+      type: 'GET',
+      url: page.url.getAllMedicalBills
+    })
+            .done((data) => {
+              data.forEach(item => {
+                const bill = item;
+                const str = page.commands.renderMedicalBills(bill);
+                page.elements.tbMedicalBill.prepend(str);
+              });
+            })
+            .fail((error) => {
+              console.log(error);
+            })
+  }
+
+  page.initializeControlEvent = () => {
+
+  }
+
+  page.loadData = () => {
+    page.commands.getAllMedicalBills();
+  }
+
+  $(() => {
+    page.loadData();
+    page.initializeControlEvent();
+  })
+
+</script>
+
+<!--<script src="/dashboard/assets/js/customer-validation.js"></script>-->
+</body>
+
+</html>

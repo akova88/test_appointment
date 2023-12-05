@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ | MEDIC-PRO</title>
+
+  <th:block th:replace="/homepage/fragment/head_css"/>
+</head>
+
+<body>
+<div class="container-fluid">
+  <th:block th:replace="/homepage/fragment/header"/>
+
+
+  <div class="content">
+
+    <div class="style_wrapper_content__2nPtC">
+      <div class="style_bg_breakcum__2BT1J">
+        <div data-test="container" class="container">
+          <div data-test="row" class="row">
+            <div data-test="col" class="col-12">
+              <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                <nav data-test="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/static">Trang
+                      chủ</a></li>
+                    <li data-test="breadcrumb-item" class="breadcrumb-item">Cập nhập hồ sơ bệnh nhân
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div data-test="container" class="container">
+          <div data-test="row" class="row">
+            <div data-test="col" class="col-md-12">
+              <div>
+                <h2 class="style_title_component__3jzrX style_title_line__3AhYV style_title_header_mobile__23s4W">
+                  <span>Cập nhập hồ sơ</span>
+                </h2>
+
+                <div data-test="tabContent" class="tab-content">
+                  <div data-test="tab-pane" role="tabpanel" class="tab-pane active">
+                    <div data-test="animation" class="animated fadeIn"
+                         style="animation-iteration-count: 1; visibility: visible; animation-name: fadeIn;">
+                      <form class="style_form_medpro__nfoJ1 style_form_update__2XmGr" method="post" id="frmUpdate">
+                        <div>
+                          <h2 class="style_title_component__3jzrX style_title_headline__1RPh4">
+                            <span>Nhập thông tin bệnh nhân</span>
+                          </h2>
+                          <div data-test="alert" class="alert alert-primary" role="alert">
+                            Vui lòng cung cấp thông tin chính xác để được phục vụ tốt
+                            nhất. Trong trường hợp cung cấp sai thông tin bệnh nhân
+                            &amp; điện thoại, việc xác nhận cuộc hẹn sẽ không hiệu lực
+                            trước khi đặt khám.
+                          </div>
+                          <div class="style_info_required__2nJlo">
+                                                        <span class="style_alertSpan__2UfTW" style="margin-bottom: 15px;">(*)
+                                                                Thông tin bắt buộc nhập
+                                                        </span>
+                          </div>
+
+                          <div class="style_wapper_form_group__2xD4H">
+                            <div class="style_form_group__3EAEk">
+                              <label for="fullNameUp">Họ và tên (có dấu)<sup>*</sup>
+                              </label>
+                              <input id="fullNameUp" name="fullNameUp" type="text" class="form-control text-uppercase" placeholder="Ví dụ: Nguyễn Văn Bảo" maxlength="28">
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk">
+                              <label for="dayUp">Ngày tháng năm sinh<sup>*</sup></label>
+                              <div class="style_form_group_select__19IYg">
+                                <select id="dayUp" class="browser-default custom-select">
+                                  <option value="0">Ngày</option>
+                                </select>
+
+                                <select id="monthUp" class="browser-default custom-select">
+                                  <option value="0">Tháng</option>
+                                </select>
+
+                                <select id="yearUp" class="browser-default custom-select">
+                                  <option value="0">Năm</option>
+                                </select>
+                              </div>
+                              <span class="style_alertSpan__2UfTW"></span>
+                              <span class="style_alertSpan__2UfTW"></span>
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk">
+                              <label for="phoneUp">Số điện thoại<sup>*</sup></label>
+                              <input type="text" id="phoneUp" name="phoneUp" class="form-control" placeholder="Nhập số điện thoại" value="">
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk style_form_select__2iBjy">
+                              <label for="genderUp">Giới tính<sup>*</sup></label>
+                              <select id="genderUp" class="browser-default custom-select">
+                                <option value="0">Chọn giới tính</option>
+                                <option value="MALE">Nam</option>
+                                <option value="FEMALE">Nữ</option>
+                              </select>
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk style_form_select__2iBjy">
+                              <label for="jobUp">Nghề nghiệp <sup>*</sup></label>
+                              <select id="jobUp" class="browser-default custom-select">
+                                <option value="0">Chọn nghề nghiệp</option>
+                              </select>
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk">
+                              <label for="identityUp">Số CMND/Passport<sup></sup></label>
+                              <input type="text" id="identityUp" name="identityUp" class="form-control" placeholder="Nhập số CMND" value="">
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk">
+                              <label for="emailUp">Địa chỉ Email<sup></sup></label>
+                              <input type="text" id="emailUp" name="emailUp" class="form-control"
+                                     placeholder="Nhập địa chỉ email để nhận phiếu khám"
+                                     value="">
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk style_form_select__2iBjy">
+                              <label for="ethnicUp">Dân tộc</label>
+                              <select id="ethnicUp" class="browser-default custom-select">
+                              </select>
+                            </div>
+                            <div class="style_form_group__3EAEk style_form_select__2iBjy">
+                              <label for="provinceUp">Tỉnh / Thành<sup>*</sup></label>
+                              <select id="provinceUp" class="browser-default custom-select">
+                                <option value="0">Chọn tỉnh thành</option>
+                              </select>
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk style_form_select__2iBjy">
+                              <label for="districtUp"> Quận / Huyện<sup>*</sup></label>
+                              <select id="districtUp" class="browser-default custom-select">
+                                <option value="0">Chọn quận huyện</option>
+                              </select>
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk style_form_select__2iBjy">
+                              <label for="wardUp">Phường / Xã<sup>*</sup></label>
+                              <select id="wardUp" class="browser-default custom-select">
+                                <option value="0">Chọn phường xã</option>
+                              </select>
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk">
+                              <label for="addressUp">Địa chỉ<sup>*</sup></label>
+                              <input type="text" id="addressUp" name="addressUp" class="form-control"
+                                     placeholder="Nhập địa chỉ" maxlength="100" value="">
+                              <span class="style_alertSpan__2UfTW"></span>
+                            </div>
+                            <div class="style_form_group__3EAEk style_action_form__1hR3C">
+                              <button data-test="button" type="button" id="btnClear"
+                                      class="btn-flat btn Ripple-parent style_button__bKNrt style_reset__1qJB7">
+                                <i class="fas fa-eraser"></i>
+                                <div>Nhập lại</div>
+                                <div data-test="waves" class="Ripple Ripple-outline " style="top: 0px; left: 0px; width: 0px; height: 0px;">
+                                </div>
+                              </button>
+                              <button data-test="button" type="button" id="btnUpdate"
+                                      class="btn-flat btn Ripple-parent style_button__bKNrt style_create_patient_form__1321O">
+                                <i class="fas fa-user-plus"></i>
+                                <div>Cập nhập</div>
+                                <div data-test="waves"
+                                     class="Ripple Ripple-outline "
+                                     style="top: 0px; left: 0px; width: 0px; height: 0px;">
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- -----------------------Footer----------------------- -->
+
+  <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+
+<th:block th:replace="/homepage/fragment/footer_js"/>
+
+<script>
+  const page = {
+    url: {
+      getAllCustomers: App.API_CUSTOMER,
+      getCustomerById: App.API_CUSTOMER,
+      getAllProvince: App.API_LOCATION_REGION + '/',
+      getAllDistricts: App.API_LOCATION_REGION + '/district',
+      getAllWard: App.API_LOCATION_REGION + '/ward',
+      getAllJob: App.API_JOB,
+      getAllEthnic: App.API_ETHNIC,
+      updateCustomer: App.API_CUSTOMER,
+    },
+    elements: {},
+    loadData: {},
+    commands: {},
+    initializeControlEvent: {}
+  }
+
+
+  page.elements.frmUpdate = $('#frmUpdate');
+  page.elements.fullNameUp = $('#fullNameUp');
+  page.elements.emailUp = $('#emailUp');
+  page.elements.genderUp = $('#genderUp');
+  page.elements.phoneUp = $('#phoneUp');
+  page.elements.identityUp = $('#identityUp');
+  page.elements.dayUp = $('#dayUp')
+  page.elements.monthUp = $('#monthUp')
+  page.elements.yearUp = $('#yearUp')
+  page.elements.dobUp = $('#dobUp');
+  page.elements.jobUp = $('#jobUp');
+  page.elements.ethnicUp = $('#ethnicUp');
+  page.elements.provinceUp = $('#provinceUp');
+  page.elements.districtUp = $('#districtUp');
+  page.elements.wardUp = $('#wardUp');
+  page.elements.addressUp = $('#addressUp');
+  page.elements.btnUpdate = $('#btnUpdate');
+  page.elements.btnClear = $('#btnClear');
+
+  let customerId = [[${customer.id}]];
+  console.log(customerId);
+  let customer;
+  let locationRegion = new LocationRegion();
+
+  const userId = [[${userId}]];
+
+  page.commands.getCustomerById = (id) => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getCustomerById + '/' + id,
+    });
+  }
+
+  page.commands.getAllYear = () => {
+    for( let i = 2023; i >= 1900; i-- ){
+      const str = `<option value="${i}">${i}</option>`;
+      page.elements.yearUp.append(str)
+    }
+  }
+
+  page.commands.getAllMonth = () => {
+    for( let i = 1; i <= 12; i++ ){
+      const str = `<option value="${i}">${i}</option>`;
+      page.elements.monthUp.append(str)
+    }
+  }
+
+  page.commands.getAllDay = () => {
+    for( let i = 1; i <= 31; i++ ){
+      const str = `<option value="${i}">${i}</option>`;
+      page.elements.dayUp.append(str)
+    }
+  }
+
+  page.commands.getAllJob = () => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getAllJob
+    })
+            .done((data) => {
+              const jobs = data;
+              page.elements.jobUp.empty();
+              $.each(jobs, (index, item) => {
+                const str = `<option value="${item.id}">${item.name}</option>`;
+                page.elements.jobUp.append(str);
+              });
+            })
+  }
+
+  page.commands.getAllEthnic = () => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getAllEthnic
+    })
+            .done((data) => {
+              const ethnics = data;
+              page.elements.ethnicUp.empty();
+              $.each(ethnics, (index, item) => {
+                const str = `<option value="${item.id}">${item.name}</option>`;
+                page.elements.ethnicUp.append(str);
+              });
+            })
+  }
+
+  page.commands.getAllProvince = () => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getAllProvince
+    })
+            .done((data) => {
+              const provinces = data.results;
+              page.elements.provinceUp.empty();
+              $.each(provinces, (index, item) => {
+                const str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                page.elements.provinceUp.append(str);
+              });
+            })
+  }
+  page.commands.getAllDistricts = (provinceId, elem) => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getAllDistricts + '/' + provinceId
+    })
+            .done((data) => {
+              const districts = data.results;
+
+              elem.empty();
+              $.each(districts, (index, item) => {
+                const str = `<option value="${item.district_id}">${item.district_name}</option>`;
+
+                elem.append(str);
+              });
+            })
+  }
+
+  page.commands.getAllWards = (districtId, elem) => {
+    $.ajax({
+      type: 'GET',
+      url: page.url.getAllWard + '/' + districtId
+    })
+            .done((data) => {
+              const wards = data.results;
+              elem.empty();
+              $.each(wards, (index, item) => {
+                const str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                elem.append(str);
+              });
+            })
+  }
+
+  page.commands.getCustomerById = (id) => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getCustomerById + '/' + id,
+    });
+  }
+
+  page.commands.update = () => {
+    const provinceId = page.elements.provinceUp.val();
+    const provinceName = page.elements.provinceUp.find('option:selected').text();
+    const districtId = page.elements.districtUp.val();
+    const districtName = page.elements.districtUp.find('option:selected').text();
+    const wardId = page.elements.wardUp.val();
+    const wardName = page.elements.wardUp.find('option:selected').text();
+    const address = page.elements.addressUp.val();
+
+    let locationRegion = {
+      provinceId,
+      provinceName,
+      districtId,
+      districtName,
+      wardId,
+      wardName,
+      address
+    }
+
+    const fullName = page.elements.fullNameUp.val();
+    const email = page.elements.emailUp.val();
+    const phone = page.elements.phoneUp.val();
+    const nameGender = page.elements.genderUp.find('option:selected').val();
+
+    let dayUp = page.elements.dayUp.val();
+    let monthUp = page.elements.monthUp.val();
+    let yearUp = page.elements.yearUp.val();
+
+    const birthDay = dayUp + '/' + monthUp + '/' + yearUp;
+
+    const identityNumber = page.elements.identityUp.val();
+    const ethnic = page.elements.ethnicUp.find('option:selected').text();
+    const job = page.elements.jobUp.find('option:selected').text();
+
+
+    let customer = {
+      fullName,
+      email,
+      nameGender,
+      phone,
+      birthDay,
+      job,
+      identityNumber,
+      ethnic,
+      locationRegion,
+      userId
+    }
+
+    return $.ajax({
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      type: 'PATCH',
+      url: page.url.updateCustomer + '/' + customerId,
+      data: JSON.stringify(customer)
+    })
+            .done((data) => {
+              App.showSuccessAlert("Cập nhập khách hàng thành công!")
+            })
+            .fail((error) => {
+              const responseJSON = error.responseJSON;
+
+              // page.elements.errorAreaCreate.empty();
+              let str = '';
+
+              $.each(responseJSON, (k, v) => {
+                str += `<label for="${k}Dep">${v}</label>`
+              })
+
+              // page.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+            })
+  }
+
+
+  page.commands.handleAddEventShowProfileUpdateCustomer = (customerId) =>{
+
+    page.commands.getCustomerById(customerId).then((data) => {
+      page.elements.fullNameUp.val(data.fullName);
+      page.elements.emailUp.val(data.email);
+      page.elements.genderUp.val(data.gender);
+      page.elements.phoneUp.val(data.phone);
+      page.elements.identityUp.val(data.identityNumber);
+      const dateStr = App.formatDate(data.dob);
+
+      const parts = dateStr.split("/");
+
+      const day = parseInt(parts[0]);
+      const month = parseInt(parts[1]);
+      const year = parts[2];
+
+      page.elements.dayUp.val(day);
+      page.elements.monthUp.val(month);
+      page.elements.yearUp.val(year);
+
+      page.commands.getAllJob().then((jobs) => {
+        jobs.forEach(item => {
+          if (item.name === data.job) {
+            page.elements.jobUp.val(item.id);
+            return;
+          }
+        })
+      })
+              .catch((error) => {
+                console.log(error);
+              })
+
+      page.commands.getAllEthnic().then((ethnics) => {
+        ethnics.forEach(item => {
+          if (item.name === data.ethnic){
+            page.elements.ethnicUp.val(item.id);
+            return;
+          }
+        })
+      })
+              .catch((error) => {
+                console.log(error);
+              })
+
+      page.elements.addressUp.val(data.locationRegion.address);
+
+      const provinceId = data.locationRegion.provinceId;
+      const districtId = data.locationRegion.districtId;
+
+      page.elements.provinceUp.val(provinceId);
+
+      page.commands.getAllDistricts(provinceId, page.elements.districtUp).then(() => {
+        page.elements.districtUp.val(districtId);
+        page.commands.getAllWards(districtId, page.elements.wardUp).then(() => {
+          page.elements.wardUp.val(data.locationRegion.wardId);
+        });
+      });
+    })
+            .catch((error) => {
+              console.log(error);
+            })
+  }
+
+  page.initializeControlEvent = () => {
+    page.elements.provinceUp.on('change', function () {
+      const provinceId = $(this).val();
+      page.commands.getAllDistricts(provinceId, page.elements.districtUp).then(() => {
+        const districtId = page.elements.districtUp.val();
+        page.commands.getAllWards(districtId, page.elements.wardUp);
+      });
+    })
+
+    page.elements.districtUp.on('change', function () {
+      const districtId = page.elements.districtUp.val();
+      page.commands.getAllWards(districtId, page.elements.wardUp);
+    })
+
+    page.elements.btnUpdate.on('click', () => {
+      page.commands.update().then(() => {
+        window.location.href = '/profile';
+      })
+      // bắt sự kiện nhấn vô nút save create
+      //     page.elements.frmCreate.trigger("submit");
+    })
+
+    page.elements.btnClear.on('click', () => {
+      page.elements.frmUpdate[0].reset();
+      // page.elements.frmCreate.validate().resetForm();
+      // page.dialogs.elements.frmCreate.find("input.error").removeClass("error");
+      // page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
+    })
+  }
+  page.loadData = () => {
+    page.commands.getAllYear();
+    page.commands.getAllMonth();
+    page.commands.getAllDay();
+    page.commands.getAllJob();
+    page.commands.getAllEthnic();
+    page.commands.getAllProvince().then(() => {
+      page.commands.handleAddEventShowProfileUpdateCustomer(customerId);
+      const provinceId = page.elements.provinceUp.val();
+      page.commands.getAllDistricts(provinceId, page.elements.districtUp).then(() => {
+        const districtId = page.elements.districtUp.val();
+        page.commands.getAllWards(districtId, page.elements.wardUp);
+      });
+    });
+  }
+
+  $(() => {
+    page.loadData();
+    page.initializeControlEvent();
+  })
+</script>
+
+</body>
+
+</html>

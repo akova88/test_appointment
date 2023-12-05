@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css" />
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header" />
+
+
+    <div class="content row justify-content-center">
+        <div class="col-lg-10 container-fluid row">
+            <div class="col-lg-3">
+                <div class="bg-primary p-2 text-lg-center rounded-top">
+                    <p class="card-title fw-bold">Thông tin bệnh nhân</p>
+                </div>
+                <div class="border border-primary p-2">
+                    <p>
+                        <i class="fas fa-user-circle me-2"></i>
+                        <span th:text="${customer.fullName}"></span>
+                    </p>
+                    <p>
+                        <i class="fas fa-mobile me-2"></i>
+                        <span th:text="${customer.phone}"></span>
+                    </p>
+                    <p>
+                        <i class="fas fa-map-marker me-2"></i>
+                        <span th:text="${customer.locationRegion.address+', '+customer.locationRegion.wardName+', '+customer.locationRegion.districtName+', '+customer.locationRegion.provinceName}"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-8 ms-5">
+                <div class="card mb-2">
+                    <div class="card-header bg-primary">
+                        <h4 class="card-title">Xác nhận thông tin khám</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body mb-2">
+                            <!-- Table with outer spacing -->
+                            <div class="table-responsive">
+                                <table class="table table-lg" id="tableBill">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Chuyên khoa</th>
+                                        <th>Bác sĩ</th>
+                                        <th>Giờ khám</th>
+                                        <th>Tiền khám</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="bg-primary p-2 text-lg-center rounded-top">
+                        <p class="card-title fw-bold">Thông tin bệnh nhân</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 ms-2">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fal fa-user me-2"></i>Họ và tên
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${customer.fullName}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fa-calendar-alt me-2"></i>Ngày Sinh
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${#dates.format(customer.DOB, 'dd/MM/yyyy')}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fa-mail-bulk me-2"></i>Email
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${customer.email}"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-5 ms-2">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fa-venus-mars"></i>Giới tính
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${customer.gender.value}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fal fa-id-card me-2"></i>CMND
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${customer.identityNumber}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fal fa-users me-2"></i>Dân tộc
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${customer.ethnic}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p>
+                                        <i class="fas fal fa-map-marker me-2"></i>Địa chỉ
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <span th:text="${customer.locationRegion.address+', '+customer.locationRegion.wardName+', '+customer.locationRegion.districtName+', '+customer.locationRegion.provinceName}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row d-flex justify-content-between mb-1">
+                    <a class="text-decoration-none col-lg-3 ms-2" href="/choose-appointment">
+                        <button class="btn btn-outline-primary">
+                            Thêm chuyên khoa
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </a>
+                    <a class="text-decoration-none col-lg-2" href="/checkout">
+                        <button class="btn btn-outline-primary">
+                            Xác nhận
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer" />
+</div>
+
+
+
+<th:block th:replace="/homepage/fragment/footer_js" />
+
+<script th:inline="javascript">
+
+    const page = {
+        url: {
+            getUnpaidMedicalBillByCus: App.API_MEDICAL_BILL+"/unpaid/",
+            deleteUnpaidMedicalBillById: App.API_MEDICAL_BILL+"/unpaid/"
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            command: {}
+        },
+        initializeControlEvent: {}
+    }
+
+    page.elements.tbMedicalBill = $('#tableBill tbody');
+
+    const customerId = '[[${customerId}]]';
+    let medicalBillId = 0;
+
+    page.commands.renderMedicalBills = (bill) => {
+        return `
+            <tr id="tr_${bill.id}">
+                <td >${bill.id}</td>
+                <td>${bill.appointment.specialityName}</td>
+                <td>${bill.appointment.doctor.fullName}</td>
+                <td>${App.formatDate(bill.appointment.day)}</td>
+                <td>${App.formatCurrency(bill.appointment.price)}</td>
+                <td>
+                    <button class="btn btn-flat p-0 delete" data-id="${bill.id}">
+                        <i class="far fa-trash-alt me-2"></i>Xóa
+                    </button>
+                </td>
+            </tr>
+    `;
+    }
+
+    page.commands.getAllMedicalBills = () => {
+        page.elements.tbMedicalBill.empty();
+
+        $.ajax({
+            type: 'GET',
+            url: page.url.getUnpaidMedicalBillByCus+customerId
+        })
+            .done((data) => {
+                data.forEach(bill => {
+                    const str = page.commands.renderMedicalBills(bill);
+                    page.elements.tbMedicalBill.append(str);
+                });
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+
+    page.commands.deleteMedicalBill = (medicalBillId) =>{
+        $.ajax({
+            type: 'DELETE',
+            url: page.url.deleteUnpaidMedicalBillById+medicalBillId,
+        })
+            .done((data)=>{
+                const currentRow = $("#tr_"+medicalBillId);
+                currentRow.remove();
+                App.showSuccessNotification("Xóa phiếu khám thành công");
+            })
+    }
+
+    page.initializeControlEvent = () => {
+        page.elements.tbMedicalBill.on('click', '.delete', function (){
+            medicalBillId = $(this).data('id');
+            App.showDeleteConfirmDialog().then((result) =>{
+                if (result.isConfirmed){
+                    page.commands.deleteMedicalBill(medicalBillId);
+                }
+            })
+        })
+    }
+
+    page.loadData = () => {
+        page.commands.getAllMedicalBills();
+    }
+
+    $(() => {
+        page.loadData();
+        page.initializeControlEvent();
+    })
+
+</script>
+</body>
+
+</html>

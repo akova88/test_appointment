@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css"/>
+    <link rel="stylesheet" href="/homepage/assets/css/booking.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC" style="min-height: 0">
+            <div class="style_bg_breakcum__2BT1J bg-info">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Hình thức đặt khám
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="site-main">
+
+
+            <div class="container">
+                <div class="bookings">
+                    <div class="block-content">
+                        <h2>Lấy mẫu tại nhà</h2>
+                        <p>Lấy mẫu xét nghiệm tại nhà giúp khách hàng chủ động tầm soát bệnh lý. Đồng thời tiết kiệm
+                            thời gian đi lại, chờ đợi kết quả với mức chi phí hợp lý.</p>
+                        <form id="formLayMauTaiNha" action="/service/datlich/" method="post">
+                            <div class="form">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Họ và tên <sup>*</sup></label>
+                                        <div class="control">
+                                            <input type="hidden" class="form-control" id="RecaptchaToken"
+                                                   name="RecaptchaToken" value="">
+                                            <input id="siteKey" value="6LfX-QsnAAAAAOIiB-QrHzjBHuT5H0yVO6mccoi3"
+                                                   type="hidden">
+                                            <input placeholder="Nhập họ và tên" type="text" class="form-control"
+                                                   data-val="true" data-val-required="Họ và tên không được để trống"
+                                                   id="patientName" name="patientName" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="patientName"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Ngày sinh <sup>*</sup></label>
+                                        <div class="control">
+                                            <input placeholder="-- / -- / ----" class="date form-control" type="text"
+                                                   data-val="true" data-val-required="Ngày sinh không được để trống"
+                                                   id="patientBirthDate" name="patientBirthDate" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="patientBirthDate"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <input value="POSTPAID" style="display:none" type="text" class="form-control"
+                                           id="MedthodPayment" name="MedthodPayment">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Số điện thoại <sup>*</sup></label>
+                                        <div class="control">
+                                            <input placeholder="Nhập số điện thoại" type="text" class="form-control"
+                                                   data-val="true" data-val-required="Số điện thoại không được để trống"
+                                                   id="phone" name="phone" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="phone"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Email <sup>*</sup></label>
+                                        <div class="control">
+                                            <input placeholder="Nhập email" type="text" class="form-control"
+                                                   data-val="true" data-val-required="Email không được để trống"
+                                                   id="email" name="email" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="email"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Giới tính <sup>*</sup></label>
+                                        <div class="control">
+                                            <select data-placeholder="Chọn giới tính"
+                                                    class="form-control select2-hidden-accessible" data-val="true"
+                                                    data-val-required="Giới tính không được để trống" id="patientSex"
+                                                    name="patientSex" data-select2-id="select2-data-patientSex"
+                                                    tabindex="-1" aria-hidden="true">
+                                                <option value="" data-select2-id="select2-data-2-3p8k">Chọn giới tính
+                                                </option>
+                                                <option value="MALE">Nam</option>
+                                                <option value="FEMALE">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Loại xét nghiệm</label>
+                                        <div class="control">
+                                            <select data-placeholder="Chọn loại xét nghiệm"
+                                                    class="form-control select2-hidden-accessible" id="TestTypeSelected"
+                                                    name="TestTypeSelected"
+                                                    data-select2-id="select2-data-TestTypeSelected" tabindex="-1"
+                                                    aria-hidden="true">
+                                                <option value="" data-select2-id="select2-data-4-wkcx">Chọn loại xét
+                                                    nghiệm
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Ngày lấy mẫu <sup>*</sup></label>
+                                        <div class="control">
+                                            <input placeholder="-- / -- / ----" class="date form-control" type="text"
+                                                   data-val="true" data-val-required="Ngày hẹn không được để trống"
+                                                   id="appointmentDate" name="appointmentDate" value="02/12/2023">
+                                            <span class="field-validation-valid" data-valmsg-for="appointmentDate"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Giờ lấy mẫu <sup>*</sup></label>
+                                        <div class="control">
+                                            <select data-placeholder="Chọn thời gian lấy mẫu tại nhà"
+                                                    class="form-control select2-hidden-accessible" data-val="true"
+                                                    data-val-required="Giờ khám không được để trống" id="TimeSelected"
+                                                    name="TimeSelected" data-select2-id="select2-data-TimeSelected"
+                                                    tabindex="-1" aria-hidden="true">
+                                                <option value="79616d86-2289-40fc-b1a9-2c70553183d1">05h30</option>
+                                                <option value="c8ee9a73-ea30-4097-82f9-da8e3c41f041">06h00</option>
+                                                <option value="7b881da7-c415-405e-b81b-0d6c4bb02234">06h30</option>
+                                                <option value="4cb05aaa-028e-4698-b8b6-d16d1fc8b68c">07h00</option>
+                                                <option value="c5a29407-9319-4150-a1b0-b642da196feb">07h30</option>
+                                                <option value="cd92d497-6c61-4a40-8594-fbb3109efd43">08h00</option>
+                                                <option value="e27ce340-d205-455a-9d9c-a6c3c6249966">08h30</option>
+                                                <option value="49c04391-c2bd-4365-aca8-48342c99a7ff">09h00</option>
+                                                <option value="41a31605-bff7-47c6-92d8-ff269a63365a">09h30</option>
+                                                <option value="d6f49cc2-c059-4321-987b-38abbaa9bd19">10h00</option>
+                                                <option value="b9c8d241-e61d-4867-bd2a-c58594af9b7b">10h30</option>
+                                                <option value="20a6b8ce-759a-4afe-b0b8-33bf327565ac">11h00</option>
+                                                <option value="a8df4580-f5a2-4d87-9f35-6f603d123676">11h30</option>
+                                                <option value="ed6fe46c-85ec-488b-8bd4-0cd4946d0283">12h00</option>
+                                                <option value="aad7caa9-6266-4b50-8279-97843271e7e9">12h30</option>
+                                                <option value="42864d28-b16c-455f-893d-8f29e5305ea1">13h00</option>
+                                                <option value="108513d3-9ae5-4fa6-9e08-c1fa650d5496">13h30</option>
+                                                <option value="a038a03d-972c-4d66-8c3d-cae84dbcc46c">14h00</option>
+                                                <option value="cb4d0196-6432-4aed-842c-6db67f88570a">14h30</option>
+                                                <option value="244376ef-bc61-480d-8540-48e1b65c91ca">15h00</option>
+                                                <option value="f9ceb067-b2ae-47b4-a485-16ec56c7a92c">15h30</option>
+                                                <option value="028a75aa-b4c2-4e7a-8b20-ce34f1ced7f1">16h00</option>
+                                                <option value="c8d0b0fc-ca70-4904-abeb-b8c64b99729b">16h30</option>
+                                                <option value="a1c0f4a8-980c-4acd-afc7-ad698a790210">17h00</option>
+                                                <option value="a84ea6dc-1279-4579-ad96-0e037b859136">17h30</option>
+                                                <option value="93ab618d-e3ff-4b6c-9ad6-e580d84e1247">18h00</option>
+                                                <option value="6f91e37d-b79f-4c3a-92de-d7251d8d1604">18h30</option>
+                                                <option value="31948e5a-396e-405d-9caf-c48180f7ab49">19h00</option>
+                                                <option value="bd43aa13-3cdd-4d6d-8f66-e2f31d3bfdf2">19h30</option>
+                                                <option value="ca5d5e8f-9858-4b02-8b81-09adb2a75294">20h00</option>
+                                                <option value="2260ca38-c031-4c78-bba3-80ba5484742a">20h30</option>
+                                                <option value="a9aad9c5-2f10-4772-829c-f31bd4de87ff">21h00</option>
+                                                <option value="245c6d65-947b-474b-9874-0e6e8177f345">21h30</option>
+                                                <option value="eb87adf3-4a05-4a74-b7e6-484b82f10150">22h00</option>
+                                                <option value="ed1a31d2-90fd-49a6-a188-08c25c37b3ab"
+                                                        data-select2-id="select2-data-6-fkul">22h30
+                                                </option>
+                                                <option value="8307b9ad-ca79-4b77-a6bd-3c6057f81e88">23h00</option>
+                                            </select>
+                                            <span class="field-validation-valid" data-valmsg-for="TimeSelected"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Tỉnh/Thành phố <sup>*</sup></label>
+                                        <div class="control">
+                                            <select data-placeholder="Chọn Tỉnh/Thành phố"
+                                                    class="form-control select2-hidden-accessible" data-val="true"
+                                                    data-val-required="Tỉnh/Thành phố không được để trống"
+                                                    id="ProvinceSelected" name="ProvinceSelected"
+                                                    data-select2-id="select2-data-ProvinceSelected" tabindex="-1"
+                                                    aria-hidden="true">
+                                                <option value="" data-select2-id="select2-data-8-3by6">Chọn Tỉnh/Thành
+                                                    phố
+                                                </option>
+                                                <option value="76">Hà Nội</option>
+                                                <option value="1295">Banteay Meanchey</option>
+                                                <option value="1280">Battambang</option>
+                                                <option value="77">Hồ Chí Minh</option>
+                                                <option value="1290">Kampong Cham</option>
+                                                <option value="1273">Kampong Chhnang</option>
+                                                <option value="1275">Kampong Speu</option>
+                                                <option value="1284">Kampong Thom</option>
+                                                <option value="1294">Kampot</option>
+                                                <option value="1293">Kandal</option>
+                                                <option value="1289">Kep</option>
+                                                <option value="1282">Koh Kong</option>
+                                                <option value="1278">Kratie</option>
+                                                <option value="1272">Mondul Kiri</option>
+                                                <option value="1288">Oddar Meanchey</option>
+                                                <option value="1281">Pailin</option>
+                                                <option value="1291">Phnom Penh</option>
+                                                <option value="1285">Preah Sihanouk</option>
+                                                <option value="1277">Preah Vihear</option>
+                                                <option value="1271">Prey Veng</option>
+                                                <option value="1287">Pursat</option>
+                                                <option value="1283">Ratanak Kiri</option>
+                                                <option value="1279">Siemreap</option>
+                                                <option value="1276">Stung Treng</option>
+                                                <option value="1292">Svay Rieng</option>
+                                                <option value="1274">Takeo</option>
+                                                <option value="1286">Tboung Khmum</option>
+                                                <option value="78">Hải Phòng</option>
+                                                <option value="86">Đà Nẵng</option>
+                                                <option value="87">An Giang</option>
+                                                <option value="91">Bà Rịa - Vũng Tàu</option>
+                                                <option value="88">Bắc Giang</option>
+                                                <option value="89">Bắc Kạn</option>
+                                                <option value="90">Bạc Liêu</option>
+                                                <option value="79">Bắc Ninh</option>
+                                                <option value="92">Bến Tre</option>
+                                                <option value="93">Bình Định</option>
+                                                <option value="94">Bình Dương</option>
+                                                <option value="95">Bình Phước</option>
+                                                <option value="96">Bình Thuận</option>
+                                                <option value="97">Cà Mau</option>
+                                                <option value="11">Cần Thơ</option>
+                                                <option value="98">Cao Bằng</option>
+                                                <option value="83">Đắk Lắk</option>
+                                                <option value="100">Đắk Nông</option>
+                                                <option value="101">Điện Biên</option>
+                                                <option value="102">Đồng Nai</option>
+                                                <option value="103">Đồng Tháp</option>
+                                                <option value="104">Gia Lai</option>
+                                                <option value="105">Hà Giang</option>
+                                                <option value="107">Hà Nam</option>
+                                                <option value="108">Hà Tĩnh</option>
+                                                <option value="106">Hải Dương</option>
+                                                <option value="109">Hậu Giang</option>
+                                                <option value="84">Hòa Bình</option>
+                                                <option value="111">Hưng Yên</option>
+                                                <option value="112">Khánh Hòa</option>
+                                                <option value="113">Kiên Giang</option>
+                                                <option value="114">Kon Tum</option>
+                                                <option value="115">Lai Châu</option>
+                                                <option value="116">Lâm Đồng</option>
+                                                <option value="117">Lạng Sơn</option>
+                                                <option value="118">Lào Cai</option>
+                                                <option value="25">Long An</option>
+                                                <option value="42">Nam Định</option>
+                                                <option value="119">Nghệ An</option>
+                                                <option value="66">Ninh Bình</option>
+                                                <option value="68">Ninh Thuận</option>
+                                                <option value="85">Phú Thọ</option>
+                                                <option value="121">Phú Yên</option>
+                                                <option value="122">Quảng Bình</option>
+                                                <option value="123">Quảng Nam</option>
+                                                <option value="124">Quảng Ngãi</option>
+                                                <option value="125">Quảng Ninh</option>
+                                                <option value="126">Quảng Trị</option>
+                                                <option value="127">Sóc Trăng</option>
+                                                <option value="128">Sơn La</option>
+                                                <option value="129">Tây Ninh</option>
+                                                <option value="130">Thái Bình</option>
+                                                <option value="53">Thái Nguyên</option>
+                                                <option value="81">Thanh Hóa</option>
+                                                <option value="131">Thừa Thiên - Huế</option>
+                                                <option value="132">Tiền Giang</option>
+                                                <option value="133">Trà Vinh</option>
+                                                <option value="134">Tuyên Quang</option>
+                                                <option value="135">Vĩnh Long</option>
+                                                <option value="80">Vĩnh Phúc</option>
+                                                <option value="136">Yên Bái</option>
+                                            </select>
+                                            <span class="field-validation-valid" data-valmsg-for="ProvinceSelected"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Quận/Huyện <sup>*</sup></label>
+                                        <div class="control">
+                                            <select data-placeholder="Chọn Quận/Huyện"
+                                                    class="form-control select2-hidden-accessible" data-val="true"
+                                                    data-val-required="Quận/Huyện không được để trống"
+                                                    id="DistrictSelected" name="DistrictSelected"
+                                                    data-select2-id="select2-data-DistrictSelected" tabindex="-1"
+                                                    aria-hidden="true"></select>
+                                            <span class="field-validation-valid" data-valmsg-for="DistrictSelected"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Xã/Phường <sup>*</sup></label>
+                                        <div class="control">
+                                            <select data-placeholder="Chọn Xã/Phường"
+                                                    class="form-control select2-hidden-accessible" data-val="true"
+                                                    data-val-required="Xã/Phường không được để trống"
+                                                    id="WardSelected" name="WardSelected"
+                                                    data-select2-id="select2-data-WardSelected" tabindex="-1"
+                                                    aria-hidden="true"></select>
+                                            <span class="field-validation-valid" data-valmsg-for="WardSelected"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 form-group">
+                                        <label>Địa chỉ <sup>*</sup></label>
+                                        <div class="control">
+                                            <input placeholder="Nhập địa chỉ" type="text" class="form-control"
+                                                   data-val="true" data-val-regex="Địa chỉ không dài quá 100 kí tự"
+                                                   data-val-regex-pattern="^.{1,100}$"
+                                                   data-val-required="Địa chỉ không được để trống" id="address"
+                                                   name="address" value="">
+                                            <span class="field-validation-valid" data-valmsg-for="address"
+                                                  data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12 form-group">
+                                        <label>Nội dung yêu cầu<sup>*</sup></label>
+                                        <div class="control">
+                                            <textarea placeholder="Tôi cảm thấy..." class="form-control" data-val="true"
+                                                      data-val-required="Nội dung yêu cầu không được để trống"
+                                                      id="reasonNote" name="reasonNote"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-left: -2px;" id="dvCaptcha">
+                                    <div style="width: 304px; height: 78px;">
+                                        <div>
+                                            <iframe title="reCAPTCHA" width="304" height="78" role="presentation"
+                                                    name="a-3ulfzqezyydg" frameborder="0" scrolling="no"
+                                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"
+                                                    src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LfUbw4pAAAAAN-odX6cLYhhE4nIH9_20QSWbbYb&amp;co=aHR0cHM6Ly9tZWRsYXRlYy52bjo0NDM.&amp;hl=vi&amp;v=-QbJqHfGOUB8nuVRLvzFLVed&amp;size=normal&amp;cb=3hjp3dhtq72b"></iframe>
+                                        </div>
+                                        <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                                                  class="g-recaptcha-response"
+                                                  style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                                    </div>
+                                    <iframe style="display: none;"></iframe>
+                                </div>
+                                <input type="hidden" id="hfCaptcha" value="true">
+                                <span id="rfvCaptcha" class="error" style="display:none; color:red">Captcha validation is required.</span>
+
+                                <div class="actions">
+                                    <a href="tel:1900565565" class="action">Cần tư vấn trực tiếp?</a>
+                                    <button type="submit" class="btn btn-primary tainha">Đặt lịch</button>
+                                </div>
+
+                            </div>
+                            <input name="__RequestVerificationToken" type="hidden"
+                                   value="CfDJ8CiUe3fVQM1Bu5x4yljo4yb-9vYDseZAr3Cn7vQTMf1lGq7q2YxL3SbLY-k5rrTDewDnurYUQ2XZUNB4nRc0RRbqSwZUgO0I_eRYHSIfa-9px2nDWKWDs8an5y0mpp5zMRUBmi5-wZFC9kB78H0t0WM">
+                        </form>
+
+                    </div>
+                    <div class="block-images">
+                        <img src="/med/images/bookings.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+
+            <script type="text/javascript"
+                    src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&amp;render=explicit" async=""
+                    defer=""></script>
+
+
+        </main>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+
+
+<th:block th:replace="/homepage/fragment/footer_js"/>
+</body>
+
+</html>

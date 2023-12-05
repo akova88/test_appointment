@@ -1,0 +1,89 @@
+<th:block th:fragment="header">
+    <div class="header container" style="height: 124px;">
+        <div class="logo-header col-3">
+<!--            <img src="/homepage/assets/img/header_logo.svg">-->
+            <img src="/homepage/assets/img/logo6.png">
+        </div>
+        <div class="center-header col-7">
+            <div class="row h-100 justify-content-end">
+                <a href="/login" class="center-header-button col-3" th:unless="${user}">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                        Đăng nhập
+                    </button>
+                </a>
+
+                <div class="dropdown" id="dropdown" th:if="${user}">
+                    <button class="btn btn-outline-primary dropdown-center" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                        <span th:text="${user.name}"></span>
+                    </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li data-test="list-group-item"
+                                class="list-group-item style_item_user___eJGV list-group-item-undefined">
+                                <div class="ms-3"><i class="fas fa-user-circle"></i></div>
+                                <div class="style_info__1Bwlh"><span>Xin chào!</span>
+                                    <div class="style_info_name__3gr9P"><b th:text="${user.name}">Phước Dương Công</b></div>
+                                </div>
+                            </li>
+                            <li th:if="${roleName != 'ROLE_DOCTOR'}" data-test="list-group-item" class="list-group-item list-group-item-undefined"><a
+                                    href="/customer"><i class="fas fa-address-book"></i> Hồ sơ bệnh nhân </a></li>
+                            <li th:if="${roleName != 'ROLE_DOCTOR'}" data-test="list-group-item" class="list-group-item list-group-item-undefined"><a
+                                    href="/customer"><i class="fas fa-file-medical"></i> Phiếu khám bệnh</a></li>
+
+                            <li th:if="${roleName == 'ROLE_DOCTOR'}" data-test="list-group-item" class="list-group-item list-group-item-undefined"><a
+                                    href="/doctor"><i class="fas fa-file-medical"></i> Lịch khám bệnh</a></li>
+
+                            <li data-test="list-group-item" class="list-group-item list-group-item-undefined"><a
+                                    href="/user"><i class="fas fa-bell"></i>Thông báo</a></li>
+
+                            <li th:if="${roleName == 'ROLE_ADMIN'}" data-test="list-group-item" class="list-group-item list-group-item-undefined"><a
+                                    href="/admin"><i class="fas fa-user-shield"></i>Dash board</a></li>
+
+                            <li data-test="list-group-item" class="list-group-item list-group-item-undefined"><a
+                                    href="/logout"><i class="fas fa-power-off"></i> Thoát</a></li>
+                            <li data-test="list-group-item" class="list-group-item list-group-item-undefined">
+                                <div class="style_version__3c8JL"><i>Phiên bản 1.1.2</i><i>Mới nhất: 14/11 10:17</i>
+                                </div>
+                            </li>
+                        </ul>
+                </div>
+
+            </div>
+            <div class="row h-100">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Giới thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Quy Trình</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Thắc mắc</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="name-header col-2">
+            <div>
+                <img src="/homepage/assets/img/bg.jpg">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <span class="row">Tổng đài đặt lịch khám</span>
+                <span class="row">082 440 7788</span>
+            </div>
+        </div>
+    </div>
+</th:block>

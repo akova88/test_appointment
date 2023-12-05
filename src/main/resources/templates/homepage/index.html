@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <th:block th:replace="/homepage/fragment/header" />
+
+        <div class="content">
+            <div class="container-fluid content-bg">
+                <div class="card w-25 content-service bg-white bg-opacity-75">
+                    <div class="card-body">
+                        <h4 class="card-title">CHỌN DỊCH VỤ</h4>
+                        <div class="content-service-img">
+                            <a href="/profile">
+                                <div>
+                                    <img src="/homepage/assets/img/tracuuketqua.png"
+                                        alt="" style="width: 55px; height: 55px;">
+                                </div>
+                                <span>Tra cứu kết quả</span>
+                            </a>
+
+                            <a href="/hinh-thuc-dat-kham">
+                                <div>
+                                    <img src="/homepage/assets/img/datlichxetnghiem.png"
+                                        alt="" style="width: 55px; height: 55px;">
+                                </div>
+                                <span>Đặt lịch xét nghiệm</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- -----------------------Footer----------------------- -->
+
+        <th:block th:replace="/homepage/fragment/footer" />
+    </div>
+
+
+
+    <th:block th:replace="/homepage/fragment/footer_js" />
+</body>
+
+</html>

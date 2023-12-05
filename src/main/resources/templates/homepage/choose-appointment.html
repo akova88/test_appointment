@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lịch khám | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css" />
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header" />
+
+
+    <div class="content row justify-content-center">
+        <div class="col-9 m-5">
+            <div class="mb-5 text-center text-primary">
+                <h1 class="modal-title fs-5">Appointment Booking</h1>
+            </div>
+            <div id="frmBook">
+
+                <div class="modal-body">
+                    <div class="error-area hide"></div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label class="fw-bold" for="specialityBook">Speciality</label>
+                            <select class="form-select" id="specialityBook"></select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="fw-bold" for="doctorBook">Doctor</label>
+                            <select class="form-select" id="doctorBook"></select>
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label class="fw-bold" for="roomBook">Room</label>
+                            <select class="form-select" id="roomBook"></select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="fw-bold" for="dayBook">Day Time</label>
+                            <select class="form-select" id="dayBook"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnBook">
+                        <i class="fas fa-plus"></i>
+                        Book Appointment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer" />
+</div>
+
+
+
+<th:block th:replace="/homepage/fragment/footer_js" />
+
+<script th:inline="javascript">
+    const page = {
+        url: {
+            getAllSpeciality: App.API_SPECIALITY,
+            getDoctorsBySpec: App.API_APPOINTMENT+"/doctor/",
+            getRoomsByDoctor: App.API_APPOINTMENT+"/room/",
+            getAppointmentsBySpecAndDocAndRoom: App.API_APPOINTMENT+"/",
+            createMedicalBill: App.API_MEDICAL_BILL,
+            getAllAppointment: App.API_APPOINTMENT
+
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            command: {}
+        },
+        initializeControlEvent: {}
+    };
+
+    page.elements.frmBook = $("#frmBook");
+    page.dialogs.elements.errorAreaBook = $('#frmBook .error-area');
+    page.dialogs.elements.specialityBook= $("#specialityBook");
+    page.dialogs.elements.doctorBook= $("#doctorBook");
+    page.dialogs.elements.roomBook= $("#roomBook");
+    page.dialogs.elements.dayBook= $("#dayBook");
+    page.dialogs.elements.btnBook= $("#btnBook");
+
+    const eTimes = [[${times}]];
+    const customerId = '[[${customerId}]]';
+    console.log(eTimes);
+
+    page.commands.getAllAppointments = () =>{
+        $.ajax({
+            type: 'GET',
+            url: page.url.getAllAppointment,
+        })
+            .done((data) =>{
+
+            })
+            .fail((errors) =>{
+                console.log(errors)
+            })
+    }
+
+    page.commands.getAllSpeciality = () =>{
+        page.dialogs.elements.specialityBook.empty();
+
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getAllSpeciality
+        })
+    }
+
+    page.commands.getDoctorsBySpec = (specId) =>{
+        page.dialogs.elements.doctorBook.empty();
+
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getDoctorsBySpec+specId
+        })
+    }
+
+    page.commands.getRoomsByDoctor = (docId) =>{
+        page.dialogs.elements.roomBook.empty();
+
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getRoomsByDoctor+docId
+        })
+    }
+
+    page.commands.getAppointmentsBySpecAndDocAndRoom = (specId,docId,roomId) =>{
+        page.dialogs.elements.dayBook.empty();
+
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getAppointmentsBySpecAndDocAndRoom+specId+'/'+docId+'/'+roomId
+        })
+    }
+
+    page.commands.findTimePeriod = (timeCode) =>{
+        switch (timeCode){
+            case 'C1':
+                return eTimes.C1;
+            case 'C2':
+                return eTimes.C2;
+            case 'C3':
+                return eTimes.C3;
+            case 'S1':
+                return eTimes.S1;
+            case 'S2':
+                return eTimes.S2;
+            case 'S3':
+                return eTimes.S3;
+        }
+    }
+
+    page.loadData = () =>{
+        page.commands.getAllSpeciality().then((specialities)=>{
+            page.dialogs.elements.specialityBook.empty();
+            specialities.forEach(speciality=>{
+                const specStr = `<option value="${speciality.id}">${speciality.name}</option>`;
+                page.dialogs.elements.specialityBook.append(specStr);
+            })
+            const specId = page.dialogs.elements.specialityBook.val();
+
+            page.commands.getDoctorsBySpec(specId).then((doctors) =>{
+                page.dialogs.elements.doctorBook.empty();
+                doctors.forEach(doctor=>{
+                    const docStr = `<option value="${doctor.id}">${doctor.fullName}</option>`;
+                    page.dialogs.elements.doctorBook.append(docStr);
+                })
+                const docId = page.dialogs.elements.doctorBook.val();
+
+                page.commands.getRoomsByDoctor(docId).then((rooms)=>{
+                    rooms.forEach(room=>{
+                        const roomStr = `<option value="${room.id}">${room.name}</option>`;
+                        page.dialogs.elements.roomBook.append(roomStr);
+                    })
+                    const roomId = page.dialogs.elements.roomBook.val();
+
+                    page.commands.getAppointmentsBySpecAndDocAndRoom(specId,docId,roomId).then((appointments)=>{
+                        appointments.forEach(appointment=>{
+                            const timeCode = appointment.timeName;
+                            const time = page.commands.findTimePeriod(timeCode);
+                            const appStr = `<option value="${appointment.id}">${App.formatDate(appointment.day)} - ${time}</option>`;
+                            page.dialogs.elements.dayBook.append(appStr);
+                        })
+                    })
+                        .catch((errors)=>{
+                            console.log(errors);
+                        })
+                })
+                    .catch((errors)=>{
+                        console.log(errors);
+                    })
+            })
+                .catch((errors)=>{
+                    console.log(errors)
+                })
+        }).catch((errors)=>{
+            console.log(errors)
+        })
+
+        page.commands.getAllAppointments();
+    }
+
+    page.initializeControlEvent = () =>{
+        page.dialogs.elements.specialityBook.on('change',function (){
+            const specId = $(this).val();
+            page.commands.getDoctorsBySpec(specId).then((doctors) =>{
+                page.dialogs.elements.doctorBook.empty();
+                doctors.forEach(doctor=>{
+                    const docStr = `<option value="${doctor.id}">${doctor.fullName}</option>`;
+                    page.dialogs.elements.doctorBook.append(docStr);
+                })
+                const docId = page.dialogs.elements.doctorBook.val();
+
+                page.commands.getRoomsByDoctor(docId).then((rooms)=>{
+                    rooms.forEach(room=>{
+                        const roomStr = `<option value="${room.id}">${room.name}</option>`;
+                        page.dialogs.elements.roomBook.append(roomStr);
+                    })
+                    const roomId = page.dialogs.elements.roomBook.val();
+
+                    page.commands.getAppointmentsBySpecAndDocAndRoom(specId,docId,roomId).then((appointments)=>{
+                        appointments.forEach(appointment=>{
+                            const timeCode = appointment.timeName;
+                            const time = page.commands.findTimePeriod(timeCode);
+                            const appStr = `<option value="${appointment.id}">${App.formatDate(appointment.day)} - ${time}</option>`;
+                            page.dialogs.elements.dayBook.append(appStr);
+                        })
+                    })
+                        .catch((errors)=>{
+                            // const responseJSON = errors.responseJSON;
+                            //
+                            // page.dialogs.elements.errorAreaBook.empty();
+                            // let str = '';
+                            //
+                            // $.each(responseJSON, (k, v) => {
+                            //     str += `<label for="${k}Book">${v}</label>`
+                            // })
+                            //
+                            // page.dialogs.elements.errorAreaBook.append(str).removeClass('hide').addClass('show');
+
+                            console.log(errors);
+                        })
+                })
+                    .catch((errors)=>{
+                        console.log(errors);
+                    })
+            })
+                .catch((errors)=>{
+                    console.log(errors)
+                })
+        })
+
+        page.dialogs.elements.doctorBook.on('change',function (){
+            const docId = $(this).val();
+
+            page.commands.getRoomsByDoctor(docId).then((rooms)=>{
+                rooms.forEach(room=>{
+                    const roomStr = `<option value="${room.id}">${room.name}</option>`;
+                    page.dialogs.elements.roomBook.append(roomStr);
+                })
+                const roomId = page.dialogs.elements.roomBook.val();
+
+                page.commands.getAppointmentsBySpecAndDocAndRoom(specId,docId,roomId).then((appointments)=>{
+                    appointments.forEach(appointment=>{
+                        const timeCode = appointment.timeName;
+                        const time = page.commands.findTimePeriod(timeCode);
+                        const appStr = `<option value="${appointment.id}">${App.formatDate(appointment.day)} - ${time}</option>`;
+                        page.dialogs.elements.dayBook.append(appStr);
+                    })
+                })
+                    .catch((errors)=>{
+                        console.log(errors);
+                    })
+            })
+                .catch((errors)=>{
+                    console.log(errors);
+                })
+        })
+
+        page.dialogs.elements.roomBook.on('change',function (){
+            const roomId = $(this).val();
+            const specId = page.dialogs.elements.specialityBook.val();
+            const docId = page.dialogs.elements.doctorBook.val();
+
+            page.commands.getAppointmentsBySpecAndDocAndRoom(specId,docId,roomId).then((appointments)=>{
+                appointments.forEach(appointment=>{
+                    const timeCode = appointment.timeName;
+                    const time = page.commands.findTimePeriod(timeCode);
+                    const appStr = `<option value="${appointment.id}">${App.formatDate(appointment.day)} - ${time}</option>`;
+                    page.dialogs.elements.dayBook.append(appStr);
+                })
+            })
+                .catch((errors)=>{
+                    console.log(errors);
+                })
+        })
+
+        page.dialogs.elements.btnBook.on('click',()=>{
+            const appointmentId = page.dialogs.elements.dayBook.val();
+
+            medicalBill = {
+                appointmentId,
+                customerId
+            }
+
+            $.ajax({
+                headers:{
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                },
+                type: 'POST',
+                url: page.url.createMedicalBill,
+                data: JSON.stringify(medicalBill)
+            })
+                .done((medBill) =>{
+                    location.href = "/appointment-confirm";
+                })
+                .fail((errors)=>{
+                    const responseJSON = errors.responseJSON;
+
+                    $.each(responseJSON, (k, v) => {
+                        App.showErrorNotification(v);
+                    })
+
+                    console.log(errors);
+                })
+        })
+    }
+
+    $(() =>{
+        page.loadData();
+        page.initializeControlEvent();
+    })
+
+</script>
+</body>
+
+</html>

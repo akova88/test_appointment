@@ -1,0 +1,52 @@
+<th:block th:fragment="modalCreate">
+    <!-- Modal Create-->
+    <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Appointment Create</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" id="frmCreate">
+
+                    <div class="modal-body">
+                        <div class="error-area hide"></div>
+                        <div class="row mb-3">
+                            <div class="col-lg-4">
+                                <label class="fw-bold">Speciality</label>
+                                <select class="form-select" id="specialityCre"></select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="fw-bold">Doctor</label>
+                                <select class="form-select" id="doctorCre"></select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="fw-bold">Room</label>
+                                <select class="form-select" id="roomCre"></select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label class="fw-bold" for="dayCre">Day</label>
+                                <input type="text" class="form-control" id="dayCre" name="dayCre">
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="fw-bold">Time</label>
+                                <select class="form-select" id="timeCre"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="btnCreate">
+                            <i class="fas fa-plus"></i>
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</th:block>

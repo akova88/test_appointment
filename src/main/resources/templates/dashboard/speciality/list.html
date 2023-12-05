@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Med Pro Admin Dashboard</title>
+
+    <th:block th:replace="/dashboard/fragment/head-css"/>
+</head>
+
+<body>
+<div id="app">
+    <!--    sidebar -->
+    <th:block th:replace="/dashboard/fragment/sidebar"/>
+    <div id="main">
+        <!--    heading-->
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+        <div class="page-heading">
+            <h3>Speciality</h3>
+        </div>
+
+        <!--    content-->
+        <div class="page-content">
+            <section class="section">
+                <div class="row" id="table-striped">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Striped rows</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <button class="btn btn-primary" id="btnShowCreateModal">
+                                        <i class="fas fa-user-plus"></i>
+                                        Add new Speciality
+                                    </button>
+                                </div>
+                                <!-- table striped -->
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0" id="tbSpeciality">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Code name</th>
+                                            <th>Name</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!--        footer-->
+        <th:block th:replace="/dashboard/fragment/footer"/>
+    </div>
+</div>
+<!--footer JS-->
+<th:block th:replace="/dashboard/fragment/footer-js"/>
+<th:block th:replace="/dashboard/speciality/modalCreate"/>
+
+<script>
+    const page = {
+        url: {
+            getAllSpeciality:App.API_SPECIALITY,
+            createSpeciality: App.API_SPECIALITY,
+
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            commands: {}
+        },
+        initializeControlEvent: {}
+    }
+    page.elements.btnShowCreateModal = $('#btnShowCreateModal');
+    page.elements.tbSpecialityBody = $('#tbSpeciality tbody');
+
+    page.dialogs.elements.modalCreate = $('#modalCreate');
+    page.dialogs.elements.formCreate = $('#formCreate');
+    page.dialogs.elements.errorAreaCreate = $('#modalCreate .error-area')
+    page.dialogs.elements.codeNameCre = $('#codeNameCre');
+    page.dialogs.elements.nameCre = $('#nameCre');
+    page.dialogs.elements.btnCreate = $('#btnCreate');
+
+
+    let speciality = new Speciality()
+    page.commands.renderSpeciality = (speciality) => {
+        return `
+    <tr id="tr_${speciality.id}">
+        <td>${speciality.id}</td>
+        <td>${speciality.codeName}</td>
+        <td>${speciality.name}</td>
+    </tr>
+    `;
+    }
+
+    page.commands.getAllSpeciality = () => {
+        page.elements.tbSpecialityBody.empty();
+
+        $.ajax({
+            type: 'GET',
+            url: page.url.getAllSpeciality
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    const str = page.commands.renderSpeciality(item);
+                    page.elements.tbSpecialityBody.prepend(str);
+                });
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+
+    // page.commands.getSpecialityById = (id) => {
+    //     return $.ajax({
+    //         type: 'GET',
+    //         url: page.url.getSpecialityById + '/' + id,
+    //     });
+    // }
+
+    page.dialogs.commands.create = () => {
+        const codeName = page.dialogs.elements.codeNameCre.val();
+        const name = page.dialogs.elements.nameCre.val();
+
+        const obj = {
+           codeName,
+            name
+        }
+        $.ajax({
+            headers: {
+                'accept': 'application/json',
+                'content-type':  'application/json'
+            },
+            type: "POST",
+            url: page.url.createSpeciality,
+            data: JSON.stringify(obj)
+        })
+            .done((data) => {
+                const str = page.commands.renderSpeciality(data);
+                page.elements.tbSpecialityBody.prepend(str);
+
+                page.dialogs.elements.modalCreate.modal('hide');
+                App.showSuccessNotification('Thêm thành công');
+
+                page.dialogs.commands.closeModalCreate();
+
+            })
+            .fail((jqXHR) => {
+                const responseJSON = jqXHR.responseJSON;
+
+                page.dialogs.elements.errorAreaCreate.empty();
+                let str = '';
+                $.each(responseJSON, (k, v) => {
+                    str += `<label for="${k}Create">${v}</label>`
+                })
+                page.dialogs.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+
+                console.log(jqXHR);
+            });
+    }
+    page.initializeControlEvent = () => {
+        page.elements.btnShowCreateModal.on('click', () => {
+            page.dialogs.elements.modalCreate.modal('show');
+        })
+        page.dialogs.elements.btnCreate.on('click', () => {
+            page.dialogs.elements.formCreate.trigger("submit");
+        })
+        page.dialogs.commands.closeModalCreate = () => {
+            page.dialogs.elements.formCreate[0].reset();
+            page.dialogs.elements.formCreate.validate().resetForm();
+            page.dialogs.elements.formCreate.find("input.error").removeClass("error");
+            page.dialogs.elements.errorAreaCreate.empty().removeClass("show").addClass("hide");
+        }
+        page.dialogs.elements.modalCreate.on("hidden.bs.modal", function () {
+            page.dialogs.commands.closeModalCreate();
+        });
+
+    }
+    page.loadData = () => {
+        page.commands.getAllSpeciality();
+
+    }
+    $(() => {
+        page.loadData();
+
+        page.initializeControlEvent();
+    })
+
+</script>
+
+<script src="/dashboard/assets/js/speciality-validation.js"></script>
+
+</body>
+
+
+</html>

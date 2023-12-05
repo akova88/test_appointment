@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+    <link rel="stylesheet" href="/homepage/assets/css/profile-choose.css">
+    <th:block th:replace="/homepage/fragment/head_css"/>
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+
+        <div class="style_wrapper_content__2nPtC">
+            <div class="style_bg_breakcum__2BT1J">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Tạo hồ sơ bệnh nhân
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-md-12">
+                            <div>
+                                <h1
+                                        class="style_title_component__3jzrX style_title_line__3AhYV style_title_header_mobile__23s4W">
+                                    <span>Chọn hồ sơ bệnh nhân</span></h1>
+                                <div class="style_wapper_page_item__3Y0Lc">
+                                    <div data-test="animation" class="animated fadeIn"
+                                         style="animation-iteration-count: 1; visibility: visible; animation-name: fadeIn;">
+                                        <div data-test="card" class="card style_card__K4KJL style_active__3ZBig">
+                                            <ul data-test="list-group" class="list-group style_list_group__rY0xa">
+                                                <li data-test="list-group-item"
+                                                    class="list-group-item list-group-item-undefined">
+                                                    <div class="style_fullname__137I6" ><i
+                                                            class="fas fa-user-circle"></i><strong th:text="${customer.fullName}">DƯƠNG CÔNG
+                                                        PHƯỚC</strong></div>
+                                                </li>
+                                                <li data-test="list-group-item"
+                                                    class="list-group-item list-group-item-undefined">
+                                                    <div class="style_column1__3zE8R"><i
+                                                            class="fas fa-birthday-cake"></i><span>Ngày sinh</span>
+                                                    </div>
+                                                    <div class="style_column2__3U41a" th:utext="${#dates.format(customer.DOB, 'dd/MM/yyyy')}"> 30/05/1988</div>
+                                                </li>
+                                                <li data-test="list-group-item"
+                                                    class="list-group-item list-group-item-undefined">
+                                                    <div class="style_column1__3zE8R"> <i
+                                                            class="fas fa-mobile"></i><span>Số điện thoại</span></div>
+                                                    <div class="style_column2__3U41a" th:text="${customer.phone}"> 0944271170</div>
+                                                </li>
+                                                <li data-test="list-group-item"
+                                                    class="list-group-item list-group-item-undefined">
+                                                    <div class="style_column1__3zE8R" ><i
+                                                            class="fas fa-venus-mars"></i>Giới tính</div>
+                                                    <div class="style_column2__3U41a" th:text="${customer.gender.value}">Nam</div>
+                                                </li>
+                                                <li data-test="list-group-item"
+                                                    class="list-group-item list-group-item-undefined">
+                                                    <div class="style_column1__3zE8R"><i class="fas fa-id-card"></i>Dân
+                                                        tộc</div>
+                                                    <div class="style_column2__3U41a" th:text="${customer.ethnic}">Kinh</div>
+                                                </li>
+                                                <li data-test="list-group-item"
+                                                    class="list-group-item list-group-item-undefined">
+                                                    <div class="style_column1__3zE8R"><i
+                                                            class="fas fa-map-marker"></i>Địa chỉ</div>
+                                                    <div class="style_column2__3U41a">
+                                                        <span th:text="${customer.locationRegion.address} + ','"></span>
+                                                        <span th:text="${customer.locationRegion.wardName} +','"></span>
+                                                        <span th:text="${customer.locationRegion.districtName} +','"></span>
+                                                        <span th:text="${customer.locationRegion.provinceName} +'.'"></span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="style_action_edit_remove__30XUQ">
+                                                <div>
+                                                    <button data-test="button" type="button" id="btnRemove"
+                                                             class="btn-flat btn Ripple-parent style_button__bKNrt style_remove__2EQQx">
+                                                    <div><i class="fas fa-trash-alt"></i>Xoá</div>
+                                                    <div data-test="waves" class="Ripple Ripple-outline "
+                                                         style="top: 0px; left: 0px; width: 0px; height: 0px;"></div>
+                                                </button><a href="/profile-update"><button data-test="button"
+                                                                                               type="button"
+                                                                                               class="btn-flat btn Ripple-parent style_button__bKNrt style_edit__2xyzQ">
+                                                    <div><i class="fas fa-edit"></i>Sửa</div>
+                                                    <div data-test="waves" class="Ripple Ripple-outline "
+                                                         style="top: 0px; left: 0px; width: 0px; height: 0px;">
+                                                    </div>
+                                                </button></a></div>
+                                                <div class="style_action_right__2XdJ_">
+                                                    <a href="/choose-appointment">
+                                                        <button data-test="button"
+                                                                type="button"
+                                                                class="btn-flat btn Ripple-parent style_button__bKNrt style_create__1hfMN style_buttonArrow__yB4G_">
+                                                            <div>Tiếp tục<i class="fas fa-long-arrow-right"></i></div>
+                                                            <div data-test="waves" class="Ripple Ripple-outline "
+                                                                 style="top: 0px; left: 0px; width: 0px; height: 0px;"></div>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="style_next_prev__2NLc5"><button data-test="button" type="button"
+                                                                                class="btn-flat btn Ripple-parent style_button__bKNrt">
+                                        <div>Quay lại</div>
+                                        <div data-test="waves" class="Ripple Ripple-outline "
+                                             style="top: 0px; left: 0px; width: 0px; height: 0px;"></div>
+                                    </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+
+
+<th:block th:replace="/homepage/fragment/footer_js"/>
+
+<script>
+    const page = {
+        url: {
+            getAllCustomers: App.API_CUSTOMER,
+            getCustomerById: App.API_CUSTOMER,
+            deleteCustomer: App.API_CUSTOMER
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        initializeControlEvent: {}
+    }
+
+    page.elements.btnRemove = $('#btnRemove');
+
+
+    page.commands.suspend = (customerId) => {
+        return $.ajax({
+            type: 'DELETE',
+            url: page.url.deleteCustomer + '/' + customerId
+        })
+            .done((data) => {
+                App.showSuccessNotification("Suspended customer thành công!")
+            })
+    }
+
+    page.initializeControlEvent = () => {
+        page.elements.btnRemove.on('click', () => {
+            const customerId = [[${customer.id}]]
+
+            App.showDeleteConfirmDialog().then((data) => {
+                if (data.isConfirmed) {
+                    page.commands.suspend(customerId).then(() => {
+                        location.reload();
+                    });
+                }
+            });
+        })
+    }
+
+    $(() => {
+        page.initializeControlEvent();
+    })
+</script>
+</body>
+
+</html>

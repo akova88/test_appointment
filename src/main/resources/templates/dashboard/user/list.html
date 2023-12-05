@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Med Pro Admin Dashboard</title>
+
+    <th:block th:replace="/dashboard/fragment/head-css"/>
+</head>
+
+<body>
+<div id="app">
+    <!--    sidebar -->
+    <th:block th:replace="/dashboard/fragment/sidebar"/>
+    <div id="main">
+        <!--    heading-->
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+        <div class="page-heading">
+            <h3>User</h3>
+        </div>
+
+        <!--    content-->
+        <div class="page-content">
+            <section class="section">
+                <div class="row" id="table-striped">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Striped rows</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <button class="btn btn-primary" id="btnShowCreateModal">
+                                        <i class="fas fa-user-plus"></i>
+                                        Add new user
+                                    </button>
+                                </div>
+                                <!-- table striped -->
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0" id="tbUser">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User Name</th>
+                                            <th>Role</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!--        footer-->
+        <th:block th:replace="/dashboard/fragment/footer"/>
+    </div>
+</div>
+<!--footer JS-->
+<th:block th:replace="/dashboard/user/modalCreate"/>
+<th:block th:replace="/dashboard/user/modalUpdate"/>
+<th:block th:replace="/dashboard/fragment/footer-js"/>
+
+<script>
+    const page = {
+        url: {
+            getAllUsers: App.API_USER,
+            createUser: App.API_USER,
+            getUserById:App.API_USER,
+            updateUser:App.API_USER,
+            delete:App.API_USER
+
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            commands: {}
+        },
+        initializeControlEvent: {}
+    }
+    page.elements.tbUserBody =$('#tbUser tbody');
+    page.elements.btnShowCreateModal = $('#btnShowCreateModal');
+
+    page.dialogs.elements.modalCreate = $('#modalCreate');
+    page.dialogs.elements.formCreate = $('#formCreate');
+    page.dialogs.elements.errorAreaCreate = $('#modalCreate .error-area')
+    page.dialogs.elements.usernameCre = $('#usernameCre');
+    page.dialogs.elements.passwordCre = $('#passwordCre');
+    page.dialogs.elements.roleCre = $('#roleCre');
+    page.dialogs.elements.btnCreate = $('#btnCreate');
+
+    page.dialogs.elements.modalUpdate = $('#modalUpdate');
+    page.dialogs.elements.frmUpdate = $('#frmUpdate');
+    page.dialogs.elements.userNameUp = $('#userNameUp');
+    page.dialogs.elements.passwordUp = $('#passwordUp');
+    page.dialogs.elements.btnUpdate = $('#btnUpdate');
+    page.dialogs.elements.errorAreaUpdate = $('#modalUpdate .error-area')
+
+
+    let user = new User();
+    let userId = 0;
+
+    page.commands.renderUser = (user) => {
+        return `
+    <tr id="tr_${user.id}">
+        <td>${user.id}</td>
+        <td>${user.username}</td>
+        <td>${user.roleName}</td>
+    </tr>
+    `;
+    }
+    page.commands.getAllUsers = () => {
+        page.elements.tbUserBody.empty();
+
+        $.ajax({
+            type: 'GET',
+            url: page.url.getAllUsers
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    user = item;
+                    const str = page.commands.renderUser(user);
+                    page.elements.tbUserBody.prepend(str);
+                });
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+    }
+    page.commands.getUserById = (id) => {
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getUserById + '/' + id,
+        });
+    }
+    page.dialogs.commands.create = () => {
+        const username = page.dialogs.elements.usernameCre.val();
+        const password=page.dialogs.elements.passwordCre.val();
+        const roleId = page.dialogs.elements.roleCre.val();
+
+        let user = {
+            username,
+            password,
+            roleId
+        }
+        $.ajax({
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            type: "POST",
+            url: page.url.createUser,
+            data: JSON.stringify(user)
+        })
+            .done((data) => {
+                const str = page.commands.renderUser(data);
+                page.elements.tbUserBody.prepend(str);
+
+                page.dialogs.elements.modalCreate.modal('hide');
+
+                App.showSuccessNotification('Tạo user thành công');
+
+            })
+            .fail((jqXHR) => {
+                const responseJSON = jqXHR.responseJSON;
+
+                page.dialogs.elements.errorAreaCreate.empty();
+                let str = '';
+
+                $.each(responseJSON, (k, v) => {
+                    str += `<label for="${k}Create">${v}</label>`
+                })
+                page.dialogs.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+                console.log(jqXHR);
+            });
+    }
+
+    page.commands.handleAddEventShowModalUpdate = (userId) => {
+        page.commands.getUserById(userId).then((data) => {
+            user = data;
+            page.dialogs.elements.userNameUp.val(user.username);
+            page.dialogs.elements.passwordUp.val(user.password);
+            page.dialogs.elements.modalUpdate.modal('show');
+
+        })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+
+    page.dialogs.commands.update = () => {
+        const username = page.dialogs.elements.userNameUp.val();
+        const password = page.dialogs.elements.passwordUp.val();
+
+        user = {
+            username: username,
+            password: password
+        }
+
+        $.ajax({
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json'
+            },
+            type: 'PATCH',
+            url: page.url.updateUser + '/' + userId,
+            data: JSON.stringify(user)
+        })
+            .done((data) => {
+                const str = page.commands.renderUser(data);
+                const currentRow = $('#tr_' + userId);
+                currentRow.replaceWith(str);
+
+                page.dialogs.elements.modalUpdate.modal('hide');
+                App.showSuccessNotification("Cập nhật mật khẩu thành công")
+            })
+            .fail((jqXHR) => {
+                const responseJSON = jqXHR.responseJSON;
+
+                page.dialogs.elements.errorAreaUpdate.empty();
+                let str = '';
+
+                $.each(responseJSON, (k, v) => {
+                    str += `<label for="${k}Up">${v}</label>`
+                })
+
+                page.dialogs.elements.errorAreaUpdate.append(str).removeClass('hide').addClass('show');
+
+                console.log(jqXHR);
+            })
+    }
+
+    page.commands.handleShowConfirmDelete = (userId) => {
+        App.showDeleteConfirmDialog().then((data) => {
+            if (data.isConfirmed) {
+                $.ajax({
+                    headers: {
+                        'accept': 'application/json',
+                        'content-type': 'application/json'
+                    },
+                    type: 'DELETE',
+                    url: page.url.delete + '/' + userId
+                })
+                    .done(() => {
+                        App.showSuccessNotification('Đình chỉ user thành công');
+                        $('#tr_' + userId).remove();
+                    })
+                    .fail((jqXHR) => {
+                        console.log(jqXHR);
+                    })
+            }
+        })
+    }
+
+
+    page.initializeControlEvent = () => {
+        page.elements.btnShowCreateModal.on('click', () => {
+            page.dialogs.elements.modalCreate.modal('show');
+        })
+
+        page.dialogs.commands.closeModalCreate = () => {
+            page.dialogs.elements.formCreate[0].reset();
+            page.dialogs.elements.formCreate.validate().resetForm();
+            page.dialogs.elements.formCreate.find("input.error").removeClass("error");
+            page.dialogs.elements.errorAreaCreate.empty().removeClass("show").addClass("hide");
+        }
+        page.dialogs.elements.modalCreate.on("hidden.bs.modal", function () {
+            page.dialogs.commands.closeModalCreate();
+        });
+        page.dialogs.elements.btnCreate.on('click', () => {
+            page.dialogs.elements.formCreate.trigger("submit");
+        })
+        page.elements.tbUserBody.on('click', '.edit', function () {
+            userId = $(this).data('id');
+            page.commands.handleAddEventShowModalUpdate(userId);
+        })
+        page.dialogs.commands.closeModalUpdate = () => {
+            page.dialogs.elements.frmUpdate[0].reset();
+        }
+        page.dialogs.elements.btnUpdate.on('click', () => {
+            page.dialogs.elements.frmUpdate.trigger("submit");
+        })
+
+        page.elements.tbUserBody.on('click', '.delete', function () {
+            userId = $(this).data('id');
+            page.commands.handleShowConfirmDelete(userId);
+        })
+
+    }
+
+    page.loadData = () => {
+        page.commands.getAllUsers();
+
+    }
+    $(() => {
+        page.loadData();
+        page.initializeControlEvent();
+    })
+
+
+</script>
+
+</body>
+</html>
+<script src="/dashboard/assets/js/user-validation.js"></script>
