@@ -1,11 +1,14 @@
 package com.cg.api;
 
+import com.cg.exception.DataInputException;
+import com.cg.model.DMNhomDV;
 import com.cg.model.dtos.dmNhomDv.DMNhomDvResDTO;
 import com.cg.service.dm_nhom_dv.IDMNhomDvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +25,16 @@ public class DM_NhomDvAPI {
     public ResponseEntity<?> getAll() {
         List<DMNhomDvResDTO> dmNhomDvResDTOS = dmNhomDvService.findAllDmNhomDvResDTO();
         return new ResponseEntity<>(dmNhomDvResDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/{maNhomDv}")
+    public ResponseEntity<?> getNhomDvByMaNhomDv(@PathVariable String maNhomDv) {
+        DMNhomDV dmNhomDV = dmNhomDvService.findDMNhomDVByMaNhomDv(maNhomDv);
+
+        if (dmNhomDV == null) {
+            throw new DataInputException("Mã nhóm dịch vụ không tồn tại");
+        }
+
+        return new ResponseEntity<>(dmNhomDV.toDmNhomDvResDTO(), HttpStatus.OK);
     }
 }

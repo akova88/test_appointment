@@ -10,6 +10,8 @@ import java.util.List;
 public interface IDMDichVuService extends IGeneralService<DMDichVu, Long> {
     List<DMDichVuResDTO> findAllDMDichVuResDTO();
 
+    DMDichVu findDMDichVuByMaDv(String maDv);
+
     DMDichVuResDTO create(DMDichVuReqDTO dmDichVuReqDTO);
 
     Boolean existsDMDichVuByTenDv(String tenDv);

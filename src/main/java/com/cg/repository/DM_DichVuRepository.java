@@ -16,8 +16,10 @@ public interface DM_DichVuRepository extends JpaRepository<DMDichVu, Long> {
            "dv.maDv," +
            "dv.tenDv," +
            "dv.donGiaTT," +
-           "dv.dmNhomDV) FROM DMDichVu AS dv WHERE dv.isRemove = false ")
+           "dv.dmNhomDV) FROM DMDichVu AS dv WHERE dv.isRemove = false ORDER BY dv.id DESC")
    List<DMDichVuResDTO> findAllDMDichVuResDTO();
+
+   DMDichVu findDMDichVuByMaDv(String maDv);
 
    Boolean existsDMDichVuByTenDv(String tenDv);
 

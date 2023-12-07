@@ -36,7 +36,7 @@ public class DMDichVu extends BaseEntity{
     @JoinColumn(name = "dmNhomDv_id", referencedColumnName = "id", nullable = false)
     private DMNhomDV dmNhomDV;
 
-    @ManyToMany(mappedBy = "dmDichVuList")
+    @ManyToMany(mappedBy = "dmDichVuList", fetch = FetchType.LAZY)
     private List<DM_Goi> dmGoiList;
 
     public DMDichVuResDTO toDmDichVuResDTO() {

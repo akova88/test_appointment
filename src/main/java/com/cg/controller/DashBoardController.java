@@ -59,13 +59,14 @@ public class DashBoardController {
         return "dashboard/user/list";
     }
     @GetMapping("/dm_nhom_dv")
-    public String nhomDvPage() {
-        return "dashboard/nhom_dv/list";
-    }
+    public String nhomDvPage() { return "dashboard/nhom_dv/list";}
     @GetMapping("/dm_dv")
     public String dichVuPage() {
         return "dashboard/dich_vu/list";
     }
-
+    @GetMapping("/goi_dv")
+    public String goiDvPage() {
+        return "dashboard/goi_dv/list";
+    }
 
 }

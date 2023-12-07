@@ -40,6 +40,11 @@ public class DMDichVuService implements IDMDichVuService{
     }
 
     @Override
+    public DMDichVu findDMDichVuByMaDv(String maDv) {
+        return dmDichVuRepository.findDMDichVuByMaDv(maDv);
+    }
+
+    @Override
     public Boolean existsDMDichVuByTenDv(String tenDv) {
         return dmDichVuRepository.existsDMDichVuByTenDv(tenDv);
     }
@@ -60,8 +65,7 @@ public class DMDichVuService implements IDMDichVuService{
 
         DMDichVu dmDichVu = dmDichVuReqDTO.toDmDichVu(dmNhomDV);
         dmDichVuRepository.save(dmDichVu);
-        DMDichVuResDTO dmDichVuResDTO = dmDichVu.toDmDichVuResDTO();
-        return dmDichVuResDTO;
+        return dmDichVu.toDmDichVuResDTO();
     }
 
     @Override

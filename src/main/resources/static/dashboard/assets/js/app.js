@@ -13,6 +13,7 @@ class App {
     static API_LOCATION_REGION = 'https://vapi.vnappmob.com/api/province'
     static API_DM_NHOM_DV = this.API_SERVER + '/dm_nhom';
     static API_DM_DV = this.API_SERVER + '/dm_dv';
+    static API_DM_GOI_DV = this.API_SERVER + '/dm_goi';
     static API_SPECIALITY = this.API_SERVER + '/specialities';
 
     static API_LOCATION_REGION = 'https://vapi.vnappmob.com/api/province'

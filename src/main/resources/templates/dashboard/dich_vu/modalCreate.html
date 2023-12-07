@@ -1,0 +1,52 @@
+<th:block th:fragment="modalCreate">
+  <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Thêm dịch vụ</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="error-area hide"></div>
+          <form method="post" id="frmCreate">
+            <div class="row">
+              <div class="col-lg-12 col-sm-6 col-md-12 mb-3">
+                <label class="fw-bold">Mã Dịch vụ</label>
+                <input type="text" class="form-control" id="maDvCre" name="maDvCre">
+              </div>
+              <div class="col-lg-12 col-sm-6 col-md-12 mb-3">
+                <label class="fw-bold">Tên Dịch Vụ</label>
+                <input type="text" class="form-control" id="tenDvCre" name="tenDvCre">
+              </div>
+              <div class="col-lg-12 col-sm-6 col-md-12 mb-3">
+                <label class="fw-bold">Đơn giá TT</label>
+                <input type="text" class="form-control" id="donGiaCre" name="donGiaCre">
+              </div>
+              <div class="col-lg-12 col-sm-6 col-md-12">
+<!--                <label class="fw-bold">Chọn nhóm Dịch vụ</label>-->
+<!--                <select class="form-control selectpicker" id="nhomDvCre" data-live-search="true">-->
+
+<!--                </select>-->
+
+                <label for="nhomDvCre" class="form-label">Chọn nhóm Dịch vụ</label>
+                <input class="form-control" list="nhomDvItem" id="nhomDvCre" placeholder="Tìm nhóm Dv...">
+                <datalist id="nhomDvItem">
+
+                </datalist>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="btnCreate">
+            <i class="fas fa-plus"></i>
+            Lưu lại
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

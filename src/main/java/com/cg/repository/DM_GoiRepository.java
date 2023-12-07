@@ -18,4 +18,6 @@ public interface DM_GoiRepository extends JpaRepository<DM_Goi, Long> {
 //            "goi.giaGoi," +
 //            "goi.dmDichVuList) FROM DM_Goi as goi where goi.isRemove = false")
 //    List<DM_GoiResDTO> findAllDmGoiResDTO();
+
+    Boolean existsDM_GoiByMaGoiOrTenGoi(String maGoi, String tenGoi);
 }

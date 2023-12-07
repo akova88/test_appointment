@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/customers/**",
                         "/admin/**",
                         "/api/dm_goi",
-                        "/api/dm_nhom",
+                        "/api/**",
                         "/api/dm_dv"
                         // TODO: 21/7/2023 nhớ xóa nhé
 //                        "/admin/**"

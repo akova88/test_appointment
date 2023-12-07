@@ -21,9 +21,9 @@
       </a>
     </header>
 
-    <div class="page-heading">
-      <h3>QUẢN LÝ DANH MỤC DỊCH VỤ</h3>
-    </div>
+<!--    <div class="page-heading">-->
+<!--      <h3>QUẢN LÝ DANH MỤC DỊCH VỤ</h3>-->
+<!--    </div>-->
 
     <!--    content-->
     <div class="page-content">
@@ -31,13 +31,13 @@
         <div class="page-title">
           <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-              <h3>DataTable</h3>
-              <p class="text-subtitle text-muted">For user to check they list</p>
+<!--              <h3>DataTable</h3>-->
+<!--              <p class="text-subtitle text-muted">For user to check they list</p>-->
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
               <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                   <li class="breadcrumb-item active" aria-current="page">DANH MỤC DỊCH VỤ</li>
                 </ol>
               </nav>
@@ -49,22 +49,25 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Striped rows</h4>
+                  <h4 class="card-title">QUẢN LÝ DANH MỤC DỊCH VỤ</h4>
                 </div>
                 <div class="card-content">
                   <div class="card-body">
+                    <button class="btn btn-primary" id="btnCreateShowModal">
+                      <i class="fas fa-user-plus"></i> Thêm Dịch vụ
+                    </button>
                   </div>
                   <!-- table striped -->
                   <div class="table-responsive">
-                    <table class="table table-striped mb-0" id="tableDV">
+                    <table class="table table-hover table-bordered mb-0" id="tableDV">
                       <thead>
                       <tr>
-                        <th>#</th>
-                        <th>MÃ DỊCH VỤ</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">MÃ DỊCH VỤ</th>
                         <th>TÊN DỊCH VỤ</th>
-                        <th>ĐƠN GIÁ TT</th>
-                        <th>MÃ NHÓM DV</th>
-                        <th>TÊN NHÓM DV</th>
+                        <th class="text-center">ĐƠN GIÁ TT</th>
+                        <th class="text-center">MÃ NHÓM DV</th>
+                        <th class="text-center">TÊN NHÓM DV</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -86,7 +89,7 @@
 
     </footer>
 
-
+    <th:block th:replace="/dashboard/dich_vu/modalCreate"/>
     <th:block th:replace="/dashboard/fragment/footer"/>
   </div>
 </div>
@@ -98,7 +101,9 @@
   const page = {
     url: {
       getAllDanhMucDv: App.API_DM_DV,
-
+      getAllDmNhomDv: App.API_DM_NHOM_DV,
+      getDmNhomDvByMaNhomDv: App.API_DM_NHOM_DV,
+      creatDmDichVu: App.API_DM_DV,
     },
     elements: {},
     loadData: {},
@@ -110,17 +115,28 @@
     initializeControlEvent: {}
   }
 
+  page.elements.btnShowCreateModal = $('#btnCreateShowModal');
   page.elements.tbDichVu = $('#tableDV tbody');
+
+  page.dialogs.elements.modalCreate = $('#modalCreate');
+  page.dialogs.elements.errorAreaCreate = $('#modalCreate .error-area')
+  page.dialogs.elements.frmCreate = $('#frmCreate');
+  page.dialogs.elements.maDvCre = $('#maDvCre');
+  page.dialogs.elements.tenDvCre = $('#tenDvCre');
+  page.dialogs.elements.donGiaCre = $('#donGiaCre');
+  page.dialogs.elements.nhomDvCre = $('#nhomDvCre');
+  page.dialogs.elements.nhomDvItem = $('#nhomDvItem');
+  page.dialogs.elements.btnCreate = $('#btnCreate');
 
   page.commands.renderDanhMucDv = (dmDichVu) => {
     return `
             <tr id="tr_${dmDichVu.id}">
-                        <td >${dmDichVu.id}</td>
+                        <td class="text-center">${dmDichVu.id}</td>
                         <td>${dmDichVu.maDv}</td>
                         <td>${dmDichVu.tenDv}</td>
-                        <td>${dmDichVu.donGiaTT.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</td>
-                        <td>${dmDichVu.dmNhomDv.maNhomDv}</td>
-                        <td>${dmDichVu.dmNhomDv.tenNhomDv}</td>
+                        <td class="text-end">${dmDichVu.donGiaTT.toLocaleString('vi', {style : 'currency', currency : 'VND'})}</td>
+                        <td class="text-center">${dmDichVu.dmNhomDv.maNhomDv}</td>
+                        <td class="text-center text-uppercase"><span class="badge bg-info">${dmDichVu.dmNhomDv.tenNhomDv}</span></td>
                     </tr>
     `;
   }
@@ -144,12 +160,95 @@
             })
   }
 
-  page.initializeControlEvent = () => {
+  page.commands.getAllDmNhomDv = () => {
+    return $.ajax({
+      type: 'GET',
+      url: page.url.getAllDmNhomDv
+    })
+            .done((data) => {
+              const dmNhomDv = data;
+              page.dialogs.elements.nhomDvItem.empty();
+              // page.dialogs.elements.jobUp.empty();
+              $.each(dmNhomDv, (index, item) => {
+                const str = `<option value="${item.maNhomDv}">${item.tenNhomDv}</option>`;
+                page.dialogs.elements.nhomDvItem.append(str);
+                // page.dialogs.elements.jobUp.append(str);
+              });
+            })
+  }
 
+  page.commands.findNhomDvByMaNhomDv = (maNhomDv) => {
+      return $.ajax({
+        type: 'GET',
+        url: page.url.getDmNhomDvByMaNhomDv + '/' + maNhomDv,
+      });
+  }
+
+  page.dialogs.command.create = () => {
+    const maDv = page.dialogs.elements.maDvCre.val();
+    const tenDv = page.dialogs.elements.tenDvCre.val();
+    const donGiaTT = page.dialogs.elements.donGiaCre.val();
+    const maNhomDv = page.dialogs.elements.nhomDvCre.val();
+
+    let dmDichVu = {
+      maDv,
+      tenDv,
+      donGiaTT,
+      maNhomDv
+    }
+
+    $.ajax({
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json',
+      },
+      type: 'POST',
+      url: page.url.creatDmDichVu,
+      data: JSON.stringify(dmDichVu)
+    })
+      .done((data) => {
+        dmDichVu = data;
+        const str = page.commands.renderDanhMucDv(dmDichVu);
+
+        page.elements.tbDichVu.prepend(str);
+        page.dialogs.elements.modalCreate.modal('hide');
+        App.showSuccessAlert("Thêm mới dịch vụ thành công!");
+      })
+      .fail((error) => {
+        const responseJSON = error.responseJSON;
+
+        console.log(responseJSON);
+
+        page.dialogs.elements.errorAreaCreate.empty();
+        let str = '';
+
+        $.each(responseJSON, (k, v) => {
+          str += `<label for="${k}Dep">${v}</label>`
+        })
+        page.dialogs.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+      })
+  }
+
+  page.initializeControlEvent = () => {
+    page.elements.btnShowCreateModal.on('click', () => {
+      page.dialogs.elements.frmCreate[0].reset();
+      // page.dialogs.elements.frmCreate.validate().resetForm();
+      page.dialogs.elements.frmCreate.find("input.error").removeClass("error");
+      page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
+      page.dialogs.elements.modalCreate.modal('show');
+    })
+
+    // bắt sự kiện nhấn vô nút save create
+
+    page.dialogs.elements.btnCreate.on('click', () => {
+
+      page.dialogs.command.create();
+    })
   }
 
   page.loadData = () => {
     page.commands.getAllDanhMucDv();
+    page.commands.getAllDmNhomDv();
   }
 
   $(() => {
@@ -159,7 +258,7 @@
 
 </script>
 
-<!--<script src="/dashboard/assets/js/customer-validation.js"></script>-->
+<script src="/dashboard/assets/js/dmDv-validation.js"></script>
 </body>
 
 </html>

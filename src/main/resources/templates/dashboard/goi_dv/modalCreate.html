@@ -1,0 +1,46 @@
+<th:block th:fragment="modalCreate">
+  <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Thêm gói xét nghiệm</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="error-area hide"></div>
+          <form method="post" id="frmCreate">
+            <div class="row">
+              <div class="col-lg-12 col-sm-6 col-md-12 mb-3">
+                <label class="fw-bold">Mã gói</label>
+                <input type="text" class="form-control" id="maGoiCre" name="maGoiCre">
+              </div>
+              <div class="col-lg-12 col-sm-6 col-md-12 mb-3">
+                <label class="fw-bold">Tên gói</label>
+                <input type="text" class="form-control" id="tenGoiCre" name="tenGoiCre">
+              </div>
+              <div class="col-lg-12 col-sm-6 col-md-12 mb-3">
+                <label class="fw-bold">Đơn giá</label>
+                <input type="text" class="form-control" id="donGiaGoiCre" name="donGiaGoiCre">
+              </div>
+              <div class="col-lg-12 col-sm-6 col-md-12">
+                <label class="fw-bold">Các dịch vụ của gói xét nghiệm</label>
+                <select class="form-select" id="multiple-select-clear-field" data-placeholder="Chọn dịch vụ của gói..." multiple>
+
+                </select>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="btnCreate">
+            <i class="fas fa-plus"></i>
+            Lưu lại
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
