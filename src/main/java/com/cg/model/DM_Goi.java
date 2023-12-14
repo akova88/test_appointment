@@ -37,8 +37,8 @@ public class DM_Goi extends BaseEntity{
     @ManyToMany
     @JoinTable(
             name = "goi_dv",
-            joinColumns = @JoinColumn(name = "dmdichvu_id"),
-            inverseJoinColumns = @JoinColumn(name = "dmgoi_id")
+            joinColumns = @JoinColumn(name = "dmgoi_id"),
+            inverseJoinColumns = @JoinColumn(name = "dmdichvu_id")
     )
     private List<DMDichVu> dmDichVuList;
 

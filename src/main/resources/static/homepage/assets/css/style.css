@@ -427,7 +427,101 @@ img {
     min-height: 1px;
 }
 
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    height: 40px;
+    background-color: #F2F3F7;
+    border: 1px solid #F2F3F7 !important;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+    padding: 10px 16px;
+    padding-right: 35px;
+    background-position: right 16px center;
+    background-repeat: no-repeat;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjI4MjUgMTUuMjE3NkwxMy41IDEyLjQ1NzZDMTQuNTgwMSAxMS4xMTA5IDE1LjEwMzIgOS40MDE1MiAxNC45NjE3IDcuNjgxMDNDMTQuODIwMSA1Ljk2MDUzIDE0LjAyNDggNC4zNTk2NCAxMi43MzkyIDMuMjA3NTNDMTEuNDUzNiAyLjA1NTQzIDkuNzc1NCAxLjQzOTY4IDguMDQ5NzQgMS40ODY5QzYuMzI0MDggMS41MzQxMiA0LjY4MjA5IDIuMjQwNzIgMy40NjE0MSAzLjQ2MTQxQzIuMjQwNzIgNC42ODIwOSAxLjUzNDEyIDYuMzI0MDggMS40ODY5IDguMDQ5NzRDMS40Mzk2OCA5Ljc3NTQxIDIuMDU1NDMgMTEuNDUzNiAzLjIwNzUzIDEyLjczOTJDNC4zNTk2NCAxNC4wMjQ4IDUuOTYwNTMgMTQuODIwMSA3LjY4MTAyIDE0Ljk2MTdDOS40MDE1MiAxNS4xMDMyIDExLjExMDkgMTQuNTgwMSAxMi40NTc2IDEzLjUwMDFMMTUuMjE3NiAxNi4yNjAxQzE1LjI4NzMgMTYuMzMwMyAxNS4zNzAyIDE2LjM4NjEgMTUuNDYxNiAxNi40MjQyQzE1LjU1MyAxNi40NjIzIDE1LjY1MSAxNi40ODE5IDE1Ljc1IDE2LjQ4MTlDMTUuODQ5MSAxNi40ODE5IDE1Ljk0NzEgMTYuNDYyMyAxNi4wMzg1IDE2LjQyNDJDMTYuMTI5OSAxNi4zODYxIDE2LjIxMjggMTYuMzMwMyAxNi4yODI1IDE2LjI2MDFDMTYuNDE3NyAxNi4xMjAyIDE2LjQ5MzMgMTUuOTMzMyAxNi40OTMzIDE1LjczODhDMTYuNDkzMyAxNS41NDQzIDE2LjQxNzcgMTUuMzU3NCAxNi4yODI1IDE1LjIxNzZaTTguMjUwMDUgMTMuNTAwMUM3LjIxMTcgMTMuNTAwMSA2LjE5NjY2IDEzLjE5MjEgNS4zMzMzMSAxMi42MTUzQzQuNDY5OTUgMTIuMDM4NCAzLjc5NzA0IDExLjIxODUgMy4zOTk2OCAxMC4yNTkxQzMuMDAyMzIgOS4yOTk4MyAyLjg5ODM2IDguMjQ0MjMgMy4xMDA5MyA3LjIyNTgzQzMuMzAzNSA2LjIwNzQzIDMuODAzNTEgNS4yNzE5NyA0LjUzNzc0IDQuNTM3NzRDNS4yNzE5NyAzLjgwMzUxIDYuMjA3NDMgMy4zMDM1IDcuMjI1ODMgMy4xMDA5M0M4LjI0NDIzIDIuODk4MzYgOS4yOTk4MyAzLjAwMjMyIDEwLjI1OTEgMy4zOTk2OEMxMS4yMTg1IDMuNzk3MDQgMTIuMDM4NCA0LjQ2OTk1IDEyLjYxNTMgNS4zMzMzMUMxMy4xOTIxIDYuMTk2NjYgMTMuNSA3LjIxMTcgMTMuNSA4LjI1MDA1QzEzLjUgOS42NDI0NCAxMi45NDY5IDEwLjk3NzggMTEuOTYyNCAxMS45NjI0QzEwLjk3NzggMTIuOTQ2OSA5LjY0MjQ0IDEzLjUwMDEgOC4yNTAwNSAxMy41MDAxWiIgZmlsbD0iIzU1NjE3NCIvPgo8L3N2Zz4K);
+    box-shadow: none !important;
+    outline: none !important;
+}
 
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0px 4px 32px rgba(24, 24, 24, 0.08);
+    box-shadow: 0px 4px 32px rgba(24, 24, 24, 0.08);
+    border-radius: 4px;
+    border: none;
+    margin: 4px 0;
+    padding: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3C3C3F;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu:before, .bootstrap-datetimepicker-widget.dropdown-menu:after {
+    content: none;
+}
+
+.bootstrap-datetimepicker-widget table {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.bootstrap-datetimepicker-widget table thead th, .bootstrap-datetimepicker-widget table thead td {
+    font-weight: 600;
+}
+
+.bootstrap-datetimepicker-widget table thead .dow {
+    color: #1D93E3;
+    font-weight: 500;
+}
+
+.bootstrap-datetimepicker-widget table tr th, .bootstrap-datetimepicker-widget table tr td {
+    line-height: 24px;
+    padding: 6px;
+}
+
+.bootstrap-datetimepicker-widget table tr th.day, .bootstrap-datetimepicker-widget table tr td.day {
+    line-height: 24px;
+}
+
+.bootstrap-datetimepicker-widget table tr th.old, .bootstrap-datetimepicker-widget table tr td.old, .bootstrap-datetimepicker-widget table tr th.new, .bootstrap-datetimepicker-widget table tr td.new {
+    color: #BABBBF;
+}
+
+.bootstrap-datetimepicker-widget table tr th.active, .bootstrap-datetimepicker-widget table tr td.active {
+    background: #1D93E3;
+    border-radius: 50px;
+    text-shadow: none;
+}
+
+.bootstrap-datetimepicker-widget table tr th.active:before, .bootstrap-datetimepicker-widget table tr td.active:before {
+    content: none;
+}
+
+.bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-right, .bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-left {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-right:before, .bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-left:before, .bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-right:after, .bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-left:after {
+    content: none;
+}
+
+.bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-right {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuNzQ1OSAxOS43NTg5QzcuNDQ3ODQgMTkuNDY2NyA3LjQyMDc0IDE5LjAwOTUgNy42NjQ2MSAxOC42ODczTDcuNzQ1OSAxOC41OTVMMTQuNDczNCAxMkw3Ljc0NTkgNS40MDUwM0M3LjQ0Nzg0IDUuMTEyODMgNy40MjA3NCA0LjY1NTU4IDcuNjY0NjEgNC4zMzMzOEw3Ljc0NTkgNC4yNDEwNkM4LjA0Mzk2IDMuOTQ4ODcgOC41MTAzNyAzLjkyMjMgOC44MzkwNCA0LjE2MTM3TDguOTMzMjEgNC4yNDEwNkwxNi4yNTQxIDExLjQxOEMxNi41NTIyIDExLjcxMDIgMTYuNTc5MyAxMi4xNjc1IDE2LjMzNTQgMTIuNDg5N0wxNi4yNTQxIDEyLjU4Mkw4LjkzMzIxIDE5Ljc1ODlDOC42MDUzNCAyMC4wODA0IDguMDczNzYgMjAuMDgwNCA3Ljc0NTkgMTkuNzU4OVoiIGZpbGw9IiNBNkE2QTYiLz4KPC9zdmc+Cg==);
+}
+
+.bootstrap-datetimepicker-widget .glyphicon.glyphicon-chevron-left {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2LjI1NDEgNC4yNDEwNkMxNi41NTIyIDQuNTMzMjYgMTYuNTc5MyA0Ljk5MDUxIDE2LjMzNTQgNS4zMTI3MkwxNi4yNTQxIDUuNDA1MDNMOS41MjY1OCAxMkwxNi4yNTQxIDE4LjU5NUMxNi41NTIyIDE4Ljg4NzIgMTYuNTc5MyAxOS4zNDQ0IDE2LjMzNTQgMTkuNjY2NkwxNi4yNTQxIDE5Ljc1ODlDMTUuOTU2IDIwLjA1MTEgMTUuNDg5NiAyMC4wNzc3IDE1LjE2MSAxOS44Mzg2TDE1LjA2NjggMTkuNzU4OUw3Ljc0NTkgMTIuNTgyQzcuNDQ3ODQgMTIuMjg5OCA3LjQyMDc0IDExLjgzMjUgNy42NjQ2MSAxMS41MTAzTDcuNzQ1OSAxMS40MThMMTUuMDY2OCA0LjI0MTA2QzE1LjM5NDcgMy45MTk2NSAxNS45MjYyIDMuOTE5NjUgMTYuMjU0MSA0LjI0MTA2WiIgZmlsbD0iI0E2QTZBNiIvPgo8L3N2Zz4K);
+}
 
 
 

@@ -46,6 +46,11 @@ public class DMGoiService implements IDMGoiService{
     }
 
     @Override
+    public Boolean existsDM_GoiByMaGoiOrTenGoiAndIdNot(String maGoi, String tenGoi, Long id) {
+        return dmGoiRepository.existsDM_GoiByMaGoiOrTenGoiAndIdNot(maGoi, tenGoi, id);
+    }
+
+    @Override
     public DM_GoiResDTO create(DM_GoiReqDTO dmGoiReqDTO) throws JSONException {
         List<DMDichVu> dmDichVuList = new ArrayList<>();
         String maDVlistStr = dmGoiReqDTO.getMaDvList();
@@ -53,7 +58,7 @@ public class DMGoiService implements IDMGoiService{
         if (maDVlistStr != null && !maDVlistStr.isEmpty()) {
             JSONArray maDVlist = new JSONArray(maDVlistStr);
 
-            for (int i =0; i<maDVlist.length(); i++) {
+            for (int i = 0; i < maDVlist.length(); i++) {
                 String maDv = maDVlist.getString(i);
                 DMDichVu dmDichVu = dmDichVuRepository.findDMDichVuByMaDv(maDv);
                 dmDichVuList.add(dmDichVu);
@@ -64,6 +69,12 @@ public class DMGoiService implements IDMGoiService{
         dmGoiRepository.save(dmGoi);
 
         return dmGoi.toDmGoiResDTO();
+    }
+
+    @Override
+    public DM_GoiResDTO update(DM_Goi dmGoi) {
+        DM_Goi dmGoiUp = dmGoiRepository.save(dmGoi);
+        return dmGoiUp.toDmGoiResDTO();
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.cg.controller;
 
 import com.cg.model.*;
 import com.cg.model.dtos.medicalBill.MedicalBillResDTO;
+import com.cg.model.enums.EBookTime;
+import com.cg.model.enums.EGender;
 import com.cg.model.enums.ETime;
 import com.cg.service.appointment.AppointmentService;
 import com.cg.service.customer.ICustomerService;
@@ -14,7 +16,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -273,7 +274,31 @@ public class HomeController {
     }
 
     @GetMapping("/dat-lich-lay-mau")
-    public String datLich() {
+    public String datLich(Model model, Principal user) {
+        String username = user.getName();
+        User user1 = userService.getByUsername(username);
+        Long userId = user1.getId();
+
+        String roleName = user1.getRole().getName().name();
+
+        Map<String, String> times = new HashMap<>();
+        Map<String, String> genders = new HashMap<>();
+        for (EBookTime eBookTime : EBookTime.values()
+        ) {
+            times.put(eBookTime.name(), eBookTime.getValue());
+        }
+
+        for (EGender eGender : EGender.values()) {
+            genders.put(eGender.name(), eGender.getValue());
+        }
+
+        model.addAttribute("roleName", roleName);
+        model.addAttribute("user", user);
+        model.addAttribute("userId", userId);
+        model.addAttribute("times", times);
+        model.addAttribute("genders", genders);
         return "homepage/dat-lich-lay-mau";
+
+
     }
 }

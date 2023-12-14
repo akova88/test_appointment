@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,6 +32,7 @@ public class DM_GoiReqDTO {
     @DecimalMin(value = "0.01", message = "Giá dịch vụ phải là định dạng số lớn hơn 0")
     private String giaGoi;
 
+    @Size(min = 5, message = "Vui lòng chọn dịch vụ")
     private String maDvList;
 
     public DM_Goi toDmGoi(List<DMDichVu> dmDichVuList) {

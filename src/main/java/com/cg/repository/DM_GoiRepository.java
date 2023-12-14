@@ -20,4 +20,6 @@ public interface DM_GoiRepository extends JpaRepository<DM_Goi, Long> {
 //    List<DM_GoiResDTO> findAllDmGoiResDTO();
 
     Boolean existsDM_GoiByMaGoiOrTenGoi(String maGoi, String tenGoi);
+
+    Boolean existsDM_GoiByMaGoiOrTenGoiAndIdNot(String maGoi, String tenGoi, Long id);
 }

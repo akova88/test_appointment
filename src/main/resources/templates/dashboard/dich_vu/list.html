@@ -242,7 +242,7 @@
 
     page.dialogs.elements.btnCreate.on('click', () => {
 
-      page.dialogs.command.create();
+      page.dialogs.elements.frmCreate.trigger("submit");
     })
   }
 

@@ -13,5 +13,9 @@ public interface IDMGoiService extends IGeneralService<DM_Goi, Long> {
 
     Boolean existsDM_GoiByMaGoiOrTenGoi(String maGoi, String tenGoi);
 
+    Boolean existsDM_GoiByMaGoiOrTenGoiAndIdNot(String maGoi, String tenGoi, Long id);
+
     DM_GoiResDTO create(DM_GoiReqDTO dmGoiReqDTO) throws JSONException;
+
+    DM_GoiResDTO update(DM_Goi dmGoi);
 }
