@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 @Table(name = "DM_Goi")
 @Accessors(chain = true)
 @Entity
+@SQLDelete(sql = "UPDATE dm_goi SET is_Remove=true WHERE id = ?")
+@Where(clause = "is_Remove = false")
 public class DM_Goi extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

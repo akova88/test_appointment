@@ -75,6 +75,9 @@ public class HomeController {
     @GetMapping("/profile")
     public ModelAndView profilePage(Principal user) {
         ModelAndView model = new ModelAndView("homepage/profile");
+        if (user == null) {
+            return model;
+        }
         ModelAndView modelChoose = new ModelAndView("homepage/profile-choose");
         String username = user.getName();
         User user1 = userService.getByUsername(username);
@@ -105,6 +108,9 @@ public class HomeController {
 
     @GetMapping("/profile-create")
     public ModelAndView profilePageCreate(Principal user) {
+        if (user == null) {
+            return new ModelAndView("redirect:/login");
+        }
         String username = user.getName();
         User user1 = userService.getByUsername(username);
         Long userId = user1.getId();
@@ -274,12 +280,8 @@ public class HomeController {
     }
 
     @GetMapping("/dat-lich-lay-mau")
-    public String datLich(Model model, Principal user) {
-        String username = user.getName();
-        User user1 = userService.getByUsername(username);
-        Long userId = user1.getId();
-
-        String roleName = user1.getRole().getName().name();
+    public ModelAndView datLich(Principal user) {
+        ModelAndView model = new ModelAndView("homepage/dat-lich-lay-mau");
 
         Map<String, String> times = new HashMap<>();
         Map<String, String> genders = new HashMap<>();
@@ -292,13 +294,20 @@ public class HomeController {
             genders.put(eGender.name(), eGender.getValue());
         }
 
-        model.addAttribute("roleName", roleName);
-        model.addAttribute("user", user);
-        model.addAttribute("userId", userId);
-        model.addAttribute("times", times);
-        model.addAttribute("genders", genders);
-        return "homepage/dat-lich-lay-mau";
+        model.addObject("times", times);
+        model.addObject("genders", genders);
+        if (user == null) {
+            return model;
+        }
+        String username = user.getName();
+        User user1 = userService.getByUsername(username);
+        Long userId = user1.getId();
 
+        String roleName = user1.getRole().getName().name();
+        model.addObject("roleName", roleName);
+        model.addObject("user", user);
+        model.addObject("userId", userId);
 
+        return model;
     }
 }

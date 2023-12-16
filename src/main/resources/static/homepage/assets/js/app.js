@@ -15,6 +15,7 @@ class App {
   static API_ROM = this.API_SERVER + '/rooms';
   static API_SPECIALITY = this.API_SERVER + '/specialities';
   static API_DM_GOI_DV = this.API_SERVER + '/dm_goi';
+  static API_BILL_TEST = this.API_SERVER + '/bill_tests';
   static API_LOCATION_REGION = 'https://vapi.vnappmob.com/api/province'
   static API_JOB = "https://api-119.medpro.com.vn:5000/profession-mongo/get-all-by-partner"
   static API_ETHNIC = "https://api-119.medpro.com.vn:5000/nation-mongo/get-all-by-partner"

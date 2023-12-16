@@ -5,11 +5,14 @@ import com.cg.model.dtos.dm_goi.DM_GoiReqDTO;
 import com.cg.model.dtos.dm_goi.DM_GoiResDTO;
 import com.cg.service.IGeneralService;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface IDMGoiService extends IGeneralService<DM_Goi, Long> {
 //    List<DM_GoiResDTO> findAllDmGoiResDTO();
+
+    DM_Goi findDM_GoiByMaGoi(String maGoi);
 
     Boolean existsDM_GoiByMaGoiOrTenGoi(String maGoi, String tenGoi);
 

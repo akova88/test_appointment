@@ -257,15 +257,12 @@
 <script th:inline="javascript">
     const page = {
         url: {
-            getAllCustomers: App.API_CUSTOMER,
             getCustomerById: App.API_CUSTOMER,
             getAllProvince: App.API_LOCATION_REGION + '/',
             getAllDistricts: App.API_LOCATION_REGION + '/district',
             getAllWard: App.API_LOCATION_REGION + '/ward',
-            getAllJob: App.API_JOB,
-            getAllEthnic: App.API_ETHNIC,
             getAllGoiDv: App.API_DM_GOI_DV,
-            createCustomer: App.API_CUSTOMER,
+            createBillTest: App.API_SERVER + '/bill_tests'
         },
         elements: {},
         loadData: {},
@@ -282,14 +279,9 @@
     page.elements.testTypeSelected = $('#TestTypeSelected');
     page.elements.appointmentDate = $('#appointmentDate');
     page.elements.timeSelected = $('#TimeSelected');
+    page.elements.reasonNote = $('#reasonNote');
 
-    page.elements.identityCre = $('#identityCre');
-    page.elements.dayCre = $('#dayCre')
-    page.elements.monthCre = $('#monthCre')
-    page.elements.yearCre = $('#yearCre')
-    page.elements.dobCre = $('#dobCre');
-    page.elements.jobCre = $('#jobCre');
-    page.elements.ethnicCre = $('#ethnicCre');
+    page.elements.dobCre = $('#patientBirthDate');
     page.elements.provinceCre = $('#ProvinceSelected');
     page.elements.districtCre = $('#DistrictSelected');
     page.elements.wardCre = $('#WardSelected');
@@ -301,9 +293,16 @@
     let customer;
     let locationRegion = new LocationRegion();
 
-    const userId = [[${userId}]];
     const eBookTimes = [[${times}]];
     const eGenders = [[${genders}]];
+    let userId = 5;
+    if ([[${userId}]] !== null) {
+        userId = [[${userId}]];
+    }
+    console.log(userId);
+
+    const datas = Object.entries(eBookTimes).map(([id, text]) => ({id, text}));
+    const genderArr = Object.entries(eGenders).map(([id, text]) => ({id, text}));
 
     page.commands.bindDataSelect2 = (el, data, selectedvalues) => {
         $(el).empty();
@@ -323,8 +322,6 @@
         }
     }
 
-    const datas = Object.entries(eBookTimes).map(([id, text]) => ({id, text}));
-    const genderArr = Object.entries(eGenders).map(([id, text]) => ({id, text}));
     page.commands.bindDataSelect2(page.elements.timeSelected, datas);
 
     page.commands.bindDataSelect2(page.elements.genderCre, genderArr, "");
@@ -348,57 +345,6 @@
             })
     }
 
-    page.commands.getAllYear = () => {
-        for (let i = 2023; i >= 1900; i--) {
-            const str = `<option value="${i}">${i}</option>`;
-            page.elements.yearCre.append(str)
-        }
-    }
-
-    page.commands.getAllMonth = () => {
-        for (let i = 1; i <= 12; i++) {
-            const str = `<option value="${i}">${i}</option>`;
-            page.elements.monthCre.append(str)
-        }
-    }
-
-    page.commands.getAllDay = () => {
-        for (let i = 1; i <= 31; i++) {
-            const str = `<option value="${i}">${i}</option>`;
-            page.elements.dayCre.append(str)
-        }
-    }
-
-    page.commands.getAllJob = () => {
-        return $.ajax({
-            type: 'GET',
-            url: page.url.getAllJob
-        })
-            .done((data) => {
-                const jobs = data;
-                page.elements.jobCre.empty();
-                $.each(jobs, (index, item) => {
-                    const str = `<option value="${item.id}">${item.name}</option>`;
-                    page.elements.jobCre.append(str);
-                });
-            })
-    }
-
-    page.commands.getAllEthnic = () => {
-        return $.ajax({
-            type: 'GET',
-            url: page.url.getAllEthnic
-        })
-            .done((data) => {
-                const ethnics = data;
-                page.elements.ethnicCre.empty();
-                $.each(ethnics, (index, item) => {
-                    const str = `<option value="${item.id}">${item.name}</option>`;
-                    page.elements.ethnicCre.append(str);
-                });
-            })
-    }
-
     page.commands.getAllProvince = () => {
         return $.ajax({
             type: 'GET',
@@ -412,6 +358,7 @@
                 page.commands.bindDataSelect2(page.elements.provinceCre, result1, '46');
             })
     }
+
     page.commands.getAllDistricts = (provinceId, elem) => {
         return $.ajax({
             type: 'GET',
@@ -471,31 +418,31 @@
         const fullName = page.elements.fullNameCre.val();
         const email = page.elements.emailCre.val();
         const phone = page.elements.phoneCre.val();
-        const nameGender = page.elements.genderCre.find('option:selected').val();
+        const genderName = page.elements.genderCre.find('option:selected').val();
+        const birthDay = page.elements.dobCre.val().replace(/\s+/g, '');
 
-        let dayCre = page.elements.dayCre.val();
-        let monthCre = page.elements.monthCre.val();
-        let yearCre = page.elements.yearCre.val();
+        const maGoi = page.elements.testTypeSelected.find('option:selected').val();
+        const takeDate = page.elements.appointmentDate.val().replace(/\s+/g, '');
+        const timeBookName = page.elements.timeSelected.find('option:selected').val();
+        const reasonNote = page.elements.reasonNote.val();
+        const homeService = 1;
 
-        const birthDay = dayCre + '/' + monthCre + '/' + yearCre;
-
-        const identityNumber = page.elements.identityCre.val();
-        const ethnic = page.elements.ethnicCre.find('option:selected').text();
-        const job = page.elements.jobCre.find('option:selected').text();
-
-
-        let customer = {
+        let billTest = {
+            maGoi,
+            takeDate,
+            timeBookName,
             fullName,
             email,
-            nameGender,
+            genderName,
             phone,
             birthDay,
-            job,
-            identityNumber,
-            ethnic,
             locationRegion,
-            userId
+            reasonNote,
+            homeService,
+            userId: userId.toString()
         }
+
+        console.log(JSON.stringify(billTest))
 
         $.ajax({
             headers: {
@@ -503,11 +450,11 @@
                 'content-type': 'application/json'
             },
             type: 'POST',
-            url: page.url.createCustomer,
-            data: JSON.stringify(customer)
+            url: page.url.createBillTest,
+            data: JSON.stringify(billTest)
         })
             .done((data) => {
-                App.showSuccessAlert("Tạo hồ sơ thành công!")
+                App.showSuccessNotification("Bạn đặt lịch thành công")
             })
             .fail((error) => {
                 const responseJSON = error.responseJSON;
@@ -557,7 +504,8 @@
         page.elements.btnCreate.on('click', function () {
             const response = grecaptcha.getResponse();
             if (response) {
-                page.elements.frmCreate.trigger("submit");
+                // page.elements.frmCreate.trigger("submit");
+                page.commands.create();
             }
 
         });
@@ -569,19 +517,8 @@
             // page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
         });
 
-        $(".date").click(function () {
-            DateTimePicker();
-        });
-
-
-
     }
     page.loadData = () => {
-        page.commands.getAllYear();
-        page.commands.getAllMonth();
-        page.commands.getAllDay();
-        page.commands.getAllJob();
-        page.commands.getAllEthnic();
         page.commands.getAllGoiDv();
         page.commands.getAllProvince().then(() => {
             const provinceId = page.elements.provinceCre.val();
@@ -603,7 +540,7 @@
     //     "Giá trị không hợp lệ"
     // );
 
-   page.elements.frmCreate.validate({
+   /*page.elements.frmCreate.validate({
         onfocusout: function (element) {
             page.elements.frmCreate.valid();
         },
@@ -710,7 +647,7 @@
             page.commands.create();
             e.preventDefault();
         }
-    })
+    })*/
 </script>
 </body>
 </html>

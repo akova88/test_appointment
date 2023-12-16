@@ -41,6 +41,11 @@ public class DMGoiService implements IDMGoiService{
     }
 
     @Override
+    public DM_Goi findDM_GoiByMaGoi(String maGoi) {
+        return dmGoiRepository.findDM_GoiByMaGoi(maGoi);
+    }
+
+    @Override
     public Boolean existsDM_GoiByMaGoiOrTenGoi(String maGoi, String tenGoi) {
         return dmGoiRepository.existsDM_GoiByMaGoiOrTenGoi(maGoi, tenGoi);
     }
