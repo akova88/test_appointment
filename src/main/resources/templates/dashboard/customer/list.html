@@ -78,6 +78,12 @@
 
                                             </tbody>
                                         </table>
+                                        <div class="clearfix">
+                                            <div class="hint-text float-lg-start">Showing <b>5</b> out of <b>25</b> entries</div>
+                                            <nav aria-label="Page navigation" class="float-lg-end">
+                                                <ul class="pagination" id="pagination-1"></ul>
+                                            </nav>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -175,11 +181,16 @@
     page.dialogs.elements.levelUp = $('#levelUp');
     page.dialogs.elements.btnEdit = $('#btnEdit');
 
+    page.elements.pagination = $('#pagination-1')
     page.elements.footer = $('#footer-control');
 
     let customerId = 0;
     let customer;
     let locationRegion = new LocationRegion();
+    let currentPage = 1;
+    let pageSize = 2;
+
+    let totalPages = 0;
 
     page.commands.renderCustomers = (customer, locationRegion) => {
         return `
@@ -213,20 +224,33 @@
             `;
     }
 
-    page.commands.getAllCustomers = () => {
+    page.commands.getAllCustomers = (currentPage) => {
         page.elements.tbCustomerBody.empty();
 
-        $.ajax({
+        return $.ajax({
             type: 'GET',
-            url: page.url.getAllCustomers
+            url: page.url.getAllCustomers + `/pagination?page=${currentPage}&limit=${pageSize}`
         })
-            .done((data) => {
+            .done((response) => {
+                const data = response.customers.content;
+
                 data.forEach(item => {
                     customer = item;
                     locationRegion = customer.locationRegion;
                     const str = page.commands.renderCustomers(customer, locationRegion);
                     page.elements.tbCustomerBody.prepend(str);
                 });
+                totalPages = response.customers.totalPages;
+                page.elements.pagination.twbsPagination('destroy');
+                page.elements.pagination.twbsPagination($.extend({}, {
+                    startPage: currentPage,
+                    totalPages: totalPages,
+                    visiblePages: 5,
+                    initiateStartPageClick: false,
+                    onPageClick: function (event, pageClicked) {
+                        page.commands.getAllCustomers(pageClicked)
+                    }
+                }));
             })
             .fail((error) => {
                 console.log(error);
@@ -408,7 +432,7 @@
             .done((data) => {
                 customer = data;
                 locationRegion = customer.locationRegion;
-                const str = page.commands.renderDoctors(customer, locationRegion);
+                const str = page.commands.renderCustomers(customer, locationRegion);
 
                 page.elements.tbCustomerBody.prepend(str);
                 page.dialogs.elements.modalCreate.modal('hide');
@@ -649,9 +673,8 @@
         })
     }
 
-
     page.loadData = () => {
-        page.commands.getAllCustomers();
+        page.commands.getAllCustomers(currentPage).then;
         page.commands.getAllJob();
         page.commands.getAllEthnic();
         page.commands.getUserByCustomer();

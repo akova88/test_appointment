@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "DM_Goi")
+@Table(name = "dm_goi")
 @Accessors(chain = true)
 @Entity
 @SQLDelete(sql = "UPDATE dm_goi SET is_Remove=true WHERE id = ?")
@@ -29,13 +29,13 @@ public class DM_Goi extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MaGoi", columnDefinition = "nvarchar(15)", nullable = false, unique = true)
+    @Column(name = "ma_goi", columnDefinition = "nvarchar(15)", nullable = false, unique = true)
     private String maGoi;
 
-    @Column(name = "TenGoi", columnDefinition = "nvarchar(150)", nullable = false)
+    @Column(name = "ten_goi", columnDefinition = "nvarchar(150)", nullable = false)
     private String tenGoi;
 
-    @Column(precision = 10, scale = 0, nullable = false)
+    @Column(name = "gia_goi", precision = 10, scale = 0, nullable = false)
     private BigDecimal giaGoi;
 
     @ManyToMany

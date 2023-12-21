@@ -149,11 +149,20 @@
       url: page.url.getAllDanhMucDv
     })
             .done((data) => {
-              data.forEach(item => {
-                const dmDichVu = item;
-                const str = page.commands.renderDanhMucDv(dmDichVu);
-                page.elements.tbDichVu.prepend(str);
-              });
+              // data.forEach(item => {
+              //   const dmDichVu = item;
+              //   const str = page.commands.renderDanhMucDv(dmDichVu);
+              //   page.elements.tbDichVu.prepend(str);
+              // });
+              console.log(data.map(item => Object.values(item)))
+              window.datatable = new window.simpleDatatables.DataTable("#tableDV", {
+                data: {
+                  headings: Object.keys(data[0]),
+                  data: data.map(item => Object.values(item)).map(value => [
+                          value[0], value[1], value[2],App.formatCurrency(value[3]), value[4].tenNhomDv
+                  ])
+                }
+              })
             })
             .fail((error) => {
               console.log(error);

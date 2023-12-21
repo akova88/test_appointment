@@ -25,17 +25,17 @@ public class BillTest extends BasePerson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(name = "ma_phieu", unique = true)
     private String maPhieu;
 
     @ManyToOne
     @JoinColumn(name = "dm_goi_id", referencedColumnName = "id", nullable = false)
     private DM_Goi dmGoi;
 
-    @Column(nullable = false)
+    @Column(name = "take_date", nullable = false)
     private Date takeDate;
 
-    @Column(nullable = false)
+    @Column(name = "time_book", nullable = false)
     @Enumerated(EnumType.STRING)
     private EBookTime timeBook;
 

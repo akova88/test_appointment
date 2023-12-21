@@ -40,9 +40,11 @@ public class BillTestAPI {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<BillTestResDTO> billTestResDTOS = billTestService.findAllBillTestResDTO();
-
-        return new ResponseEntity<>(billTestResDTOS, HttpStatus.OK);
+//        List<BillTestResDTO> billTestResDTOS = billTestService.findAllBillTestResDTO();
+//
+//        return new ResponseEntity<>(billTestResDTOS, HttpStatus.OK);
+        List<BillTest> billTests = billTestService.findAll();
+        return new ResponseEntity<>(billTests, HttpStatus.OK);
     }
 
     @PostMapping

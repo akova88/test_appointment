@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "DMNhomDV")
+@Table(name = "dmnhomdv")
 @Accessors(chain = true)
 @Entity
 public class DMNhomDV extends BaseEntity{
@@ -24,13 +24,13 @@ public class DMNhomDV extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MANhomDV", columnDefinition = "nvarchar(15)", nullable = false, unique = true)
+    @Column(name = "manhomdv", columnDefinition = "nvarchar(15)", nullable = false, unique = true)
     private String maNhomDv;
 
-    @Column(name = "TenNhomDV", columnDefinition = "nvarchar(150)", nullable = false)
+    @Column(name = "ten_nhomdv", columnDefinition = "nvarchar(150)", nullable = false)
     private String tenNhomDv;
 
-    @Column(name = "MaChungLoai", columnDefinition = "nvarchar(5)", nullable = false)
+    @Column(name = "ma_chung_loai", columnDefinition = "nvarchar(5)", nullable = false)
     private String maChungLoai;
 
     public DMNhomDvResDTO toDmNhomDvResDTO() {

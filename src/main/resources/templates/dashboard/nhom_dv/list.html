@@ -56,18 +56,18 @@
 <!--                  </div>-->
                   <!-- table striped -->
                   <div class="table-responsive">
-                    <table class="table table-hover table-bordered mb-0" id="tableNhomDV">
-                      <thead>
-                      <tr>
-                        <th class="text-center">#</th>
-                        <th class="text-center">Mã Nhóm DV</th>
-                        <th>Tên Nhóm Dịch Vụ</th>
-                        <th class="text-center">Mã Chủng Loại</th>
-                      </tr>
-                      </thead>
-                      <tbody>
+                    <table class="table table-striped table-hover table-bordered mb-0" id="tableNhomDV">
+<!--                      <thead>-->
+<!--                      <tr>-->
+<!--                        <th class="text-center">#</th>-->
+<!--                        <th class="text-center">Mã Nhóm DV</th>-->
+<!--                        <th>Tên Nhóm Dịch Vụ</th>-->
+<!--                        <th class="text-center">Mã Chủng Loại</th>-->
+<!--                      </tr>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
 
-                      </tbody>
+<!--                      </tbody>-->
                     </table>
                   </div>
                 </div>
@@ -129,11 +129,17 @@
       url: page.url.getAllDmNhomDv
     })
             .done((data) => {
-              data.forEach(item => {
-                const nhomDv = item;
-                const str = page.commands.renderDmNhomDv(nhomDv);
-                page.elements.tbNhomDV.prepend(str);
-              });
+              // data.forEach(item => {
+              //   const nhomDv = item;
+              //   const str = page.commands.renderDmNhomDv(nhomDv);
+              //   page.elements.tbNhomDV.prepend(str);
+              // });
+                window.datatable = new window.simpleDatatables.DataTable("#tableNhomDV", {
+                    data: {
+                        headings: Object.keys(data[0]),
+                        data: data.map(item => Object.values(item))
+                    }
+                })
             })
             .fail((error) => {
               console.log(error);

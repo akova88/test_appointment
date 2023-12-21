@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "DMDichVu")
+@Table(name = "dmdich_vu")
 @Accessors(chain = true)
 @Entity
 public class DMDichVu extends BaseEntity{
@@ -23,17 +23,17 @@ public class DMDichVu extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "MaDV", columnDefinition = "nvarchar(15)", nullable = false, unique = true)
+    @Column(name = "madv", columnDefinition = "nvarchar(15)", nullable = false, unique = true)
     private String maDv;
 
-    @Column(name = "TenDV", columnDefinition = "nvarchar(150)", nullable = false)
+    @Column(name = "tendv", columnDefinition = "nvarchar(150)", nullable = false)
     private String tenDv;
 
-    @Column(precision = 10, scale = 0, nullable = false)
+    @Column(name = "don_giatt", precision = 10, scale = 0, nullable = false)
     private BigDecimal donGiaTT;
 
     @ManyToOne
-    @JoinColumn(name = "dmNhomDv_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "dm_nhom_dv_id", referencedColumnName = "id", nullable = false)
     private DMNhomDV dmNhomDV;
 
     @ManyToMany(mappedBy = "dmDichVuList", fetch = FetchType.LAZY)

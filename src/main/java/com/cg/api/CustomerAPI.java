@@ -61,41 +61,41 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerResDTOS,HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity<?> getAll(@RequestParam(required = false) String kw,
-//                                    @RequestParam("page") int page,
-//                                    @RequestParam(value = "limit", defaultValue = "2") int limit,
-//                                    @RequestParam(value = "sort-by", defaultValue = "id") String sort,
-//                                    @RequestParam(value = "order", defaultValue = "asc") String order) {
-//        Pageable pageable;
-//        if (order.equals("asc")) {
-//            pageable = PageRequest.of(page - 1, limit, Sort.by(sort).ascending());
-//        } else {
-//            pageable = PageRequest.of(page - 1, limit, Sort.by(sort).descending());
-//        }
-//        Page<Customer> customers;
-//        if (kw == null) {
-//            customers = customerService.findAll(pageable);
-//        } else {
-//            kw = "%"+kw+"%";
-//            customers = customerService.findAllByFullNameLike(kw, pageable);
-//        }
-//
-//        List<Customer> customerList = customers.getContent();
-//        List<CustomerResDTO> customerResDTOS = new ArrayList<>();
-//        for (Customer customer: customerList){
-//            if (!customer.isDeleted()) {
-//                CustomerResDTO customerResDTO = customer.toCustomerResDTO();
-//                customerResDTOS.add(customerResDTO);
-//            }
-//        }
-//
-//        Map<String, Object> response = new HashMap<>();
-//        response.put("customers", customers);
-//
-//
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @GetMapping("/pagination")
+    public ResponseEntity<?> getAllPagination(@RequestParam(required = false) String kw,
+                                    @RequestParam("page") int page,
+                                    @RequestParam(value = "limit", defaultValue = "2") int limit,
+                                    @RequestParam(value = "sort-by", defaultValue = "id") String sort,
+                                    @RequestParam(value = "order", defaultValue = "asc") String order) {
+        Pageable pageable;
+        if (order.equals("asc")) {
+            pageable = PageRequest.of(page - 1, limit, Sort.by(sort).ascending());
+        } else {
+            pageable = PageRequest.of(page - 1, limit, Sort.by(sort).descending());
+        }
+        Page<Customer> customers;
+        if (kw == null) {
+            customers = customerService.findAll(pageable);
+        } else {
+            kw = "%"+kw+"%";
+            customers = customerService.findAllByFullNameLike(kw, pageable);
+        }
+
+        List<Customer> customerList = customers.getContent();
+        List<CustomerResDTO> customerResDTOS = new ArrayList<>();
+        for (Customer customer: customerList){
+            if (!customer.isDeleted()) {
+                CustomerResDTO customerResDTO = customer.toCustomerResDTO();
+                customerResDTOS.add(customerResDTO);
+            }
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("customers", customers);
+
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @GetMapping("/{customerId}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long customerId) {
