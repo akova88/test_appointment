@@ -26,7 +26,7 @@
                                     <ol class="breadcrumb">
                                         <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
                                             chủ</a></li>
-                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Hình thức đặt khám
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Đặt lịch lấy mẫu
                                         </li>
                                     </ol>
                                 </nav>
@@ -237,7 +237,7 @@
 
                     </div>
                     <div class="block-images">
-                        <img src="/med/images/bookings.png" alt="">
+                        <img src="/homepage/assets/img/xetnghiem.png" alt="">
                     </div>
                 </div>
             </div>
@@ -455,6 +455,7 @@
         })
             .done((data) => {
                 App.showSuccessNotification("Bạn đặt lịch thành công")
+                location.href = "/dat-lich-thanh-cong";
             })
             .fail((error) => {
                 const responseJSON = error.responseJSON;

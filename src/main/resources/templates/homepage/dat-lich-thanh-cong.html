@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css"/>
+    <link rel="stylesheet" href="/homepage/assets/css/booking.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC" style="min-height: 0">
+            <div class="style_bg_breakcum__2BT1J bg-info">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Đặt lịch thành công
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="site-main">
+
+            <div class="container">
+                <div class="bookings">
+                    <div class="block-content">
+                        <div class="form-successful">
+                            <img src="/homepage/assets/img/successful.png" alt="">
+                            <h2>Xác nhận đặt lịch thành công </h2>
+                            <p style="color: #A6A6A6;">Cảm ơn Quý khách đã lựa chọn dịch vụ của Bệnh viện Trung ương Huế! <br>Chúng tôi sẽ liên hệ quý khách trong thời gian sớm nhất.</p>
+                            <div class="actions">
+                                <a href="/"><button class="btn btn-primary">Về trang chủ</button></a>
+                                <a href="tel:1900565565" class="action">Cần tư vấn trực tiếp?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-images">
+                        <img src="/homepage/assets/img/xetnghiem1.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+
+</body>
+</html>

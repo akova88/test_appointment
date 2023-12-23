@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ | MEDIC-PRO</title>
+
+    <th:block th:replace="/homepage/fragment/head_css"/>
+    <link rel="stylesheet" href="/homepage/assets/css/booking.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC" style="min-height: 0">
+            <div class="style_bg_breakcum__2BT1J bg-info">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Tra cứu kết quả
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="site-main">
+
+            <div class="container">
+                <div class="bookings bookings-lookup">
+                    <div class="block-content">
+
+                        <h2>Tra cứu kết quả</h2>
+                        <p>Quý khách vui lòng điền đầy đủ thông tin để kiểm tra kết quả</p>
+                        <form id="formTraCuuThongTin" method="post">
+                            <div class="form">
+
+                                <div role="tabpanel" class="tab-pane active" id="lookup1">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-12 form-group">
+                                            <label>Ngày khám <sup>*</sup></label>
+                                            <div class="control">
+                                                <input placeholder="-- / -- / ----" class="date form-control"
+                                                       type="text" id="NgayKham" name="NgayKham" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="NgayKham"
+                                                      data-valmsg-replace="true"></span>
+                                                <div id="undefined-error" class="error" style="display: none;">Ngày khám
+                                                    không được để trống
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12 form-group">
+                                            <label>Mã tra cứu <sup>*</sup></label>
+                                            <div class="control">
+                                                <input placeholder="Mã tra cứu của bạn" type="text"
+                                                       class="form-control" id="MaTraCuu" name="MaTraCuu" value="">
+                                                <span class="field-validation-valid" data-valmsg-for="MaTraCuu"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12 form-group">
+                                            <label>Mã bảo mật <sup>*</sup></label>
+                                            <div class="control">
+                                                <input type="password" class="form-control form-control"
+                                                       placeholder="Nhập mật khẩu của bạn" required=""
+                                                       data-msg-required="Vui lòng nhập mật khẩu" id="MaBaoMat"
+                                                       name="MaBaoMat">
+                                                <button type="button" class="show-pass"
+                                                        onclick="togglePasswordVisibility('MaBaoMat')">
+                                                    <span>SHOW</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="/huong-dan-tra-cuu-ket-qua-theo-ma-khach-hang" class="action">Hướng
+                                            dẫn tra cứu kết quả</a>
+                                        <button type="submit" class="btn btn-primary" id="btn_MaTraCuu">Tra cứu
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <input name="__RequestVerificationToken" type="hidden"
+                                   value="CfDJ8CiUe3fVQM1Bu5x4yljo4ybD9cl61t_DM6Fwt8KAwWAMNzreOZrWA2sq9gg6PpjqcD4TMsRaspixsfop8dY4fRQ2T4VlQS9OWj2iaXdSrFjfxA97D_8p_B3__RQxv7IkkhjhoYMaHVaUdywZoYj6y22rWgTa7dYuAACw95U2ZUwlCudTr350m3ijPUkBGCiMNA">
+                        </form>
+
+                    </div>
+                    <div class="block-images">
+
+
+                        <img src="/homepage/assets/img/ketqua.png" alt="">
+
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+        <script>
+            function togglePasswordVisibility(passwordInputId) {
+                const passwordInput = document.getElementById(passwordInputId);
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                } else {
+                    passwordInput.type = 'password';
+                }
+            }
+        </script>
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<th:block th:replace="/homepage/fragment/footer_js"/>
+
+<script th:inline="javascript">
+    const page = {
+        url: {
+            getCustomerById: App.API_CUSTOMER,
+            getAllProvince: App.API_LOCATION_REGION + '/',
+            getAllDistricts: App.API_LOCATION_REGION + '/district',
+            getAllWard: App.API_LOCATION_REGION + '/ward',
+            getAllGoiDv: App.API_DM_GOI_DV,
+            createBillTest: App.API_SERVER + '/bill_tests'
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        initializeControlEvent: {}
+    }
+
+
+    page.elements.frmCreate = $('#formLayMauTaiNha');
+    page.elements.fullNameCre = $('#patientName');
+    page.elements.emailCre = $('#email');
+    page.elements.genderCre = $('#patientSex');
+    page.elements.phoneCre = $('#phone');
+    page.elements.testTypeSelected = $('#TestTypeSelected');
+    page.elements.appointmentDate = $('#appointmentDate');
+    page.elements.timeSelected = $('#TimeSelected');
+    page.elements.reasonNote = $('#reasonNote');
+
+    page.elements.dobCre = $('#patientBirthDate');
+    page.elements.provinceCre = $('#ProvinceSelected');
+    page.elements.districtCre = $('#DistrictSelected');
+    page.elements.wardCre = $('#WardSelected');
+    page.elements.addressCre = $('#address');
+    page.elements.btnCreate = $('#btnCreate');
+    page.elements.btnClear = $('#btnClear');
+
+
+    page.commands.getCustomerById = (id) => {
+        return $.ajax({
+            type: 'GET',
+            url: page.url.getCustomerById + '/' + id,
+        });
+    }
+
+    page.initializeControlEvent = () => {
+
+        page.elements.btnCreate.on('click', function () {
+            const response = grecaptcha.getResponse();
+            if (response) {
+                // page.elements.frmCreate.trigger("submit");
+                page.commands.create();
+            }
+
+        });
+
+        page.elements.btnClear.on('click', () => {
+            page.elements.frmCreate[0].reset();
+            // page.dialogs.elements.frmCreate.validate().resetForm();
+            // page.dialogs.elements.frmCreate.find("input.error").removeClass("error");
+            // page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
+        });
+
+    }
+    page.loadData = () => {
+        function DateTimePicker() {
+
+            if (jQuery('input.date').length) {
+                $('input.date').datetimepicker({
+                    format: 'LT',
+                    format: 'DD / MM / YYYY',
+                    locale: 'vi'
+                });
+            }
+        }
+
+        $('input.date').datetimepicker({
+            format: 'LT',
+            format: 'DD / MM / YYYY',
+            locale: 'vi'
+        });
+    }
+    $(() => {
+        page.loadData();
+        page.initializeControlEvent();
+    })
+    // $.validator.addMethod(
+    //     "regex",
+    //     function (value, element, regexp) {
+    //         return this.optional(element) || regexp.test(value);
+    //     },
+    //     "Giá trị không hợp lệ"
+    // );
+
+    /*page.elements.frmCreate.validate({
+         onfocusout: function (element) {
+             page.elements.frmCreate.valid();
+         },
+         rules: {
+             fullNameCre: {
+                 required: true,
+                 minlength: 5,
+                 maxlength: 25
+             },
+             emailCre: {
+                 required: true,
+                 regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/,
+             },
+             genderCre: {
+                 required: true,
+             },
+             dayCre: {
+                 required: true,
+                 regex: '^(1|2?[0-9]|3[0-1])$'
+             },
+             monthCre: {
+                 required: true,
+                 regex: '^(0?[1-9]|1[0-2])$'
+             },
+             yearCre: {
+                 required: true,
+                 regex: '^(19|20)\\d{2}$'
+             },
+             phoneCre: {
+                 required: true,
+                 // regex: /^\+\d{1,2} \(\d{3}\) \d{3}-\d{4}$/
+             },
+             jobCre: {
+                 required: true
+             },
+             identityCre: {
+                 required: true,
+                 regex: /^\d{9}$/
+             },
+             addressCre: {
+                 required: true,
+                 maxlength: 50
+             },
+         },
+         messages: {
+             fullNameCre: {
+                 required: "Bắt buộc nhập Full Name",
+                 minlength: 'Full Name tối thiểu ${0} ký tự',
+                 maxlength: 'Full Name tối đa ${0} ký tự'
+             },
+             emailCre: {
+                 required: "Email là bắt buộc",
+                 regex: 'Email không hợp lệ'
+             },
+
+             genderCre: {
+                 required: 'Vui lòng chọn giới tính',
+             },
+             dayCre: {
+                 required: 'Vui lòng chọn ngày',
+                 regex: 'Ngày không hợp lệ'
+             },
+             monthCre: {
+                 required: 'Vui lòng chọn ngày tháng',
+                 regex: 'Tháng không hợp lệ'
+             },
+             yearCre: {
+                 required: 'Vui lòng chọn ngày tháng',
+                 regex: 'Năm không hợp lệ'
+             },
+             phoneCre: {
+                 required: 'Điện thoại là bắt buộc',
+                 // regex: 'Số điện thoại không hợp lệ'
+             },
+             jobCre: {
+                 required: 'Vui lòng chọn công việc'
+             },
+             identityCre: {
+                 required: 'Số CMND là bắt buộc',
+                 regex: 'Số CMND không đúng định dạng'
+             },
+             addressCre: {
+                 required: 'Địa chỉ là bắt buộc',
+                 maxlength: 'Địa chỉ tối đa ${0} ký tự'
+             },
+         },
+         // errorLabelContainer: "#modalCreate .error-area",
+         // errorPlacement: function (error) {
+         //     error.appendTo("#modalCreate .error-area");
+         // },
+         errorElement: "div",
+         errorClass: "style_alertSpan__2UfTW",
+
+         showErrors: function (errorMap, errorList) {
+             // if (this.numberOfInvalids() > 0) {
+             //     page.dialogs.elements.errorAreaCreate.removeClass("hide").addClass("show");
+             // } else {
+             //     page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
+             //     $("#frmCreate input.error").removeClass("error");
+             // }
+             this.defaultShowErrors();
+         },
+         submitHandler: function (e) {
+             page.commands.create();
+             e.preventDefault();
+         }
+     })*/
+</script>
+</body>
+</html>

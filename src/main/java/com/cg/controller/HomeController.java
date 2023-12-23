@@ -279,6 +279,21 @@ public class HomeController {
         return "homepage/hinh-thuc-dat-kham";
     }
 
+    @GetMapping("/tra-cuu-ket-qua")
+    public String bookingLookup() {
+        return "homepage/tra-cuu-ket-qua";
+    }
+
+    @GetMapping("/dat-lich-thanh-cong")
+    public String bookSuccess() {
+        return "homepage/dat-lich-thanh-cong";
+    }
+
+    @GetMapping("/phieu-ket-qua")
+    public String resultLookup() {
+        return "homepage/fragment/result/return-table";
+    }
+
     @GetMapping("/dat-lich-lay-mau")
     public ModelAndView datLich(Principal user) {
         ModelAndView model = new ModelAndView("homepage/dat-lich-lay-mau");
