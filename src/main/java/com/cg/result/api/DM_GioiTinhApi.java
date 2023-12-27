@@ -1,6 +1,5 @@
 package com.cg.result.api;
 
-import com.cg.result.entity.DMGioiTinhDTO;
 import com.cg.result.entity.DM_GioiTinh;
 import com.cg.result.service.dm_gioitinh.IDM_GioiTinhService;
 import org.springframework.beans.factory.annotation.Autowired;

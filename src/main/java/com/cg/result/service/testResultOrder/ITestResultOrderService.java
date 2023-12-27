@@ -7,5 +7,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ITestResultOrderService extends IGeneralService<TestResultOrder, String> {
-    List<TestResultOrder> getAllTest(@Param("maSoKham") String maSoKham);
+    List<TestResultOrder> getAllTest(@Param("MaSoKham") String maSoKham, @Param("NgayKham") String ngayKham);
+
 }

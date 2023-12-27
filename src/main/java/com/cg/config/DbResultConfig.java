@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@Profile("dev")
 @EnableTransactionManagement
 @EnableJpaRepositories(
         entityManagerFactoryRef = "resultEntityManagerFactory",
@@ -49,6 +51,7 @@ public class DbResultConfig {
 //        props.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
         props.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
         props.put("hibernate.hbm2ddl.auto", "validate");
+        props.put("hibernate.type_contributor_class", "org.hibernate.type.descriptor.sql.NVarcharTypeDescriptor");
 
 //        Map<String, String> resultJpaProperties = new HashMap<>();
 //        resultJpaProperties.put("jpa.properties.hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");

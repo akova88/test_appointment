@@ -10,12 +10,15 @@ import java.util.Date;
 
 public class DateFormat {
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat formatterOut = new SimpleDateFormat("yyyy-MM-dd");
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public static String format(Date date) {
         return formatter.format(date);
     }
+
+    public static String formatOut(Date date) {return formatterOut.format(date);}
     public static Date parse(String strDate) {
         try {
             return formatter.parse(strDate);

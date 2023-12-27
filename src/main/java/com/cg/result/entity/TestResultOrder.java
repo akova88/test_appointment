@@ -12,17 +12,16 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-
 public class TestResultOrder {
     private String soPhieu;
     private String ngayKq;
-    private String sTT;
+    private Integer sTT;
     private String maDv;
     private String tenDv;
     private String khoaTH;
     private String maNoiDL;
-    private int daTT;
+    private Integer daTT;
     private String noiChoTH;
-    private int soTT;
+    private Integer soTT;
     private String goiLuc;
 }

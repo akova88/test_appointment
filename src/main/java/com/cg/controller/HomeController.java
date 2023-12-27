@@ -293,6 +293,10 @@ public class HomeController {
     public String resultLookup() {
         return "homepage/fragment/result/return-table";
     }
+    @GetMapping("/chi-tiet-ket-qua")
+    public String resultDetail() {
+        return "homepage/chi-tiet-ket-qua";
+    }
 
     @GetMapping("/dat-lich-lay-mau")
     public ModelAndView datLich(Principal user) {

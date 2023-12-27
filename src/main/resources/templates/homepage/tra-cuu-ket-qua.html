@@ -88,7 +88,7 @@
                                     <div class="actions">
                                         <a href="/huong-dan-tra-cuu-ket-qua-theo-ma-khach-hang" class="action">Hướng
                                             dẫn tra cứu kết quả</a>
-                                        <button type="submit" class="btn btn-primary" id="btn_MaTraCuu">Tra cứu
+                                        <button type="button" class="btn btn-primary" id="btn_MaTraCuu">Tra cứu
                                         </button>
                                     </div>
                                 </div>
@@ -133,11 +133,7 @@
     const page = {
         url: {
             getCustomerById: App.API_CUSTOMER,
-            getAllProvince: App.API_LOCATION_REGION + '/',
-            getAllDistricts: App.API_LOCATION_REGION + '/district',
-            getAllWard: App.API_LOCATION_REGION + '/ward',
-            getAllGoiDv: App.API_DM_GOI_DV,
-            createBillTest: App.API_SERVER + '/bill_tests'
+            getAllTest: App.API_SERVER + '/test_results'
         },
         elements: {},
         loadData: {},
@@ -146,23 +142,12 @@
     }
 
 
-    page.elements.frmCreate = $('#formLayMauTaiNha');
-    page.elements.fullNameCre = $('#patientName');
-    page.elements.emailCre = $('#email');
-    page.elements.genderCre = $('#patientSex');
-    page.elements.phoneCre = $('#phone');
-    page.elements.testTypeSelected = $('#TestTypeSelected');
-    page.elements.appointmentDate = $('#appointmentDate');
-    page.elements.timeSelected = $('#TimeSelected');
-    page.elements.reasonNote = $('#reasonNote');
+    page.elements.frmTraCuu = $('#formTraCuuThongTin');
+    page.elements.ngayKham = $('#NgayKham');
+    page.elements.maTraCuu = $('#MaTraCuu');
+    page.elements.maBaoMat = $('#MaBaoMat');
 
-    page.elements.dobCre = $('#patientBirthDate');
-    page.elements.provinceCre = $('#ProvinceSelected');
-    page.elements.districtCre = $('#DistrictSelected');
-    page.elements.wardCre = $('#WardSelected');
-    page.elements.addressCre = $('#address');
-    page.elements.btnCreate = $('#btnCreate');
-    page.elements.btnClear = $('#btnClear');
+    page.elements.btnTraCuu = $('#btn_MaTraCuu');
 
 
     page.commands.getCustomerById = (id) => {
@@ -174,21 +159,38 @@
 
     page.initializeControlEvent = () => {
 
-        page.elements.btnCreate.on('click', function () {
-            const response = grecaptcha.getResponse();
-            if (response) {
-                // page.elements.frmCreate.trigger("submit");
-                page.commands.create();
+        page.elements.btnTraCuu.on('click', () => {
+            const ngayKham = page.elements.ngayKham.val().replace(/\s+/g, '');
+            const maTraCuu = page.elements.maTraCuu.val();
+            const maBaoMat = page.elements.maBaoMat.val();
+
+            const obj = {
+                ngayKham,
+                maTraCuu,
+                maBaoMat
             }
+            console.log(obj)
+            $.ajax({
+                headers: {
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                },
+                type: 'POST',
+                url: page.url.getAllTest,
+                data: JSON.stringify(obj)
+            })
+                .done((data) => {
+                    App.showSuccessNotification("Thông tin tra cứu thành công");
+                    sessionStorage.setItem("resultOrder", JSON.stringify(data))
+                    location.href = '/chi-tiet-ket-qua';
+                    page.elements.frmTraCuu[0].reset();
+                })
+                .fail((jqXHR) => {
+                    App.showErrorNotification("Tài khoản không tồn tại hoặc mật khẩu không chính xác")
 
-        });
-
-        page.elements.btnClear.on('click', () => {
-            page.elements.frmCreate[0].reset();
-            // page.dialogs.elements.frmCreate.validate().resetForm();
-            // page.dialogs.elements.frmCreate.find("input.error").removeClass("error");
-            // page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
-        });
+                    console.log(jqXHR);
+                })
+        })
 
     }
     page.loadData = () => {

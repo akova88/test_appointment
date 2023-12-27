@@ -75,7 +75,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/admin/**",
                         "/api/dm_goi",
                         "/api/**",
-                        "/api/dm_dv"
+                        "/api/dm_dv",
+                        "/api/test_results/**"
                         // TODO: 21/7/2023 nhớ xóa nhé
 //                        "/admin/**"
                 ).permitAll()

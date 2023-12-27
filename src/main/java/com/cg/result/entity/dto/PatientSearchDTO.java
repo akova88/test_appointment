@@ -1,4 +1,4 @@
-package com.cg.result.entity;
+package com.cg.result.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,8 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class DMGioiTinhDTO {
-
-    private Integer Ma;
-
-    private String tenGioiTinh;
+public class PatientSearchDTO {
+    private String ngayKham;
+    private String maTraCuu;
+    private String maBaoMat;
 }
