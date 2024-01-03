@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ | MEDIC-PRO</title>
+    <title>BỆNH VIỆN ĐA KHOA TRUNG ƯƠNG HUẾ | ĐẶT LỊCH LẤY MẪU</title>
 
     <th:block th:replace="/homepage/fragment/head_css"/>
     <link rel="stylesheet" href="/homepage/assets/css/booking.css">
@@ -38,16 +38,32 @@
         </div>
 
         <main class="site-main">
-
-
+            <div class="loader hide">
+                <div id="loading"></div>
+            </div>
             <div class="container">
                 <div class="bookings">
                     <div class="block-content">
-                        <h2>Lấy mẫu tại nhà</h2>
-                        <p>Lấy mẫu xét nghiệm tại nhà giúp khách hàng chủ động tầm soát bệnh lý. Đồng thời tiết kiệm
-                            thời gian đi lại, chờ đợi kết quả với mức chi phí hợp lý.</p>
+<!--                        <h5>Chọn nơi lấy mẫu</h5>-->
+<!--                        <p>Lấy mẫu xét nghiệm tại nhà giúp khách hàng chủ động tầm soát bệnh lý. Đồng thời tiết kiệm-->
+<!--                            thời gian đi lại, chờ đợi kết quả với mức chi phí hợp lý.</p>-->
+
                         <form id="formLayMauTaiNha" method="post">
                             <div class="form">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12 d-flex align-items-center">
+                                        <div class="form-check pe-2">
+                                            <input class="form-check-input" type="radio" id="home" value=1 name="location">
+                                            <label class="form-check-label" for="home">LẤY MẪU TẠI NHÀ</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 d-flex align-items-center">
+                                        <div class="form-check pe-2">
+                                            <input class="form-check-input" type="radio" id="hospital" value=0 name="location">
+                                            <label class="form-check-label" for="hospital">LẤY MẪU TẠI BỆNH VIỆN</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12 form-group">
                                         <label>Họ và tên <sup>*</sup></label>
@@ -221,12 +237,11 @@
                                         <div class="control">
                                             <textarea placeholder="Tôi cảm thấy..." class="form-control" data-val="true"
                                                       data-val-required="Nội dung yêu cầu không được để trống"
-                                                      id="reasonNote" name="reasonNote">
-                                            </textarea>
+                                                      id="reasonNote" name="reasonNote"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                            <div class="g-recaptcha" data-sitekey="6LeezS8pAAAAAEIrdIRORYFsCjEd-4zjJHfpNdOJ"></div>
+                                <div class="g-recaptcha" data-sitekey="6LeezS8pAAAAAEIrdIRORYFsCjEd-4zjJHfpNdOJ"></div>
                                 <div class="actions">
                                     <a href="tel:1900565565" class="action">Cần tư vấn trực tiếp?</a>
                                     <button type="button" id="btnCreate" class="btn btn-primary tainha">Đặt lịch
@@ -241,7 +256,6 @@
                     </div>
                 </div>
             </div>
-
 
 
         </main>
@@ -272,6 +286,7 @@
 
 
     page.elements.frmCreate = $('#formLayMauTaiNha');
+    // page.elements.location = $('input[name=location]:checked');
     page.elements.fullNameCre = $('#patientName');
     page.elements.emailCre = $('#email');
     page.elements.genderCre = $('#patientSex');
@@ -288,6 +303,8 @@
     page.elements.addressCre = $('#address');
     page.elements.btnCreate = $('#btnCreate');
     page.elements.btnClear = $('#btnClear');
+
+    page.elements.loader = $(".loader");
 
     let customerId = 0;
     let customer;
@@ -396,6 +413,14 @@
         });
     }
 
+    page.commands.showLoading = () => {
+        page.elements.loader.removeClass("hide");
+    }
+
+    page.commands.closeLoading = () => {
+        page.elements.loader.addClass("hide");
+    }
+
     page.commands.create = () => {
         const provinceId = page.elements.provinceCre.val();
         const provinceName = page.elements.provinceCre.find('option:selected').text();
@@ -425,7 +450,8 @@
         const takeDate = page.elements.appointmentDate.val().replace(/\s+/g, '');
         const timeBookName = page.elements.timeSelected.find('option:selected').val();
         const reasonNote = page.elements.reasonNote.val();
-        const homeService = 1;
+        const homeService = parseInt($('input[name=location]:checked').val()) ;
+        console.log(homeService)
 
         let billTest = {
             maGoi,
@@ -443,7 +469,7 @@
         }
 
         console.log(JSON.stringify(billTest))
-
+        page.commands.showLoading()
         $.ajax({
             headers: {
                 'accept': 'application/json',
@@ -468,6 +494,10 @@
                 })
 
                 // page.elements.errorAreaCreate.append(str).removeClass('hide').addClass('show');
+                App.showErrorNotification("Đặt lịch không thành công!")
+            })
+            .always(() => {
+                page.commands.closeLoading();
             })
     }
 
@@ -541,114 +571,114 @@
     //     "Giá trị không hợp lệ"
     // );
 
-   /*page.elements.frmCreate.validate({
-        onfocusout: function (element) {
-            page.elements.frmCreate.valid();
-        },
-        rules: {
-            fullNameCre: {
-                required: true,
-                minlength: 5,
-                maxlength: 25
-            },
-            emailCre: {
-                required: true,
-                regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/,
-            },
-            genderCre: {
-                required: true,
-            },
-            dayCre: {
-                required: true,
-                regex: '^(1|2?[0-9]|3[0-1])$'
-            },
-            monthCre: {
-                required: true,
-                regex: '^(0?[1-9]|1[0-2])$'
-            },
-            yearCre: {
-                required: true,
-                regex: '^(19|20)\\d{2}$'
-            },
-            phoneCre: {
-                required: true,
-                // regex: /^\+\d{1,2} \(\d{3}\) \d{3}-\d{4}$/
-            },
-            jobCre: {
-                required: true
-            },
-            identityCre: {
-                required: true,
-                regex: /^\d{9}$/
-            },
-            addressCre: {
-                required: true,
-                maxlength: 50
-            },
-        },
-        messages: {
-            fullNameCre: {
-                required: "Bắt buộc nhập Full Name",
-                minlength: 'Full Name tối thiểu ${0} ký tự',
-                maxlength: 'Full Name tối đa ${0} ký tự'
-            },
-            emailCre: {
-                required: "Email là bắt buộc",
-                regex: 'Email không hợp lệ'
-            },
+    /*page.elements.frmCreate.validate({
+         onfocusout: function (element) {
+             page.elements.frmCreate.valid();
+         },
+         rules: {
+             fullNameCre: {
+                 required: true,
+                 minlength: 5,
+                 maxlength: 25
+             },
+             emailCre: {
+                 required: true,
+                 regex: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/,
+             },
+             genderCre: {
+                 required: true,
+             },
+             dayCre: {
+                 required: true,
+                 regex: '^(1|2?[0-9]|3[0-1])$'
+             },
+             monthCre: {
+                 required: true,
+                 regex: '^(0?[1-9]|1[0-2])$'
+             },
+             yearCre: {
+                 required: true,
+                 regex: '^(19|20)\\d{2}$'
+             },
+             phoneCre: {
+                 required: true,
+                 // regex: /^\+\d{1,2} \(\d{3}\) \d{3}-\d{4}$/
+             },
+             jobCre: {
+                 required: true
+             },
+             identityCre: {
+                 required: true,
+                 regex: /^\d{9}$/
+             },
+             addressCre: {
+                 required: true,
+                 maxlength: 50
+             },
+         },
+         messages: {
+             fullNameCre: {
+                 required: "Bắt buộc nhập Full Name",
+                 minlength: 'Full Name tối thiểu ${0} ký tự',
+                 maxlength: 'Full Name tối đa ${0} ký tự'
+             },
+             emailCre: {
+                 required: "Email là bắt buộc",
+                 regex: 'Email không hợp lệ'
+             },
 
-            genderCre: {
-                required: 'Vui lòng chọn giới tính',
-            },
-            dayCre: {
-                required: 'Vui lòng chọn ngày',
-                regex: 'Ngày không hợp lệ'
-            },
-            monthCre: {
-                required: 'Vui lòng chọn ngày tháng',
-                regex: 'Tháng không hợp lệ'
-            },
-            yearCre: {
-                required: 'Vui lòng chọn ngày tháng',
-                regex: 'Năm không hợp lệ'
-            },
-            phoneCre: {
-                required: 'Điện thoại là bắt buộc',
-                // regex: 'Số điện thoại không hợp lệ'
-            },
-            jobCre: {
-                required: 'Vui lòng chọn công việc'
-            },
-            identityCre: {
-                required: 'Số CMND là bắt buộc',
-                regex: 'Số CMND không đúng định dạng'
-            },
-            addressCre: {
-                required: 'Địa chỉ là bắt buộc',
-                maxlength: 'Địa chỉ tối đa ${0} ký tự'
-            },
-        },
-        // errorLabelContainer: "#modalCreate .error-area",
-        // errorPlacement: function (error) {
-        //     error.appendTo("#modalCreate .error-area");
-        // },
-        errorElement: "div",
-        errorClass: "style_alertSpan__2UfTW",
+             genderCre: {
+                 required: 'Vui lòng chọn giới tính',
+             },
+             dayCre: {
+                 required: 'Vui lòng chọn ngày',
+                 regex: 'Ngày không hợp lệ'
+             },
+             monthCre: {
+                 required: 'Vui lòng chọn ngày tháng',
+                 regex: 'Tháng không hợp lệ'
+             },
+             yearCre: {
+                 required: 'Vui lòng chọn ngày tháng',
+                 regex: 'Năm không hợp lệ'
+             },
+             phoneCre: {
+                 required: 'Điện thoại là bắt buộc',
+                 // regex: 'Số điện thoại không hợp lệ'
+             },
+             jobCre: {
+                 required: 'Vui lòng chọn công việc'
+             },
+             identityCre: {
+                 required: 'Số CMND là bắt buộc',
+                 regex: 'Số CMND không đúng định dạng'
+             },
+             addressCre: {
+                 required: 'Địa chỉ là bắt buộc',
+                 maxlength: 'Địa chỉ tối đa ${0} ký tự'
+             },
+         },
+         // errorLabelContainer: "#modalCreate .error-area",
+         // errorPlacement: function (error) {
+         //     error.appendTo("#modalCreate .error-area");
+         // },
+         errorElement: "div",
+         errorClass: "style_alertSpan__2UfTW",
 
-        showErrors: function (errorMap, errorList) {
-            // if (this.numberOfInvalids() > 0) {
-            //     page.dialogs.elements.errorAreaCreate.removeClass("hide").addClass("show");
-            // } else {
-            //     page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
-            //     $("#frmCreate input.error").removeClass("error");
-            // }
-            this.defaultShowErrors();
-        },
-        submitHandler: function (e) {
-            page.commands.create();
-            e.preventDefault();
-        }
-    })*/
+         showErrors: function (errorMap, errorList) {
+             // if (this.numberOfInvalids() > 0) {
+             //     page.dialogs.elements.errorAreaCreate.removeClass("hide").addClass("show");
+             // } else {
+             //     page.dialogs.elements.errorAreaCreate.removeClass("show").addClass("hide").empty();
+             //     $("#frmCreate input.error").removeClass("error");
+             // }
+             this.defaultShowErrors();
+         },
+         submitHandler: function (e) {
+             page.commands.create();
+             e.preventDefault();
+         }
+     })*/
 </script>
 </body>
 </html>

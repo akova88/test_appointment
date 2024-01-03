@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ | MEDIC-PRO</title>
+    <title>BỆNH VIỆN ĐA KHOA TRUNG ƯƠNG HUẾ | TRA CỨU KẾT QUẢ</title>
 
     <th:block th:replace="/homepage/fragment/head_css"/>
     <link rel="stylesheet" href="/homepage/assets/css/booking.css">
@@ -38,7 +38,9 @@
         </div>
 
         <main class="site-main">
-
+            <div class="loader hide">
+                <div id="loading"></div>
+            </div>
             <div class="container">
                 <div class="bookings bookings-lookup">
                     <div class="block-content">
@@ -146,6 +148,7 @@
     page.elements.ngayKham = $('#NgayKham');
     page.elements.maTraCuu = $('#MaTraCuu');
     page.elements.maBaoMat = $('#MaBaoMat');
+    page.elements.loader = $(".loader");
 
     page.elements.btnTraCuu = $('#btn_MaTraCuu');
 
@@ -155,6 +158,14 @@
             type: 'GET',
             url: page.url.getCustomerById + '/' + id,
         });
+    }
+
+    page.commands.showLoading = () => {
+        page.elements.loader.removeClass("hide");
+    }
+
+    page.commands.closeLoading = () => {
+        page.elements.loader.addClass("hide");
     }
 
     page.initializeControlEvent = () => {
@@ -170,6 +181,7 @@
                 maBaoMat
             }
             console.log(obj)
+            page.commands.showLoading();
             $.ajax({
                 headers: {
                     'accept': 'application/json',
@@ -189,6 +201,9 @@
                     App.showErrorNotification("Tài khoản không tồn tại hoặc mật khẩu không chính xác")
 
                     console.log(jqXHR);
+                })
+                .always(() => {
+                    page.commands.closeLoading();
                 })
         })
 

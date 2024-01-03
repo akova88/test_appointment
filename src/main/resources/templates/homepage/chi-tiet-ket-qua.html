@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ | MEDIC-PRO</title>
+    <title>BỆNH VIỆN ĐA KHOA TRUNG ƯƠNG HUẾ | CHI TIẾT KẾT QUẢ </title>
 
     <th:block th:replace="/homepage/fragment/head_css"/>
     <link rel="stylesheet" href="/homepage/assets/css/result-table.css">
@@ -38,7 +38,9 @@
         </div>
 
         <main class="site-main">
-
+            <div class="loader hide">
+                <div id="loading"></div>
+            </div>
             <div class="lookup-results container">
                 <!--                <div class="actions text-right">-->
                 <!--                    <button class="btn btn-primary" id="btn_TaiKham">Tái khám</button>-->
@@ -63,13 +65,13 @@
                         </button>
                     </li>
                 </ul>
-                <!--<div class="tab-content" id="resultOderTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        123
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">345</div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">567</div>
-                </div>-->
+                <div class="tab-content" id="resultOderTabContent">
+                    <!--                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">-->
+                    <!--                        123-->
+                    <!--                    </div>-->
+                    <!--                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">345</div>-->
+                    <!--                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">567</div>-->
+                </div>
                 <div class="return-find--container">
                     <div class="news-item row">
                         <div class="news-col col-12">
@@ -92,761 +94,13 @@
                             </thead>
                             <tbody>
 
-<!--                            </tr>-->
-                            <!--<tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    - Hồng cầu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2"></td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; "></td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng hồng cầu (RBC)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:red">5.09 T/L</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">3.90-5.03</td>
-                                <td class="return-col&#45;&#45;5">Tăng</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Lượng huyết sắc tố (Hb)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:blue">10.7 g/dL</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">12.0-15.5</td>
-                                <td class="return-col&#45;&#45;5">Giảm</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Thể tích khối hồng cầu (HCT)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:blue">34.0 %</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">37.0-42.0</td>
-                                <td class="return-col&#45;&#45;5">Giảm</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Thể tích trung bình HC (MCV)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:blue">67 fL</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">85-95</td>
-                                <td class="return-col&#45;&#45;5">Nhỏ</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Lượng Hb trung bình HC (MCH)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:blue">21.0 pg</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">28.0-32.0</td>
-                                <td class="return-col&#45;&#45;5">Thấp</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Nồng độ Hb trung bình HC (MCHC)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:blue">31.4 g/dL</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">32.0-36.0</td>
-                                <td class="return-col&#45;&#45;5">Thấp</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Độ phân bố HC (RDW-CV)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">15.5 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">10.0-16.5</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Độ phân bố HC (RDW-SD)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">41.4 (fL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">35.0-56.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    - Tiểu cầu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2"></td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; "></td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng tiểu cầu (PLT)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">322 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">150-450</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Thể tích trung bình TC (MPV)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">8.6 (fL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">4.0-11.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Thể tích khối tiểu cầu (PCT)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">0.280 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0.100-1.000
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng tiểu cầu có KT lớn
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">125.5 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">8.0-129.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỉ lệ tiểu cầu có KT lớn
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">39.0 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">20.0-58.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Độ phân bố TC (PDW)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:red">19.5 %</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">15.5-18.9</td>
-                                <td class="return-col&#45;&#45;5">Cao</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    - Bạch cầu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2"></td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; "></td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng bạch cầu (WBC)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">5.87 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">3.5-10.5</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỷ lệ % bạch cầu trung tính
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">52.10 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">43.0-76.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỷ lệ % bạch cầu Lympho
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">38.49 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">17.0-48.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỷ lệ % bạch cầu Mono
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">5.51 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0.0-10.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỷ lệ % bạch cầu ái toan
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.51 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0-7.0</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỷ lệ % bạch cầu ái kiềm
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">1.390 (% )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0-2.5</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng bạch cầu trung tính
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">3.06 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">2.0-6.9</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng bạch cầu Lympho
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.26 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0.6-3.4</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng bạch cầu Mono
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">0.32 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0-0.9</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng bạch cầu ái toan
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">0.15 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0-0.7</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Số lượng bạch cầu ái kiềm
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">0.080 (G/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">0-0.2</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>-->
-                            <!--<tr>
-                                <td colspan="5" class="return-table&#45;&#45;title">Hóa sinh</td>
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    AST (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">16.00 (U/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(&lt; 32.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    ALT (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">11.20 (U/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(&lt; 33.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Bilirubin toàn phần (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">4.60 (µmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(0 - 21.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Bilirubin trực tiếp (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.60 (µmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(0 - 5.0)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Bilirubin gián tiếp (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.0 (µmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(0 - 16.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Protein máu (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">70.3 (g/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">
-                                    (66.00-87.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Glucose máu (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">4.93 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(3.90 -
-                                    5.60)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Ure máu (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">3.2 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(2.76 -
-                                    8.07)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Creatinin máu (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">58.00 (µmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">
-                                    (44.00-80.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Triglyceride (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">1.37 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(0 - 1.70)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Cholesterol (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">5.03 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(2.60 -
-                                    5.20)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    HDL-Cholesterol (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.16 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(&gt; 1.03)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    LDL-Cholesterol (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.25 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(&lt;3.40)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    CK total (Cobas c503)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">97.50 (U/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(26.00 -
-                                    192.00)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Calci máu (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">2.29 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(2.15 -
-                                    2.50)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Calci Ion (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">1.19 (mmol/L )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(1.10 -
-                                    1.35)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="return-table&#45;&#45;title">Miễn dịch</td>
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Ferritin (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2" style=" color:blue">8.21 ng/mL</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(15.0 -
-                                    150.0)
-                                </td>
-                                <td class="return-col&#45;&#45;5">Giảm</td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    CK- MB (Alinity i)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">0.36 (ng/mL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(0 - 3.40)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    CA 125 (Cobas 6000)
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">26.27 (U/mL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(0-35.00)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="return-table&#45;&#45;title">Nước tiểu</td>
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tổng phân tích nước tiểu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2"></td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; "></td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Tỉ trọng
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">1.015</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(1.005 -
-                                    1.025)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    pH
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">7.5</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(5.5 - 7.5)
-                                </td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Bạch cầu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (BC/µL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Nitrite
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Protein nước tiểu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (mg/dL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Glucose nước tiểu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (mg/dL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Ketone
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (mg/dL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Urobilinogen
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (mg/dL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Bilirubin nước tiểu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (mg/dL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Hồng cầu
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (HC/µL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>
-                            <tr>
-                                <td class="return-col&#45;&#45;1" style="text-align:left">
-                                    Axit Ascorbic
-                                </td>
-
-                                <td class="return-col&#45;&#45;2">Âm tính (mg/dL )</td>
-
-                                <td class="return-col&#45;&#45;4 text-left  " style="white-space: pre-line; ">(Âm tính)</td>
-                                <td class="return-col&#45;&#45;5"></td>
-                                <td class="return-col&#45;&#45;6"></td>
-
-                            </tr>-->
-
                             </tbody>
                         </table>
 
                     </div>
-                    <div class="return-note">Xin cảm ơn Quý Khách đã lựa chọn dịch vụ y tế của chúng tôi. Nếu cần tư vấn kết
-                        quả xin liên hệ tổng đài <span>1900565656 </span></div>
+                    <div class="return-note">Xin cảm ơn Quý Khách đã lựa chọn dịch vụ y tế của chúng tôi. Nếu cần tư vấn
+                        kết
+                        quả xin liên hệ tổng đài <span>082 440 7788 </span></div>
 
                 </div>
 
@@ -944,7 +198,7 @@
     page.elements.resultOderTabContent = $("#resultOderTabContent");
     page.elements.returnInfo = $('.return-find--info');
     page.elements.tbResultDetail = $('#table1 tbody');
-
+    page.elements.loader = $(".loader");
 
     page.elements.btnTraCuu = $('#btn_MaTraCuu');
 
@@ -1051,6 +305,14 @@
         `
     }
 
+    page.commands.showLoading = () => {
+        page.elements.loader.removeClass("hide");
+    }
+
+    page.commands.closeLoading = () => {
+        page.elements.loader.addClass("hide");
+    }
+
     page.commands.getAllResultOrder = () => {
         const resultOrderJSON = sessionStorage.getItem("resultOrder");
         const resultOrders = JSON.parse(resultOrderJSON);
@@ -1076,11 +338,7 @@
                             </button>
                         </li>`
 
-            // const str1 = `<div class="tab-pane fade" id="${item.soPhieu}" role="tabpanel" aria-labelledby="home-tab">
-            //             ${item.tenDv}
-            //         </div>`
             page.elements.resultOderTab.append(str)
-            // page.elements.resultOderTabContent.append(str1);
         })
     }
 
@@ -1097,7 +355,10 @@
                 soPhieu,
                 loaiKQ
             }
-
+            page.elements.returnInfo.empty();
+            page.elements.tbResultDetail.empty();
+            page.elements.resultOderTabContent.empty();
+            page.commands.showLoading();
             // Thực hiện lời gọi AJAX ở đây, ví dụ:
             $.ajax({
                 headers: {
@@ -1110,12 +371,17 @@
             })
                 .done((data) => {
                     console.log("data", data)
-                    const str = page.commands.rederInfoPatient(data[0]);
-                    page.elements.returnInfo.empty();
-                    page.elements.returnInfo.append(str);
+                    if (data.length === 0) {
+                        const strContent = `<div class="tab-pane fade show" id="${soPhieu}" role="tabpanel" aria-labelledby="home-tab">
+                                    DỊCH VỤ CHƯA CÓ KẾT QUẢ
+                                </div>`
+                        console.log("aaaa")
+                        page.elements.resultOderTabContent.append(strContent);
+                    } else {
+                        const str = page.commands.rederInfoPatient(data[0]);
+                        page.elements.returnInfo.append(str);
 
-                    page.elements.tbResultDetail.empty();
-                    page.elements.tbResultDetail.append(`<tr>
+                        page.elements.tbResultDetail.append(`<tr>
                                 <td class="return-col--1" style="text-align:left">
                                     ${data[0].tenDV}:
                                 </td>
@@ -1128,11 +394,11 @@
                                 <td class="return-col--6"></td>
 
                             </tr>`)
-                    data.forEach(obj => {
-                        const tr = page.commands.renderTestResultDetail(obj);
-                        page.elements.tbResultDetail.append(tr);
-                    })
-
+                        data.forEach(obj => {
+                            const tr = page.commands.renderTestResultDetail(obj);
+                            page.elements.tbResultDetail.append(tr);
+                        })
+                    }
 
                     // App.showSuccessNotification("Thông tin tra cứu thành công");
                     // sessionStorage.setItem("resultOrder", JSON.stringify(data))
@@ -1143,6 +409,9 @@
                     App.showErrorNotification("Tài khoản không tồn tại hoặc mật khẩu không chính xác")
 
                     console.log(jqXHR);
+                })
+                .always(() => {
+                    page.commands.closeLoading();
                 })
         })
     }

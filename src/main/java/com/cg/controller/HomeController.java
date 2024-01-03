@@ -284,6 +284,11 @@ public class HomeController {
         return "homepage/tra-cuu-ket-qua";
     }
 
+    @GetMapping("/bang-gia-dich-vu")
+    public String servicePrice() {
+        return "homepage/bang-gia-dich-vu";
+    }
+
     @GetMapping("/dat-lich-thanh-cong")
     public String bookSuccess() {
         return "homepage/dat-lich-thanh-cong";

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng giá dịch vụ y tế | Bệnh viện Đa khoa Trung ương Huế</title>
+
+    <th:block th:replace="/homepage/fragment/head_css"/>
+    <link rel="stylesheet" href="/homepage/assets/css/booking.css">
+    <link rel="stylesheet" href="/homepage/assets/css/bang_gia.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <th:block th:replace="/homepage/fragment/header"/>
+
+
+    <div class="content">
+        <div class="style_wrapper_content__2nPtC" style="min-height: 0">
+            <div class="style_bg_breakcum__2BT1J bg-info">
+                <div data-test="container" class="container">
+                    <div data-test="row" class="row">
+                        <div data-test="col" class="col-12">
+                            <div class="style_wrap_mdbreadcrumb__1e17- style_head__1hfhC">
+                                <nav data-test="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item"><a href="/">Trang
+                                            chủ</a></li>
+                                        <li data-test="breadcrumb-item" class="breadcrumb-item">Bảng giá dịch vụ
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="site-main">
+
+            <div class="site-main-blog">
+                <div class="container">
+                    <div class="row columns">
+                        <div class="col-xs-12 col-md-12 column-main">
+                            <div class="service-price">
+                                <h2>Bảng giá dịch vụ chung</h2>
+                                <p class="text-center hidden-xs" style="color: #534E56;">Quý khách gọi hotline
+                                    1900565656 để biết thêm chi tiết</p>
+                                <p class="text-center d-sm-none" style="color: #534E56;">Quý khách gọi hotline
+                                    1900565656 <br>để biết thêm chi tiết</p>
+                                <form id="searchService">
+                                    <div class="service-price-filter">
+                                        <div class="control active">
+                                            <input type="text" id="SearchTerm" name="SearchTerm"
+                                                   class="form-control ui-autocomplete-input"
+                                                   style="background-image:none    " placeholder="Tra cứu giá dịch vụ"
+                                                   autocomplete="off">
+                                        </div>
+                                        <div class="actions">
+                                            <button id="submitSearch" class="btn btn-primary">Tra cứu</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <div class="service-price-content">
+                                    <div class="table-responsive" id="table-responsive">
+                                        <table class="table" id="tbBangGiaDv">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center col-1">STT</th>
+                                                <th class="col-7">Tên dịch vụ</th>
+                                                <th class="col-2">Giá dịch vụ (VNĐ)</th>
+                                                <th class="col-2">Giá BHYT (VNĐ)</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>- Biohorizon (Mỹ)</td>
+                                                <td>25.000.000</td>
+                                                <td>0</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="toolbar">
+                                        <div class="amount">
+
+                                        </div>
+                                        <nav aria-label="Page navigation">
+                                            <nav id="pagination-1059540712" aria-label="Page navigation"
+                                                 class="text-center">
+                                                <ul class="pagination mb-0 justify-content-center">
+
+                                                </ul>
+                                            </nav>
+                                        </nav>
+                                    </div>
+                                </div>
+
+
+                                <div class="service-price-pdf">
+                                    <h3>GIÁ THUỐC MEDLATEC</h3> <a href="https://medlatec.vn/DMbenhvien.pdf"
+                                                                   class="action">Mở tệp PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-xs-12 col-md-4 sidebar-main">
+                            <div class="sidebar-hotline" style="background-image: url(/med/images/contactsidebar.png)">
+                                <div class="hotline">
+                                    <div class="icon">
+                                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M17.2666 5.34288L17.1908 5.33785C13.6792 5.17447 8.72376 9.39681 6.89271 12.4508C4.88365 15.195 4.84502 18.8392 6.59948 23.0546L6.87607 23.6911C11.4991 35.0765 28.8468 52.4024 40.1877 57.1459C44.5269 59.1759 48.3942 59.213 51.4412 57.0188C54.1203 55.4874 58.5137 50.3915 58.3867 46.7723C58.2661 45.2832 57.5739 44.0676 56.4987 42.9611L56.2363 42.7004L55.506 42.025C52.861 39.66 48.282 36.2928 46.8656 35.9951C45.2026 35.6484 44.0751 35.9588 42.2964 36.9395L41.634 37.3162C40.3692 38.0456 39.9169 38.1703 39.3178 37.9517C32.99 35.354 28.5279 30.8695 25.9131 24.4371C25.7431 23.9605 25.8272 23.5443 26.3772 22.5351L26.667 22.0205C27.8658 19.9267 28.2677 18.7431 27.8901 16.9205L27.8234 16.6843C27.204 14.881 23.4078 9.79336 21.3 7.57846L20.9604 7.23491C19.8619 6.15607 18.654 5.46232 17.2666 5.34288ZM16.972 9.23717L17.1166 9.26494C17.3696 9.33638 17.6681 9.51162 18.0041 9.80039L18.2489 10.0242L18.7109 10.5106C20.5031 12.4893 23.975 17.1557 24.0899 17.7136C24.1984 18.2375 24.0784 18.6752 23.5097 19.707L23.2122 20.2329C21.9599 22.4257 21.5723 23.8396 22.2919 25.8391C25.3296 33.3162 30.558 38.5707 37.9224 41.5921C39.8217 42.2867 41.1682 42.0091 43.0758 40.9751L43.7294 40.6061C45.0237 39.8576 45.4976 39.6951 46.0745 39.8153C46.6383 39.9338 51.6825 43.7198 53.5317 45.4989L53.7476 45.7134C54.2245 46.2047 54.4853 46.6626 54.5133 47.0022C54.539 47.7962 53.7439 49.2878 52.3403 50.9158C51.341 52.0749 50.0436 53.2598 49.481 53.6528L49.3466 53.7397C47.5291 55.0369 45.2844 55.0927 42.3163 53.8279L41.7512 53.5753C31.4975 49.2848 15.3722 33.3012 10.715 22.7948L10.439 22.1454C8.99589 18.9535 8.87616 16.6199 9.91235 14.922L10.1201 14.6111C11.3211 12.6225 14.9405 9.49035 16.7425 9.24925L16.972 9.23717ZM38.4564 5.98321L38.7201 5.99472C49.1995 7.16442 57.4752 15.4746 58.6529 26.0091C58.7726 27.0799 58.0063 28.0455 56.9412 28.1658C55.8762 28.2862 54.9157 27.5157 54.796 26.4449C53.8208 17.7222 46.9686 10.8415 38.2918 9.87301C37.2266 9.75411 36.4589 8.78954 36.5772 7.71858C36.6757 6.82611 37.3584 6.1414 38.1997 6.00675L38.4564 5.98321ZM38.6155 15.2025L38.8773 15.2356C44.2329 16.2851 48.418 20.4927 49.4619 25.8771C49.6669 26.9348 48.9803 27.9593 47.9284 28.1654C46.8764 28.3716 45.8574 27.6813 45.6523 26.6237C44.9109 22.7991 41.9389 19.8112 38.1348 19.0657C37.0828 18.8595 36.3963 17.835 36.6013 16.7774C36.7722 15.896 37.5083 15.2698 38.3577 15.2048L38.6155 15.2025Z"
+                                                  fill="white"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="text">
+                                        <span>Hotline</span>
+                                        <strong>1900565656</strong>
+                                    </div>
+                                </div>
+                                <p>Liên hệ ngay với số hotline của MEDLATEC để được phục vụ và sử dụng các dịch vụ khám,
+                                    chữa bệnh hiện đại &amp; cao cấp nhất.</p>
+                                <a href="tel:1900565656" class="btn btn-primary">Liên hệ với chúng tôi</a>
+                            </div>
+                            <div class="sidebar-banner">
+                                <div id="bannerzone-27" zone="priceservice_page_colright_banner_top" class="bannerzone">
+                                    <a href="https://medlatec.vn/dich-vu/xet-nghiem-nipt-sang-loc-truoc-sinh-khong-xam-lan"
+                                       target="_blank">
+                                        <img src="https://medlatec.vn/media/31340/catalog/banner++doc+web+NIPT+8.2023-bo+toan+dien-12.png?size=2048"
+                                             loading="lazy">
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <div class="sidebar-banner">
+                                <div id="bannerzone-28" zone="priceservice_page_colright_banner_bottom"
+                                     class="bannerzone">
+                                    <a href="https://medlatec.vn/dich-vu/xet-nghiem-adn" target="_blank">
+                                        <img src="https://medlatec.vn/media/27715/catalog/ADN-435x870.jpg?size=2048"
+                                             loading="lazy">
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>-->
+                    </div>
+
+                    <!--<div class="news news-style2">
+                        <div class="block-title">
+                            <h2>Tin tức Y KHOA</h2>
+                        </div>
+
+                        <div class="post-items slick-initialized slick-slider" data-slick="{
+                    &quot;slidesToShow&quot;: 4,
+                    &quot;slidesToScroll&quot;: 1,
+                    &quot;autoplay&quot;: false,
+                    &quot;autoplaySpeed&quot;: 3000,
+                    &quot;dots&quot;: false,
+                    &quot;arrows&quot;: false,
+                    &quot;responsive&quot;:[
+                        {
+                            &quot;breakpoint&quot;:640,
+                            &quot;settings&quot;:{
+                                &quot;dots&quot;:true,
+                                &quot;slidesToShow&quot;:1
+                            }
+                        },
+                        {
+                            &quot;breakpoint&quot;:768,
+                            &quot;settings&quot;:{
+                                &quot;dots&quot;:true,
+                                &quot;slidesToShow&quot;:2
+                            }
+                        },
+                        {
+                            &quot;breakpoint&quot;: 992,
+                            &quot;settings&quot;:{
+                                &quot;dots&quot;:true,
+                                &quot;slidesToShow&quot;: 3
+                            }
+                        }
+                    ]
+                }">
+                            <div class="slick-list draggable">
+                                <div class="slick-track"
+                                     style="opacity: 1; width: 3486px; transform: translate3d(-996px, 0px, 0px);">
+                                    <div class="slick-slide slick-cloned" data-slick-index="-4" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34749/content/lich-lam-viec-tet-2024.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                               tabindex="-1">HỆ THỐNG Y TẾ MEDLATEC THÔNG BÁO LỊCH LÀM
+                                                                VIỆC TẾT DƯƠNG...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Với mong muốn giúp Quý khách hàng chủ động trong công tác
+                                                            khám chữa bệnh, chăm sóc sức khỏe, Hệ thống Y tế MEDLATEC
+                                                            trân trọng thông báo lịch làm việc dịp ng...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="-3" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34636/content/cham-dut-tri.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                               tabindex="-1">Chấm dứt "chịu đựng" đau đớn, khó chịu sau
+                                                                10 năm sống ch...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            10 năm là quãng thời gian dài đằng đẵng phải chung sống với
+                                                            bệnh trĩ đeo đẳng, người phụ nữ vốn sợ dao kéo đã quyết định
+                                                            đến Bệnh viện Đa khoa MEDLATEC khám...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="-2" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34296/content/ky-thuat-rfa-khong-dau.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                               tabindex="-1">Kỹ thuật RFA mang cơ hội điều trị thành
+                                                                công u lành tuyến...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Mặc dù là lành tính, không đe dọa đến tính mạng người bệnh,
+                                                            nhưng u tuyến giáp có thể gây ảnh hưởng tới chất lượng sống
+                                                            của người bệnh. Để giúp người bệnh an...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34292/content/noi-soi-tieu-hoa.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                               tabindex="-1">May mắn phát hiện ung thư sớm sau 1 tháng
+                                                                xuất hiện dấu h...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Chủ quan chưa đi nội soi dạ dày đại tràng bao giờ, nhưng chỉ
+                                                            sau 1 tháng xuất hiện bất thường ở đường tiêu hóa, nữ bệnh
+                                                            nhân 72 tuổi đến Bệnh viện Đa khoa ME...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-current slick-active" data-slick-index="0"
+                                         aria-hidden="false" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/viet-nam-co-1-trieu-cap-doi-vo-sinh-hiem-muon-nguyen-nhan-do-dau-"
+                                                           class="post-image-container" tabindex="0">
+                                                            <img src="https://medlatec.vn/media/34752/content/tu-van-san-khoa.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/viet-nam-co-1-trieu-cap-doi-vo-sinh-hiem-muon-nguyen-nhan-do-dau-"
+                                                               tabindex="0">Việt Nam có 1 triệu cặp đôi vô sinh, hiếm
+                                                                muộn, nguyên nh...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Việt Nam nằm trong nhóm nước có tỷ lệ sinh ít nhất, nhưng tỷ
+                                                            lệ vô sinh cao nhất khu vực Châu Á - Thái Bình Dương. Do
+                                                            nhiều nguyên nhân gây nên, trong đó có...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/viet-nam-co-1-trieu-cap-doi-vo-sinh-hiem-muon-nguyen-nhan-do-dau-"
+                                                               tabindex="0">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false"
+                                         style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                           class="post-image-container" tabindex="0">
+                                                            <img src="https://medlatec.vn/media/34749/content/lich-lam-viec-tet-2024.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                               tabindex="0">HỆ THỐNG Y TẾ MEDLATEC THÔNG BÁO LỊCH LÀM
+                                                                VIỆC TẾT DƯƠNG...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Với mong muốn giúp Quý khách hàng chủ động trong công tác
+                                                            khám chữa bệnh, chăm sóc sức khỏe, Hệ thống Y tế MEDLATEC
+                                                            trân trọng thông báo lịch làm việc dịp ng...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                               tabindex="0">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false"
+                                         style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                           class="post-image-container" tabindex="0">
+                                                            <img src="https://medlatec.vn/media/34636/content/cham-dut-tri.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                               tabindex="0">Chấm dứt "chịu đựng" đau đớn, khó chịu sau
+                                                                10 năm sống ch...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            10 năm là quãng thời gian dài đằng đẵng phải chung sống với
+                                                            bệnh trĩ đeo đẳng, người phụ nữ vốn sợ dao kéo đã quyết định
+                                                            đến Bệnh viện Đa khoa MEDLATEC khám...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                               tabindex="0">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-active" data-slick-index="3" aria-hidden="false"
+                                         style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                           class="post-image-container" tabindex="0">
+                                                            <img src="https://medlatec.vn/media/34296/content/ky-thuat-rfa-khong-dau.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                               tabindex="0">Kỹ thuật RFA mang cơ hội điều trị thành công
+                                                                u lành tuyến...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Mặc dù là lành tính, không đe dọa đến tính mạng người bệnh,
+                                                            nhưng u tuyến giáp có thể gây ảnh hưởng tới chất lượng sống
+                                                            của người bệnh. Để giúp người bệnh an...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                               tabindex="0">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1"
+                                         style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34292/content/noi-soi-tieu-hoa.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                               tabindex="-1">May mắn phát hiện ung thư sớm sau 1 tháng
+                                                                xuất hiện dấu h...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Chủ quan chưa đi nội soi dạ dày đại tràng bao giờ, nhưng chỉ
+                                                            sau 1 tháng xuất hiện bất thường ở đường tiêu hóa, nữ bệnh
+                                                            nhân 72 tuổi đến Bệnh viện Đa khoa ME...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="5" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/viet-nam-co-1-trieu-cap-doi-vo-sinh-hiem-muon-nguyen-nhan-do-dau-"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34752/content/tu-van-san-khoa.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/viet-nam-co-1-trieu-cap-doi-vo-sinh-hiem-muon-nguyen-nhan-do-dau-"
+                                                               tabindex="-1">Việt Nam có 1 triệu cặp đôi vô sinh, hiếm
+                                                                muộn, nguyên nh...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Việt Nam nằm trong nhóm nước có tỷ lệ sinh ít nhất, nhưng tỷ
+                                                            lệ vô sinh cao nhất khu vực Châu Á - Thái Bình Dương. Do
+                                                            nhiều nguyên nhân gây nên, trong đó có...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/viet-nam-co-1-trieu-cap-doi-vo-sinh-hiem-muon-nguyen-nhan-do-dau-"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="6" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34749/content/lich-lam-viec-tet-2024.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                               tabindex="-1">HỆ THỐNG Y TẾ MEDLATEC THÔNG BÁO LỊCH LÀM
+                                                                VIỆC TẾT DƯƠNG...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Với mong muốn giúp Quý khách hàng chủ động trong công tác
+                                                            khám chữa bệnh, chăm sóc sức khỏe, Hệ thống Y tế MEDLATEC
+                                                            trân trọng thông báo lịch làm việc dịp ng...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/thong-bao-lich-lam-viec-tet-duong-lich-2024-cua-he-thong-y-te-medlatec"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="7" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34636/content/cham-dut-tri.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                               tabindex="-1">Chấm dứt "chịu đựng" đau đớn, khó chịu sau
+                                                                10 năm sống ch...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            10 năm là quãng thời gian dài đằng đẵng phải chung sống với
+                                                            bệnh trĩ đeo đẳng, người phụ nữ vốn sợ dao kéo đã quyết định
+                                                            đến Bệnh viện Đa khoa MEDLATEC khám...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/cham-dut-chiu-dung-dau-don-kho-chiu-sau-10-nam-song-chung-voi-tri-4"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34296/content/ky-thuat-rfa-khong-dau.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                               tabindex="-1">Kỹ thuật RFA mang cơ hội điều trị thành
+                                                                công u lành tuyến...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Mặc dù là lành tính, không đe dọa đến tính mạng người bệnh,
+                                                            nhưng u tuyến giáp có thể gây ảnh hưởng tới chất lượng sống
+                                                            của người bệnh. Để giúp người bệnh an...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/ky-thuat-rfa-mang-co-hoi-dieu-tri-thanh-cong-u-lanh-tuyen-giap-khong-xam-lan-chi-sau-20-phut"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true"
+                                         tabindex="-1" style="width: 249px;">
+                                        <div>
+                                            <div class="post-item" style="width: 100%; display: inline-block;">
+                                                <div class="post-item-info">
+                                                    <div class="post-item-photo">
+                                                        <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                           class="post-image-container" tabindex="-1">
+                                                            <img src="https://medlatec.vn/media/34292/content/noi-soi-tieu-hoa.jpg?size=512"
+                                                                 alt="" loading="lazy">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-item-details">
+                                                        <h3 class="post-item-title">
+                                                            <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                               tabindex="-1">May mắn phát hiện ung thư sớm sau 1 tháng
+                                                                xuất hiện dấu h...</a>
+                                                        </h3>
+                                                        <div class="post-item-excerpt">
+                                                            Chủ quan chưa đi nội soi dạ dày đại tràng bao giờ, nhưng chỉ
+                                                            sau 1 tháng xuất hiện bất thường ở đường tiêu hóa, nữ bệnh
+                                                            nhân 72 tuổi đến Bệnh viện Đa khoa ME...
+                                                        </div>
+                                                        <div class="post-item-actions">
+                                                            <a href="/tin-tuc/may-man-phat-hien-ung-thu-som-sau-1-thang-xuat-hien-dau-hieu-bat-thuong"
+                                                               tabindex="-1">Xem chi tiết</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-viewall">
+                            <a href="/tin-tuc-y-khoa">Xem thêm</a>
+                        </div>
+                    </div>
+
+
+                    <div class="block-service-selection">
+                        <div class="block-content">
+                            <div class="block-title"><h2>Lựa chọn dịch vụ</h2>
+                                <p>Quý khách hàng vui lòng lựa chọn dịch vụ y tế theo nhu cầu!</p></div>
+                            <div class="service-selection-item">
+                                <div class="info">
+                                    <div class="images"><img src="/med/images/service01.png" alt=""></div>
+                                    <div class="detail"><h3 class="title">Lấy mẫu xét nghiệm tại nhà</h3>
+                                        <div class="excerpt"> Lấy mẫu xét nghiệm tại nhà giúp khách hàng chủ động tầm
+                                            soát bệnh lý. Đồng thời tiết kiệm thời gian đi lại, chờ đợi kết quả với mức
+                                            chi phí hợp lý.
+                                        </div>
+                                        <div class="actions"><a href="/dat-lich-lay-mau" class="btn btn-primary">Đặt
+                                            lịch</a></div>
+                                    </div>
+                                    <div class="actions"><a href="/dat-lich-lay-mau" class="btn btn-primary">Đặt
+                                        lịch</a></div>
+                                </div>
+                            </div>
+                            <div class="service-selection-item">
+                                <div class="info">
+                                    <div class="images"><img src="/med/images/service02.png" alt=""></div>
+                                    <div class="detail"><h3 class="title">Đặt lịch thăm khám tại MEDLATEC</h3>
+                                        <div class="excerpt"> Đặt lịch khám tại cơ sở khám chữa bệnh thuộc Hệ thống Y tế
+                                            MEDLATEC giúp chủ động thời gian, hạn chế tiếp xúc đông người.
+                                        </div>
+                                        <div class="actions"><a href="/dat-lich-kham" class="btn btn-primary">Đặt
+                                            lịch</a></div>
+                                    </div>
+                                    <div class="actions"><a href="/dat-lich-kham" class="btn btn-primary">Đặt lịch</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-images"><img src="/med/images/service-selection.png" alt=""></div>
+                    </div>-->
+
+                </div>
+            </div>
+
+
+        </main>
+
+    </div>
+
+    <!-- -----------------------Footer----------------------- -->
+
+    <th:block th:replace="/homepage/fragment/footer"/>
+</div>
+<th:block th:replace="/homepage/fragment/footer_js"/>
+<script>
+    const page = {
+        url: {
+            getAllDanhMucDv: App.API_DM_DV + '/pagination'
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            command: {}
+        },
+        initializeControlEvent: {}
+    }
+
+    page.elements.keySearch = $('#SearchTerm');
+    page.elements.btnSearch = $('#submitSearch');
+    page.elements.tbBangGiaDv = $('#tbBangGiaDv tbody');
+    page.elements.pagination = $('.pagination');
+    page.elements.amount = $('.amount');
+
+    let currentPage = 0;
+    let limit = 5;
+    let keySearch = "";
+
+    page.commands.renderDmDichVu = (dmDv) => {
+        return `<tr>
+                    <td class="text-center">${dmDv.id}</td>
+                    <td>${dmDv.tenDv}</td>
+                    <td>${dmDv.donGiaTT.toLocaleString('vi', {style: 'currency', currency: 'VND'})}</td>
+                    <td></td>
+                </tr>`
+    }
+
+    page.commands.displayPagination = (totalPages, currentPage, kw) => {
+        page.elements.pagination.empty();
+        const maxVisiblePages = 3; // Số trang tối đa hiển thị
+        const ellipsis = '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+
+        let firstBtn = '<li class="page-item' + (currentPage === 1 ? ' disabled' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(0, limit, \'' + kw + '\')">First</a></li>';
+        page.elements.pagination.append(firstBtn);
+
+        let previousBtn = '<li class="page-item' + (currentPage === 1 ? ' disabled' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (currentPage - 2) + ', limit, \'' + kw + '\')"><</a></li>';
+        page.elements.pagination.append(previousBtn);
+
+        if (totalPages <= maxVisiblePages) {
+            // Hiển thị tất cả các trang nếu tổng số trang nhỏ hơn hoặc bằng maxVisiblePages
+            for (let i = 1; i <= totalPages; i++) {
+                let pageBtn = '<li class="page-item ' + (i === currentPage ? 'active' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (i - 1) + ', limit, \'' + kw + '\' )">' + i + '</a></li>';
+                page.elements.pagination.append(pageBtn);
+            }
+        } else {
+            // Hiển thị 3 trang và sử dụng dấu "..."
+            if (currentPage <= maxVisiblePages - 1) {
+                for (let i = 1; i <= maxVisiblePages; i++) {
+                    let pageBtn = '<li class="page-item ' + (i === currentPage ? 'active' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (i - 1) + ', limit, \'' + kw + '\' )">' + i + '</a></li>';
+                    page.elements.pagination.append(pageBtn);
+                }
+                page.elements.pagination.append(ellipsis);
+            } else if (currentPage >= totalPages - maxVisiblePages + 1) {
+                page.elements.pagination.append(ellipsis);
+                for (let i = totalPages - maxVisiblePages + 1; i <= totalPages; i++) {
+                    let pageBtn = '<li class="page-item ' + (i === currentPage ? 'active' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (i - 1) + ', limit, \'' + kw + '\')">' + i + '</a></li>';
+                    page.elements.pagination.append(pageBtn);
+                }
+            } else {
+                page.elements.pagination.append(ellipsis);
+                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                    let pageBtn = '<li class="page-item ' + (i === currentPage ? 'active' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (i - 1) + ', limit, \'' + kw + '\')">' + i + '</a></li>';
+                    page.elements.pagination.append(pageBtn);
+                }
+                page.elements.pagination.append(ellipsis);
+            }
+        }
+
+        let nextBtn = '<li class="page-item' + (currentPage === totalPages ? ' disabled' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (currentPage) + ', limit, \'' + kw + '\')">></a></li>';
+        page.elements.pagination.append(nextBtn);
+
+        let lastBtn = '<li class="page-item' + (currentPage === totalPages ? ' disabled' : '') + '"><a class="page-link" href="javascript:void(0)" onclick="page.commands.getAllDanhMucDvPagination(' + (totalPages - 1) + ', limit, \'' + kw + '\')">Last</li>';
+        page.elements.pagination.append(lastBtn);
+    };
+
+        page.commands.getAllDanhMucDvPagination = (currentPage, limit, kw) => {
+            console.log("currentPage", currentPage)
+            $.ajax({
+                headers: {
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                },
+                type: 'GET',
+                url: page.url.getAllDanhMucDv + `?kw=${kw}&page=${currentPage}&limit=${limit}`
+            })
+                .done((data) => {
+                    page.elements.amount.empty();
+                    page.elements.amount.append(`Đang hiển thị <span style="color: #1D93E3;">${limit}</span> / ${data.totalItems}`);
+
+                    page.elements.tbBangGiaDv.empty();
+                    $.each(data.dmDichVus, (index, dmDichVu) => {
+                        const str = page.commands.renderDmDichVu(dmDichVu);
+                        page.elements.tbBangGiaDv.append(str);
+                    })
+
+                    page.commands.displayPagination(data.totalPages, data.currentPage + 1, kw);
+                })
+                .fail((error) => {
+                    console.log(error);
+                })
+                .always(() => {
+
+                })
+        };
+
+    page.initializeControlEvent = () => {
+        page.elements.btnSearch.on('click', function (e) {
+            e.preventDefault();
+            const kw = page.elements.keySearch.val();
+            page.commands.getAllDanhMucDvPagination(0, limit, kw);
+        })
+        page.elements.keySearch.on('keypress', function (e) {
+            if (e.wich === 13 || e.keyCode === 13) {
+                e.preventDefault();
+                const kw = page.elements.keySearch.val();
+                page.commands.getAllDanhMucDvPagination(0, limit, kw);
+            }
+        })
+    }
+
+    page.loadData = () => {
+        page.commands.getAllDanhMucDvPagination(currentPage, limit, keySearch);
+    }
+
+    $(() => {
+        page.loadData();
+        page.initializeControlEvent();
+    })
+</script>
+
+</body>
+</html>

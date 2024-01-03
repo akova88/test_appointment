@@ -390,6 +390,26 @@
         page.dialogs.elements.btnCreate.prop('disabled', false);
     }
 
+    page.commands.bindDataSelect2 = (el, data, selectedvalues) => {
+        $(el).empty();
+        $(el).select2({
+            data: $.map(data, function (obj) {
+                return {
+                    id: obj.id, text: obj.text
+                }
+            }),
+            dropdownParent: $('#modalCreate'),
+            minimumResultsForSearch: 0,
+            allowClear: true,
+            closeOnSelect: false,
+            multiple: true
+        });
+
+        if (typeof selectedvalues !== 'undefined' && selectedvalues !== false) {
+            $(el).val(selectedvalues).change();
+        }
+    }
+
     page.initializeControlEvent = () => {
         // click thêm gói dịch vụ
         page.elements.btnShowCreateModal.on('click', () => {
@@ -397,15 +417,16 @@
                 const result1 = data.map(function (element) {
                     return Object.assign({}, {id: element.id, text: element.tenDv});
                 });
-                page.dialogs.elements.listDvCre.select2({
-                    theme: "bootstrap-5",
-                    data: result1,
-                    dropdownParent: $('#modalCreate'),
-                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-                    placeholder: $(this).data('placeholder'),
-                    closeOnSelect: false,
-                    allowClear: true,
-                });
+                // page.dialogs.elements.listDvCre.select2({
+                //     theme: "bootstrap-5",
+                //     data: result1,
+                //     dropdownParent: $('#modalCreate'),
+                //     width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                //     placeholder: $(this).data('placeholder'),
+                //     closeOnSelect: false,
+                //     allowClear: true,
+                // });
+                page.commands.bindDataSelect2(page.dialogs.elements.listDvCre, result1)
             })
 
             page.dialogs.elements.frmCreate[0].reset();
@@ -424,19 +445,24 @@
         // click chỉnh sửa thông tin gói
         page.elements.tbGoiDichVu.on('click', '.edit', function () {
             page.commands.getAllDanhMucDv().then((data) => {
-
+                const dvArr = data.map(function (element) {
+                    return Object.assign({}, {id: element.id, text: element.tenDv});
+                });
                 page.dialogs.elements.listDvUp.select2({
-                    theme: "bootstrap-5",
                     data: data.map(function (element) {
                         return Object.assign({}, {id: element.maDv, text: element.tenDv});
                     }),
-                    // dropdownParent: $('#modalUpdate'),
+                    dropdownParent: $('#modalUpdate'),
                     // width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-                    placeholder: $(this).data('placeholder'),
+                    // placeholder: $(this).data('placeholder'),
                     // closeOnSelect: false,
-                    // allowClear: true,
-                    templateResult: formatState,
+                    minimumResultsForSearch: 0,
+                    allowClear: true,
+                    closeOnSelect: false,
+                    multiple: true
+
                 });
+
                 function formatState(state) {
                     if (!state.id) {
                         return state.text;
@@ -444,6 +470,8 @@
                     let $state = $('<span><input type="checkbox" class="form-check-input"> ' + state.text + '</span>');
                     return $state;
                 }
+
+                // page.commands.bindDataSelect2(page.dialogs.elements.listDvUp, dvArr);
             })
             dmGoiId = $(this).data('id');
             console.log(dmGoiId)

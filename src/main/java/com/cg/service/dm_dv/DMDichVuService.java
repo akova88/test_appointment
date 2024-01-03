@@ -8,6 +8,8 @@ import com.cg.model.dtos.dmDichVu.DMDichVuResDTO;
 import com.cg.repository.DM_DichVuRepository;
 import com.cg.repository.DM_NhomDVRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,16 @@ public class DMDichVuService implements IDMDichVuService{
     @Override
     public List<DMDichVuResDTO> findAllDMDichVuResDTO() {
         return dmDichVuRepository.findAllDMDichVuResDTO();
+    }
+
+    @Override
+    public Page<DMDichVu> findAllByTenDvLike(String tenDv, Pageable pageable) {
+        return dmDichVuRepository.findAllByTenDvLike(tenDv, pageable);
+    }
+
+    @Override
+    public Page<DMDichVu> findAll(Pageable pageable) {
+        return dmDichVuRepository.findAll(pageable);
     }
 
     @Override
